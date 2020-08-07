@@ -1,0 +1,7 @@
+.icon-twitter {
+	background-image: url(./../img/app-dark.svg);
+}
+
+body.dark .icon-twitter {
+	background-image: url(./../img/app.svg);
+}
