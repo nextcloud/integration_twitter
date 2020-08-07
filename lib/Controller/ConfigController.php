@@ -93,9 +93,7 @@ class ConfigController extends Controller {
      * perform 1st step of 3-legged twitter oauth
      * @NoAdminRequired
      */
-    public function doOauthStep1($nonce) {
-        $this->config->setUserValue($this->userId, 'twitter', 'nonce', $nonce);
-
+    public function doOauthStep1() {
         $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
         $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
 
@@ -113,100 +111,61 @@ class ConfigController extends Controller {
         // save token of application to session
         $oauthToken = $request_token['oauth_token'];
         $oauthTokenSecret = $request_token['oauth_token_secret'];
-        return new DataResponse($request_token);
+        $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token', $oauthToken);
+        $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', $oauthTokenSecret);
+
+        $url = $twitteroauth->url(
+            'oauth/authorize', [
+                'oauth_token' => $request_token['oauth_token']
+            ]
+        );
+
+        return new DataResponse($url);
     }
 
     /**
-     * perform 1st step of 3-legged twitter oauth
-     * @NoAdminRequired
-     */
-    public function doOauthStep1BAD($nonce) {
-        $this->config->setUserValue($this->userId, 'twitter', 'nonce', $nonce);
-
-        $url = 'https://api.twitter.com/oauth/request_token';
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
-        $oauthToken = $this->config->getAppValue('twitter', 'oauth_token', '');
-        $oauthTokenSecret = $this->config->getAppValue('twitter', 'oauth_token_secret', '');
-
-        $ts = (new \Datetime())->getTimestamp();
-        $params = [
-            'oauth_consumer_key' => $consumerKey,
-            'oauth_nonce' => base64_encode($nonce),
-            'oauth_signature_method' => 'HMAC-SHA1',
-            'oauth_timestamp' => $ts,
-            //'oauth_token' => $oauthToken,
-            'oauth_version' => '1.0',
-            'oauth_callback' => 'web+nextcloudtwitter://',
-        ];
-        // build Signature Base String
-        $paramString = http_build_query($params);
-        $baseString = 'POST&' . urlencode($url) . '&' . urlencode($paramString);
-        //return new DataResponse($baseString);
-
-        // generate signature
-        //$signingKey = urlencode($consumerSecret) . '&' . urlencode($oauthTokenSecret);
-        $signingKey = urlencode($consumerSecret) . '&';
-        //return new DataResponse($signingKey);
-        $signature = urlencode(base64_encode(hash_hmac('sha1', $baseString, $signingKey, true)));
-        $b64Signature = base64_encode($signature);
-        $params['oauth_signature'] = $signature;
-        //return new DataResponse($signature);
-
-        // generate header string
-        $authHeader = 'OAuth ';
-        foreach ($params as $k => $v) {
-            $authHeader .= $k . '="' . urlencode($v) . '", ';
-        }
-        $authHeader = preg_replace('/, $/', '', $authHeader);
-        //return new DataResponse($authHeader);
-
-        //$response = $this->request('https://api.twitter.com/oauth/request_token', $params, 'POST');
-        $response = $this->request($url, [], 'POST', $authHeader);
-        if (is_string($response)) {
-            error_log('RESPOOOOOOO '.$response.'||||||||||');
-            return new DataResponse($response);
-            //parse_str($response, $)
-        } else {
-            return new DataResponse($response);
-        }
-    }
-
-    /**
-     * receive oauth code and get oauth access token
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function oauthRedirect($code, $state) {
-        $configState = $this->config->getUserValue($this->userId, 'twitter', 'oauth_state', '');
-        $clientID = $this->config->getAppValue('twitter', 'client_id', '');
-        $clientSecret = $this->config->getAppValue('twitter', 'client_secret', '');
+    public function oauthRedirect($url) {
+        $parts = parse_url($url);
+        parse_str($parts['query'], $params);
+        $oauth_verifier = $params['oauth_verifier'];
 
-        // anyway, reset state
-        $this->config->setUserValue($this->userId, 'twitter', 'oauth_state', '');
+        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
+        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
 
-        if ($clientID and $clientSecret and $configState !== '' and $configState === $state) {
-            $result = $this->requestOAuthAccessToken([
-                'client_id' => $clientID,
-                'client_secret' => $clientSecret,
-                'code' => $code,
-                'state' => $state
-            ], 'POST');
-            if (is_array($result) and isset($result['access_token'])) {
-                $accessToken = $result['access_token'];
-                $this->config->setUserValue($this->userId, 'twitter', 'token', $accessToken);
-                return new RedirectResponse(
-                    $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
-                    '?twitterToken=success'
-                );
-            }
-            $result = $this->l->t('Error getting OAuth access token');
-        } else {
-            $result = $this->l->t('Error during OAuth exchanges');
+        $oauthToken = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token', '');
+        $oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', '');
+
+        if (empty($oauth_verifier) || $oauthToken === '' || $oauthTokenSecret === '') {
+            $result = $this->l->t('Problem in first or second step');
+            return new RedirectResponse(
+                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
+                '?twitterToken=error&message=' . urlencode($result)
+            );
         }
+
+        $connection = new TwitterOAuth(
+            $consumerKey,
+            $consumerSecret,
+            $oauthToken,
+            $oauthTokenSecret
+        );
+
+        // request user token
+        $token = $connection->oauth(
+            'oauth/access_token', [
+                'oauth_verifier' => $oauth_verifier
+            ]
+        );
+        $oauthToken = $token['oauth_token'];
+        $oauthTokenSecret = $token['oauth_token_secret'];
+        $this->config->setUserValue($this->userId, 'twitter', 'oauth_token', $oauthToken);
+        $this->config->setUserValue($this->userId, 'twitter', 'oauth_token_secret', $oauthTokenSecret);
         return new RedirectResponse(
             $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
-            '?twitterToken=error&message=' . urlencode($result)
+            '?twitterToken=success'
         );
     }
 

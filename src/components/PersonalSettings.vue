@@ -9,7 +9,7 @@
                     <a class="icon icon-category-auth"></a>
                     {{ t('twitter', 'Twitter access token') }}
                 </label>
-                <input id="twitter-token" type="password" v-model="state.token" @input="onInput"
+                <input id="twitter-token" type="password" v-model="state.oauth_token" @input="onInput"
                     :readonly="readonly"
                     @focus="readonly = false"
                     :placeholder="t('twitter', 'Token obtained with OAuth')" />
@@ -38,10 +38,10 @@ export default {
     mounted() {
         const paramString = window.location.search.substr(1)
         const urlParams = new URLSearchParams(paramString)
-        const ghToken = urlParams.get('twitterToken')
-        if (ghToken === 'success') {
+        const twToken = urlParams.get('twitterToken')
+        if (twToken === 'success') {
             showSuccess(t('twitter', 'Twitter OAuth access token successfully retrieved!'))
-        } else if (ghToken === 'error') {
+        } else if (twToken === 'error') {
             showError(t('twitter', 'Twitter OAuth error:') + ' ' + urlParams.get('message'))
         }
 
@@ -77,7 +77,7 @@ export default {
         saveOptions() {
             const req = {
                 values: {
-                    token: this.state.token
+                    oauth_token: this.state.oauth_token
                 }
             }
             const url = generateUrl('/apps/twitter/config')
@@ -94,14 +94,8 @@ export default {
                 })
         },
         onOAuthClick() {
-            const nonce = this.makeNonce(42)
             const url = generateUrl('/apps/twitter/oauth-step1')
-            const req = {
-                params: {
-                    nonce
-                }
-            };
-            axios.get(url, req)
+            axios.get(url)
                 .then((response) => {
                     this.step2(response.data)
                 })
@@ -116,16 +110,8 @@ export default {
         step2(data) {
             console.debug('STEP2')
             console.debug(data)
-            // window.location.replace('plop')
+            window.location.replace(data)
         },
-        makeNonce(l) {
-              let text = ''
-              var chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-              for (let i=0; i < l; i++) {
-                  text += chars.charAt(Math.floor(Math.random() * chars.length));
-              }
-              return text
-          },
     }
 }
 </script>

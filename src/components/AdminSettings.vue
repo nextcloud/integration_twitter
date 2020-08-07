@@ -5,7 +5,7 @@
                 {{ t('twitter', 'Twitter') }}
             </h2>
             <p class="settings-hint">
-                {{ t('twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the ID and secret here.') }}
+                {{ t('twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the consumer key and secret here.') }}
                 <br/>
                 {{ t('twitter', 'Make sure you set the "redirect_uri" to') }}
                 <br/><b> {{ redirect_uri }} </b>
@@ -27,22 +27,6 @@
                     :readonly="readonly"
                     @focus="readonly = false"
                     :placeholder="t('twitter', 'Consumer secret of your Twitter application')" />
-                <label for="twitter-oauth-token">
-                    <a class="icon icon-category-auth"></a>
-                    {{ t('twitter', 'Twitter OAuth access token') }}
-                </label>
-                <input id="twitter-oauth-token" type="password" v-model="state.oauth_token" @input="onInput"
-                    :readonly="readonly"
-                    @focus="readonly = false"
-                    :placeholder="t('twitter', 'OAuth access token of your Twitter application')" />
-                <label for="twitter-oauth-token-secret">
-                    <a class="icon icon-category-auth"></a>
-                    {{ t('twitter', 'Twitter OAuth token secret') }}
-                </label>
-                <input id="twitter-oauth-token-secret" type="password" v-model="state.oauth_token_secret" @input="onInput"
-                    :readonly="readonly"
-                    @focus="readonly = false"
-                    :placeholder="t('twitter', 'OAuth token secret your Twitter application')" />
             </div>
     </div>
 </template>
@@ -88,8 +72,6 @@ export default {
                 values: {
                     consumer_key: this.state.consumer_key,
                     consumer_secret: this.state.consumer_secret,
-                    oauth_token: this.state.oauth_token,
-                    oauth_token_secret: this.state.oauth_token_secret,
                 }
             }
             const url = generateUrl('/apps/twitter/admin-config')

@@ -41,14 +41,10 @@ class Admin implements ISettings {
     public function getForm() {
         $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
         $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
-        $oauthToken = $this->config->getAppValue('twitter', 'oauth_token', '');
-        $oauthTokenSecret = $this->config->getAppValue('twitter', 'oauth_token_secret', '');
 
         $adminConfig = [
             'consumer_key' => $consumerKey,
             'consumer_secret' => $consumerSecret,
-            'oauth_token_secret' => $oauthTokenSecret,
-            'oauth_token' => $oauthToken,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'admin-config', $adminConfig);
         return new TemplateResponse('twitter', 'adminSettings');

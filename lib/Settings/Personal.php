@@ -39,14 +39,15 @@ class Personal implements ISettings {
      * @return TemplateResponse
      */
     public function getForm() {
-        $token = $this->config->getUserValue($this->userId, 'twitter', 'token', '');
+        $token = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
+        $tokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token_secret', '');
 
-        // for OAuth
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
+        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '') !== '';
         $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '') !== '';
 
         $userConfig = [
-            'token' => $token,
+            'oauth_token' => $token,
+            'oauth_token_secret' => $tokenSecret,
             'consumer_key' => $consumerKey,
             'consumer_secret' => $consumerSecret,
         ];
