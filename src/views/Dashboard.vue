@@ -131,7 +131,7 @@ export default {
 		},
 		getNotificationTarget(n) {
 			if (['retweet', 'mention'].includes(n.type)) {
-				return 'https://twitter.com/' + n.sender_screen_name + '/status/' + n.id
+				return 'https://twitter.com/' + n.sender_screen_name + '/status/' + n.id_str
 			} else if (['message'].includes(n.type)) {
 				return 'https://twitter.com/messages'
 			}

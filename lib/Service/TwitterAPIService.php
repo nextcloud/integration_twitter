@@ -73,6 +73,7 @@ class TwitterAPIService {
                 $resMention = [
                     'type' => 'mention',
                     'id' => $mention->id,
+                    'id_str' => $mention->id_str,
                     'timestamp' => $ts,
                     'text' => $mention->text,
                     'sender_id' => $mention->user->id,
@@ -91,19 +92,20 @@ class TwitterAPIService {
         ];
         $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/retweets_of_me', $params);
         if (is_array($result)) {
-            foreach ($result as $mention) {
-                $ts = (new \Datetime($mention->created_at))->getTimestamp();
-                $resMention = [
+            foreach ($result as $retweet) {
+                $ts = (new \Datetime($retweet->created_at))->getTimestamp();
+                $resRetweet = [
                     'type' => 'retweet',
-                    'id' => $mention->id,
+                    'id' => $retweet->id,
+                    'id_str' => $retweet->id_str,
                     'timestamp' => $ts,
-                    'text' => $mention->text,
-                    'sender_id' => $mention->user->id,
-                    'sender_name' => $mention->user->name,
-                    'sender_screen_name' => $mention->user->screen_name,
-                    'profile_image_url_https' => $mention->user->profile_image_url_https,
+                    'text' => $retweet->text,
+                    'sender_id' => $retweet->user->id,
+                    'sender_name' => $retweet->user->name,
+                    'sender_screen_name' => $retweet->user->screen_name,
+                    'profile_image_url_https' => $retweet->user->profile_image_url_https,
                 ];
-                array_push($results, $resMention);
+                array_push($results, $resRetweet);
             }
         }
 
