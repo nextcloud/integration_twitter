@@ -1,4 +1,4 @@
-/*jshint esversion: 6 */
+/* jshint esversion: 6 */
 
 /**
  * Nextcloud - twitter
@@ -18,6 +18,6 @@ import PersonalSettings from './components/PersonalSettings'
 'use strict'
 
 new Vue({
-    el: "#twitter_prefs",
-    render: h => h(PersonalSettings),
+	el: '#twitter_prefs',
+	render: h => h(PersonalSettings),
 })

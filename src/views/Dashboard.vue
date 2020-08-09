@@ -5,13 +5,13 @@
 		<template v-slot:empty-content>
 			<div v-if="state === 'no-token'">
 				<a :href="settingsUrl">
-					{{ t('twitter', 'Click here to configure the access to your Twitter account.')}}
+					{{ t('twitter', 'Click here to configure the access to your Twitter account.') }}
 				</a>
 			</div>
 			<div v-else-if="state === 'error'">
 				<a :href="settingsUrl">
 					{{ t('twitter', 'Incorrect access token.') }}
-					{{ t('twitter', 'Click here to configure the access to your Twitter account.')}}
+					{{ t('twitter', 'Click here to configure the access to your Twitter account.') }}
 				</a>
 			</div>
 			<div v-else-if="state === 'ok'">
@@ -24,7 +24,7 @@
 <script>
 import axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
-import { showSuccess, showError } from '@nextcloud/dialogs'
+import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 
@@ -58,7 +58,7 @@ export default {
 					id: n.id,
 					targetUrl: this.getNotificationTarget(n),
 					avatarUrl: this.getUserAvatarUrl(n),
-					//avatarUsername: '',
+					// avatarUsername: '',
 					overlayIconUrl: this.getNotificationTypeImage(n),
 					mainText: this.getMainText(n),
 					subText: this.getSubline(n),
@@ -83,7 +83,7 @@ export default {
 			const req = {}
 			if (this.lastDate) {
 				req.params = {
-					since: this.lastDate
+					since: this.lastDate,
 				}
 			}
 			axios.get(generateUrl('/apps/twitter/notifications'), req).then((response) => {
@@ -105,7 +105,7 @@ export default {
 		processNotifications(newNotifications) {
 			if (this.lastDate) {
 				// just add those which are more recent than our most recent one
-				let i = 0;
+				let i = 0
 				while (i < newNotifications.length && this.lastDate < newNotifications[i].timestamp) {
 					i++
 				}
@@ -125,9 +125,9 @@ export default {
 			return notifications
 		},
 		getUserAvatarUrl(n) {
-			return n.profile_image_url_https ?
-					generateUrl('/apps/twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https) :
-					''
+			return n.profile_image_url_https
+				? generateUrl('/apps/twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
+				: ''
 		},
 		getNotificationTarget(n) {
 			if (['retweet', 'mention'].includes(n.type)) {
