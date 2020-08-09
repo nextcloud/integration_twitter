@@ -114,6 +114,7 @@ class ConfigController extends Controller {
         $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token', $oauthToken);
         $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', $oauthTokenSecret);
 
+        // return the URL where user will be redirected to authenticate on twitter
         $url = $twitteroauth->url(
             'oauth/authorize', [
                 'oauth_token' => $request_token['oauth_token']
@@ -139,7 +140,7 @@ class ConfigController extends Controller {
         $oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', '');
 
         if (empty($oauth_verifier) || $oauthToken === '' || $oauthTokenSecret === '') {
-            $result = $this->l->t('Problem in first or second step');
+            $result = $this->l->t('Problem in OAuth first or second step');
             return new RedirectResponse(
                 $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
                 '?twitterToken=error&message=' . urlencode($result)
@@ -154,11 +155,20 @@ class ConfigController extends Controller {
         );
 
         // request user token
-        $token = $connection->oauth(
-            'oauth/access_token', [
-                'oauth_verifier' => $oauth_verifier
-            ]
-        );
+        try {
+            $token = $connection->oauth(
+                'oauth/access_token', [
+                    'oauth_verifier' => $oauth_verifier
+                ]
+            );
+        } catch (TwitterOAuthException $e) {
+            $result = $this->l->t('Problem in OAuth third step.');
+            $result .= ' ' . $e->getMessage();
+            return new RedirectResponse(
+                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
+                '?twitterToken=error&message=' . urlencode($result)
+            );
+        }
         $oauthToken = $token['oauth_token'];
         $oauthTokenSecret = $token['oauth_token_secret'];
         $this->config->setUserValue($this->userId, 'twitter', 'oauth_token', $oauthToken);
@@ -167,54 +177,5 @@ class ConfigController extends Controller {
             $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
             '?twitterToken=success'
         );
-    }
-
-    private function request($url, $params = [], $method = 'GET', $authHeader = null) {
-        $client = $this->clientService->newClient();
-        try {
-            $options = [
-                'headers' => [
-                    'User-Agent' => 'Nextcloud Twitter integration'
-                ],
-            ];
-            if (!is_null($authHeader)) {
-                $options['headers']['Authorization'] = $authHeader;
-            }
-
-            if (count($params) > 0) {
-                if ($method === 'GET') {
-                    $paramsContent = http_build_query($params);
-                    $url .= '?' . $paramsContent;
-                } else {
-                    $options['body'] = $params;
-                }
-            }
-
-            if ($method === 'GET') {
-                $response = $client->get($url, $options);
-            } else if ($method === 'POST') {
-                $response = $client->post($url, $options);
-            } else if ($method === 'PUT') {
-                $response = $client->put($url, $options);
-            } else if ($method === 'DELETE') {
-                $response = $client->delete($url, $options);
-            }
-            $body = $response->getBody();
-            $respCode = $response->getStatusCode();
-
-            if ($respCode >= 400) {
-                return $this->l->t('Request failed');
-            } else {
-                return $body;
-            }
-        } catch (\Exception $e) {
-            $this->logger->warning('Twitter request error : '.$e, array('app' => $this->appName));
-            $response = $e->getResponse();
-            $headers = $response->getHeaders();
-            $code = $response->getStatusCode();
-            //var_dump($headers);
-            //return $code;
-            return $headers['www-authenticate'];
-        }
     }
 }

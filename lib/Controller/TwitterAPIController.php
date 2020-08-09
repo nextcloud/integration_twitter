@@ -58,8 +58,7 @@ class TwitterAPIController extends Controller {
         $this->config = $config;
         $this->logger = $logger;
         $this->twitterAPIService = $twitterAPIService;
-        $this->accessToken = $this->config->getUserValue($this->userId, 'twitter', 'token', '');
-        $this->consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
+        $this->accessToken = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
     }
 
     /**
@@ -70,8 +69,8 @@ class TwitterAPIController extends Controller {
         if ($this->accessToken === '') {
             return new DataResponse($result, 400);
         }
-        $result = $this->twitterAPIService->getNotifications($this->accessToken, $this->consumerKey, $since, false);
-        if (is_array($result)) {
+        $result = $this->twitterAPIService->getNotifications($since);
+        if (!is_string($result)) {
             $response = new DataResponse($result);
         } else {
             $response = new DataResponse($result, 401);

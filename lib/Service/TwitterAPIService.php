@@ -13,7 +13,12 @@ namespace OCA\Twitter\Service;
 
 use OCP\IL10N;
 use OCP\ILogger;
+use OCP\IConfig;
 use OCP\Http\Client\IClientService;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Abraham\TwitterOAuth\TwitterOAuth;
+use Abraham\TwitterOAuth\TwitterOAuthException;
 
 class TwitterAPIService {
 
@@ -27,11 +32,15 @@ class TwitterAPIService {
         string $appName,
         ILogger $logger,
         IL10N $l10n,
-        IClientService $clientService
+        IConfig $config,
+        IClientService $clientService,
+        string $userId
     ) {
         $this->appName = $appName;
         $this->l10n = $l10n;
         $this->logger = $logger;
+        $this->config = $config;
+        $this->userId = $userId;
         $this->clientService = $clientService;
         $this->client = $clientService->newClient();
     }
@@ -40,74 +49,152 @@ class TwitterAPIService {
         return $this->client->get($url)->getBody();
     }
 
-    public function getNotifications($accessToken, $since = null, $participating = null) {
-        $params = [];
-        if (is_null($since)) {
-            $twoWeeksEarlier = new \DateTime();
-            $twoWeeksEarlier->sub(new \DateInterval('P14D'));
-            $params['since'] = $twoWeeksEarlier->format('Y-m-d\TH:i:s\Z');
-        } else {
-            $params['since'] = $since;
-        }
-        if (!is_null($participating)) {
-            $params['participating'] = $participating ? 'true' : 'false';
-        }
-        $result = $this->request($accessToken, 'notifications', $params);
-        return $result;
-    }
+    public function getNotifications($since = null) {
+        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
+        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
+        $oauthToken = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
+        $oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token_secret', '');
 
-    public function unsubscribeNotification($accessToken, $id) {
+        $results = [];
+        $missingUsers = [];
+
+        // my home timeline
+        //$result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/home_timeline', $params);
+
+        ////////////////// MENTIONS
         $params = [
-            'ignored' => true
+            'count' => 20,
+            // 'since_id' =>
         ];
-        $result = $this->request($accessToken, 'notifications/threads/' . $id . '/subscription', $params, 'PUT');
-        return $result;
-    }
+        $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/mentions_timeline', $params);
+        if (is_array($result)) {
+            foreach ($result as $mention) {
+                $ts = (new \Datetime($mention->created_at))->getTimestamp();
+                $resMention = [
+                    'type' => 'mention',
+                    'id' => $mention->id,
+                    'timestamp' => $ts,
+                    'text' => $mention->text,
+                    'sender_id' => $mention->user->id,
+                    'sender_name' => $mention->user->name,
+                    'sender_screen_name' => $mention->user->screen_name,
+                    'profile_image_url_https' => $mention->user->profile_image_url_https,
+                ];
+                array_push($results, $resMention);
+            }
+        }
 
-    public function markNotificationAsRead($accessToken, $id) {
-        $result = $this->request($accessToken, 'notifications/threads/' . $id, [], 'POST');
-        return $result;
-    }
+        ////////////////// RETWEETS
+        $params = [
+            'count' => 20,
+            // 'since_id' =>
+        ];
+        $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/retweets_of_me', $params);
+        if (is_array($result)) {
+            foreach ($result as $mention) {
+                $ts = (new \Datetime($mention->created_at))->getTimestamp();
+                $resMention = [
+                    'type' => 'retweet',
+                    'id' => $mention->id,
+                    'timestamp' => $ts,
+                    'text' => $mention->text,
+                    'sender_id' => $mention->user->id,
+                    'sender_name' => $mention->user->name,
+                    'sender_screen_name' => $mention->user->screen_name,
+                    'profile_image_url_https' => $mention->user->profile_image_url_https,
+                ];
+                array_push($results, $resMention);
+            }
+        }
 
-    public function request($accessToken, $endPoint, $params = [], $method = 'GET') {
-        try {
-            $url = 'https://api.twitter.com/' . $endPoint;
-            $options = [
-                'headers' => [
-                    'Authorization' => 'token ' . $accessToken,
-                    'User-Agent' => 'Nextcloud Twitter integration'
-                ],
-            ];
+        //////////////// FRIENDSHIP REQUESTS
+        //$result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'friendships/incoming', $params);
+        //if (isset($result->ids) and is_array($result->ids)) {
+        //    foreach ($result->ids as $user_id) {
+        //        array_push($results, [
+        //            'type' => 'follow_request',
+        //            'sender_id' => $user_id,
+        //        ]);
+        //        if (!in_array($user_id, $missingUsers)) {
+        //            array_push($missingUsers, $user_id);
+        //        }
+        //    }
+        //}
 
-            if (count($params) > 0) {
-                if ($method === 'GET') {
-                    $paramsContent = http_build_query($params);
-                    $url .= '?' . $paramsContent;
-                } else {
-                    $options['body'] = json_encode($params);
+        /////////////////// PRIVATE MESSAGES
+        $params = [
+            'count' => 20,
+        ];
+        $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'direct_messages/events/list', $params);
+        if (isset($result->events) and is_array($result->events)) {
+            $msgs = $result->events;
+            foreach ($msgs as $msg) {
+                if (isset($msg->type) and $msg->type === 'message_create' and isset($msg->message_create)) {
+                    $resMsg = [
+                        'type' => 'message',
+                        'id' => $msg->id,
+                        'timestamp' => intval($msg->created_timestamp / 1000),
+                        'sender_id' => $msg->message_create->sender_id,
+                        'text' => $msg->message_create->message_data->text,
+                    ];
+                    array_push($results, $resMsg);
+                    if (!in_array($msg->message_create->sender_id, $missingUsers)) {
+                        array_push($missingUsers, $msg->message_create->sender_id);
+                    }
                 }
             }
+        }
+
+        // get missing user info
+        $userInfo = [];
+        foreach ($missingUsers as $user_id) {
+            $params = [
+                'user_id' => $user_id,
+            ];
+            $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'users/show', $params);
+            if (isset($result->name) and isset($result->screen_name) and isset($result->profile_image_url_https)) {
+                $userInfo[$user_id] = [
+                    'sender_name' => $result->name,
+                    'sender_screen_name' => $result->screen_name,
+                    'profile_image_url_https' => $result->profile_image_url_https,
+                ];
+            }
+        }
+        // fill missing info
+        foreach ($results as $i => $res) {
+            if (in_array($res['type'], ['message', 'follow_request'])) {
+                $user_id = $res['sender_id'];
+                $results[$i]['sender_name'] = $userInfo[$user_id]['sender_name'];
+                $results[$i]['sender_screen_name'] = $userInfo[$user_id]['sender_screen_name'];
+                $results[$i]['profile_image_url_https'] = $userInfo[$user_id]['profile_image_url_https'];
+            }
+        }
+
+        return $results;
+    }
+
+    public function request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $endPoint, $params = [], $method = 'GET') {
+        try {
+            $twitter = new TwitterOAuth(
+                $consumerKey,
+                $consumerSecret,
+                $oauthToken,
+                $oauthTokenSecret
+            );
 
             if ($method === 'GET') {
-                $response = $this->client->get($url, $options);
-            } else if ($method === 'POST') {
-                $response = $this->client->post($url, $options);
-            } else if ($method === 'PUT') {
-                $response = $this->client->put($url, $options);
-            } else if ($method === 'DELETE') {
-                $response = $this->client->delete($url, $options);
+                $result = $twitter->get($endPoint, $params);
+            } elseif ($method === 'POST') {
+                $result = $twitter->post($endPoint, $params);
+            } elseif ($method === 'DELETE') {
+                $result = $twitter->delete($endPoint, $params);
+            } elseif ($method === 'PUT') {
+                $result = $twitter->put($endPoint, $params);
             }
-            $body = $response->getBody();
-            $respCode = $response->getStatusCode();
-
-            if ($respCode >= 400) {
-                return $this->l10n->t('Bad credentials');
-            } else {
-                return json_decode($body, true);
-            }
+            return $result;
         } catch (\Exception $e) {
             $this->logger->warning('Twitter API error : '.$e, array('app' => $this->appName));
-            return $e;
+            return $e->getMessage();
         }
     }
 
