@@ -172,6 +172,21 @@ class TwitterAPIService {
             }
         }
 
+        // filter by date
+        if (!is_null($since)) {
+            $results = array_filter($results, function($elem) use ($since) {
+                $elemTs = $elem['timestamp'];
+                return $elemTs > $since;
+            });
+        }
+
+        // sort by date
+        $a = usort($results, function($a, $b) {
+            $ta = $a['timestamp'];
+            $tb = $b['timestamp'];
+            return ($ta > $tb) ? -1 : 1;
+        });
+
         return $results;
     }
 
