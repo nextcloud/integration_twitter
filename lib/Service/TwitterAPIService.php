@@ -58,6 +58,11 @@ class TwitterAPIService {
         $results = [];
         $missingUsers = [];
 
+        //////////////// GET MY CREDENTIALS
+        $result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'account/verify_credentials', []);
+        $myId = $result->id;
+        $myIdStr = $result->id_str;
+
         // my home timeline
         //$result = $this->request($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/home_timeline', $params);
 
@@ -132,16 +137,20 @@ class TwitterAPIService {
             $msgs = $result->events;
             foreach ($msgs as $msg) {
                 if (isset($msg->type) and $msg->type === 'message_create' and isset($msg->message_create)) {
-                    $resMsg = [
-                        'type' => 'message',
-                        'id' => $msg->id,
-                        'timestamp' => intval($msg->created_timestamp / 1000),
-                        'sender_id' => $msg->message_create->sender_id,
-                        'text' => $msg->message_create->message_data->text,
-                    ];
-                    array_push($results, $resMsg);
-                    if (!in_array($msg->message_create->sender_id, $missingUsers)) {
-                        array_push($missingUsers, $msg->message_create->sender_id);
+                    // ignore what I sent
+                    if ($msg->message_create->sender_id !== $myIdStr) {
+                        //return [$msg->message_create->sender_id , $myId, $myIdStr, $msg];
+                        $resMsg = [
+                            'type' => 'message',
+                            'id' => $msg->id,
+                            'timestamp' => intval($msg->created_timestamp / 1000),
+                            'sender_id' => $msg->message_create->sender_id,
+                            'text' => $msg->message_create->message_data->text,
+                        ];
+                        array_push($results, $resMsg);
+                        if (!in_array($msg->message_create->sender_id, $missingUsers)) {
+                            array_push($missingUsers, $msg->message_create->sender_id);
+                        }
                     }
                 }
             }
