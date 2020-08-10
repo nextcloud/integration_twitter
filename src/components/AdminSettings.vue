@@ -7,7 +7,7 @@
 		<p class="settings-hint">
 			{{ t('twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the consumer key and secret here.') }}
 			<br>
-			{{ t('twitter', 'Make sure you set the "redirect_uri" to') }}
+			{{ t('twitter', 'Make sure you set this callback URL to your app in Twitter developer settings:') }}
 			<br><b> {{ redirect_uri }} </b>
 		</p>
 		<div class="grid-form">

@@ -1,9 +1,13 @@
 <template>
-	<div id="twitter_prefs" class="section">
+	<div v-if="showOAuth" id="twitter_prefs" class="section">
 		<h2>
 			<a class="icon icon-twitter" />
 			{{ t('twitter', 'Twitter') }}
 		</h2>
+		<p class="settings-hint">
+			{{ t('twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+			<br><b> {{ redirect_uri }} </b>
+		</p>
 		<div class="twitter-grid-form">
 			<label for="twitter-token">
 				<a class="icon icon-category-auth" />
@@ -16,7 +20,7 @@
 				:placeholder="t('twitter', 'Token obtained with OAuth')"
 				@focus="readonly = false"
 				@input="onInput">
-			<button v-if="showOAuth" id="twitter-oauth" @click="onOAuthClick">
+			<button id="twitter-oauth" @click="onOAuthClick">
 				<span class="icon icon-external" />
 				{{ t('twitter', 'Get access with OAuth') }}
 			</button>
