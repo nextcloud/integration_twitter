@@ -59,6 +59,10 @@ class TwitterAPIService {
 		$results = [];
 		$missingUsers = [];
 
+		// !!! this will probably work when API v2 will be released
+		// i found it in the web interface (already using unreleased APIv2)
+		//$result = $this->classicRequest('notifications/all.json', [], 'GET', '2');
+
 		//////////////// GET MY CREDENTIALS
 		$result = $this->classicRequest('account/verify_credentials.json', [], 'GET');
 		$myId = $result['id'];
@@ -229,8 +233,8 @@ class TwitterAPIService {
 	 * manual signed API request
 	 * @NoAdminRequired
 	 */
-	public function classicRequest($endPoint, $params = [], $method = 'GET') {
-		$url = 'https://api.twitter.com/1.1/' . $endPoint;
+	public function classicRequest($endPoint, $params = [], $method = 'GET', $apiVersion = '1.1') {
+		$url = 'https://api.twitter.com/' . $apiVersion . '/' . $endPoint;
 
 		$ts = (new \Datetime())->getTimestamp();
 		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
