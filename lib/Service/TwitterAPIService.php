@@ -16,10 +16,6 @@ use OCP\ILogger;
 use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-use Abraham\TwitterOAuth\TwitterOAuth;
-use Abraham\TwitterOAuth\TwitterOAuthException;
-
 class TwitterAPIService {
 
 	private $l10n;
@@ -204,33 +200,8 @@ class TwitterAPIService {
 		return $results;
 	}
 
-	public function libRequest($params = [], $method = 'GET') {
-		try {
-			$twitter = new TwitterOAuth(
-				$this->consumerKey,
-				$this->consumerSecret,
-				$this->oauthToken,
-				$this->oauthTokenSecret
-			);
-
-			if ($method === 'GET') {
-				$result = $twitter->get($endPoint, $params);
-			} elseif ($method === 'POST') {
-				$result = $twitter->post($endPoint, $params);
-			} elseif ($method === 'DELETE') {
-				$result = $twitter->delete($endPoint, $params);
-			} elseif ($method === 'PUT') {
-				$result = $twitter->put($endPoint, $params);
-			}
-			return $result;
-		} catch (\Exception $e) {
-			$this->logger->warning('Twitter API error : '.$e, array('app' => $this->appName));
-			return $e->getMessage();
-		}
-	}
-
 	/**
-	 * manual signed API request
+	 * manually signed API request
 	 * @NoAdminRequired
 	 */
 	public function classicRequest($endPoint, $params = [], $method = 'GET', $apiVersion = '1.1') {
@@ -275,7 +246,7 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->requestJSON($url, $params, $method, $authHeader);
+		$response = $this->request($url, $params, $method, $authHeader);
 		if (is_array($response)) {
 			return $response;
 		} else {
@@ -283,7 +254,116 @@ class TwitterAPIService {
 		}
 	}
 
-	private function requestJSON($url, $params = [], $method = 'GET', $authHeader = null) {
+	/**
+	 * manually signed OAuth step1 request
+	 * @NoAdminRequired
+	 */
+	public function requestTokenOAuthStep1($consumerKey, $consumerSecret) {
+		$method = 'POST';
+		$url = 'https://api.twitter.com/oauth/request_token';
+
+		$ts = (new \Datetime())->getTimestamp();
+		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
+		$headerParams = [
+			'oauth_consumer_key' => $consumerKey,
+			'oauth_nonce' => base64_encode($nonce),
+			'oauth_signature_method' => 'HMAC-SHA1',
+			'oauth_timestamp' => $ts,
+			'oauth_version' => '1.0',
+			'oauth_callback' => 'web+nextcloudtwitter://auth-redirect',
+		];
+
+		$params = [];
+		$combinedParams = array_merge($headerParams, $params);
+		// build Signature Base String
+		// get sorted keys
+		$keys = array_keys($combinedParams);
+		sort($keys);
+		$paramStringArray = [];
+		foreach ($keys as $k) {
+			array_push($paramStringArray, urlencode($k) . '=' . urlencode($combinedParams[$k]));
+		}
+		$paramString = implode('&', $paramStringArray);
+		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
+
+		// generate signature
+		//$signingKey = urlencode($this->consumerSecret) . '&' . urlencode($this->oauthTokenSecret);
+		$signingKey = urlencode($consumerSecret) . '&';
+		$signature = hash_hmac('sha1', $baseString, $signingKey, true);
+		$b64Signature = base64_encode($signature);
+		$headerParams['oauth_signature'] = $b64Signature;
+
+		// generate header string
+		$keys = array_keys($headerParams);
+		sort($keys);
+		$authHeaderParts = [];
+		foreach ($keys as $k) {
+			array_push($authHeaderParts, urlencode($k) . '="' . urlencode($headerParams[$k]) . '"');
+		}
+		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
+
+		$response = $this->request($url, $params, $method, $authHeader, false);
+		parse_str($response, $values);
+		return $values;
+	}
+
+	/**
+	 * manually signed OAuth step1 request
+	 * @NoAdminRequired
+	 */
+	public function requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier) {
+		$method = 'POST';
+		$url = 'https://api.twitter.com/oauth/access_token';
+
+		$ts = (new \Datetime())->getTimestamp();
+		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
+		$headerParams = [
+			'oauth_consumer_key' => $consumerKey,
+			'oauth_nonce' => base64_encode($nonce),
+			'oauth_signature_method' => 'HMAC-SHA1',
+			'oauth_timestamp' => $ts,
+			'oauth_token' => $oauthToken,
+			'oauth_verifier' => $oauthVerifier,
+			'oauth_version' => '1.0',
+			'oauth_callback' => 'web+nextcloudtwitter://auth-redirect',
+		];
+
+		$params = [];
+		$combinedParams = array_merge($headerParams, $params);
+		// build Signature Base String
+		// get sorted keys
+		$keys = array_keys($combinedParams);
+		sort($keys);
+		$paramStringArray = [];
+		foreach ($keys as $k) {
+			array_push($paramStringArray, urlencode($k) . '=' . urlencode($combinedParams[$k]));
+		}
+		$paramString = implode('&', $paramStringArray);
+		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
+
+		// generate signature
+		$signingKey = urlencode($consumerSecret) . '&' . urlencode($oauthTokenSecret);
+		$signature = hash_hmac('sha1', $baseString, $signingKey, true);
+		$b64Signature = base64_encode($signature);
+		$headerParams['oauth_signature'] = $b64Signature;
+
+		// generate header string
+		$keys = array_keys($headerParams);
+		sort($keys);
+		$authHeaderParts = [];
+		foreach ($keys as $k) {
+			array_push($authHeaderParts, urlencode($k) . '="' . urlencode($headerParams[$k]) . '"');
+		}
+		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
+
+		$response = $this->request($url, $params, $method, $authHeader, false);
+		parse_str($response, $values);
+		return $values;
+	}
+
+	private function request($url, $params = [], $method = 'GET', $authHeader = null, $json = true) {
 		try {
 			$options = [
 				'headers' => [
@@ -318,7 +398,11 @@ class TwitterAPIService {
 			if ($respCode >= 400) {
 				return $this->l10n->t('Request failed');
 			} else {
-				return json_decode($body, true);
+				if ($json) {
+					return json_decode($body, true);
+				} else {
+					return $body;
+				}
 			}
 		} catch (\Exception $e) {
 			$this->logger->warning('Twitter request error : '.$e, array('app' => $this->appName));

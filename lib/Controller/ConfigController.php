@@ -27,11 +27,8 @@ use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Controller;
-use OCP\Http\Client\IClientService;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-use Abraham\TwitterOAuth\TwitterOAuth;
-use Abraham\TwitterOAuth\TwitterOAuthException;
+use OCA\Twitter\Service\TwitterAPIService;
 
 class ConfigController extends Controller {
 
@@ -51,7 +48,7 @@ class ConfigController extends Controller {
                                 IURLGenerator $urlGenerator,
                                 IL10N $l,
                                 ILogger $logger,
-                                IClientService $clientService,
+                                TwitterAPIService $twitterAPIService,
                                 $userId) {
         parent::__construct($AppName, $request);
         $this->l = $l;
@@ -63,7 +60,7 @@ class ConfigController extends Controller {
         $this->dbconnection = $dbconnection;
         $this->urlGenerator = $urlGenerator;
         $this->logger = $logger;
-        $this->clientService = $clientService;
+        $this->twitterAPIService = $twitterAPIService;
     }
 
     /**
@@ -97,31 +94,18 @@ class ConfigController extends Controller {
         $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
         $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
 
-        $twitteroauth = new TwitterOAuth($consumerKey, $consumerSecret);
-        // request token of application
-        try {
-            $request_token = $twitteroauth->oauth(
-                'oauth/request_token', [
-                    'oauth_callback' => 'web+nextcloudtwitter://auth-redirect'
-                ]
-            );
-        } catch (TwitterOAuthException $e) {
-            return new DataResponse($e->getMessage());
+        $requestToken = $this->twitterAPIService->requestTokenOAuthStep1($consumerKey, $consumerSecret);
+        if (!isset($requestToken['oauth_token']) or !isset($requestToken['oauth_token_secret'])) {
+            return new DataResponse($this->l->t('Problem in OAuth first step'));
         }
+
         // save token of application to session
-        $oauthToken = $request_token['oauth_token'];
-        $oauthTokenSecret = $request_token['oauth_token_secret'];
+        $oauthToken = $requestToken['oauth_token'];
+        $oauthTokenSecret = $requestToken['oauth_token_secret'];
         $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token', $oauthToken);
         $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', $oauthTokenSecret);
 
-        // return the URL where user will be redirected to authenticate on twitter
-        $url = $twitteroauth->url(
-            'oauth/authorize', [
-                'oauth_token' => $request_token['oauth_token']
-            ]
-        );
-
-        return new DataResponse($url);
+        return new DataResponse('https://api.twitter.com/oauth/authorize?oauth_token=' . $oauthToken);
     }
 
     /**
@@ -131,7 +115,7 @@ class ConfigController extends Controller {
     public function oauthRedirect($url) {
         $parts = parse_url($url);
         parse_str($parts['query'], $params);
-        $oauth_verifier = $params['oauth_verifier'];
+        $oauthVerifier = $params['oauth_verifier'];
 
         $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
         $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
@@ -139,7 +123,7 @@ class ConfigController extends Controller {
         $oauthToken = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token', '');
         $oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', '');
 
-        if (empty($oauth_verifier) || $oauthToken === '' || $oauthTokenSecret === '') {
+        if (empty($oauthVerifier) || $oauthToken === '' || $oauthTokenSecret === '') {
             $result = $this->l->t('Problem in OAuth first or second step');
             return new RedirectResponse(
                 $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
@@ -147,21 +131,8 @@ class ConfigController extends Controller {
             );
         }
 
-        $connection = new TwitterOAuth(
-            $consumerKey,
-            $consumerSecret,
-            $oauthToken,
-            $oauthTokenSecret
-        );
-
-        // request user token
-        try {
-            $token = $connection->oauth(
-                'oauth/access_token', [
-                    'oauth_verifier' => $oauth_verifier
-                ]
-            );
-        } catch (TwitterOAuthException $e) {
+        $token = $this->twitterAPIService->requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier);
+        if (!isset($token['oauth_token']) or !isset($token['oauth_token_secret'])) {
             $result = $this->l->t('Problem in OAuth third step.');
             $result .= ' ' . $e->getMessage();
             return new RedirectResponse(
