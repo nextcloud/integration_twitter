@@ -119,7 +119,14 @@ export default {
 				})
 		},
 		step2(data) {
-			window.location.replace(data)
+			if (!data.startsWith('http')) {
+				showError(
+					t('twitter', 'OAuth failure')
+					+ ': ' + data
+				)
+			} else {
+				window.location.replace(data)
+			}
 		},
 	},
 }
@@ -133,9 +140,9 @@ export default {
 	width: 100%;
 }
 .twitter-grid-form {
-	width: 700px;
+	max-width: 900px;
 	display: grid;
-	grid-template: 1fr / 233px 233px 300px;
+	grid-template: 1fr / 1fr 1fr 1fr;
 	margin-left: 30px;
 	button .icon {
 		margin-bottom: -1px;

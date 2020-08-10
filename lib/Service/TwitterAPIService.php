@@ -16,6 +16,8 @@ use OCP\ILogger;
 use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 
+require_once __DIR__ . '/../constants.php';
+
 class TwitterAPIService {
 
 	private $l10n;
@@ -40,8 +42,10 @@ class TwitterAPIService {
 		$this->clientService = $clientService;
 		$this->client = $clientService->newClient();
 		if (!is_null($userId) and $userId !== '') {
-			$this->consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
-			$this->consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
+			$this->consumerKey = $this->config->getAppValue('twitter', 'consumer_key', DEFAULT_CONSUMER_KEY);
+			$this->consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', DEFAULT_CONSUMER_SECRET);
+			$this->consumerKey = $this->consumerKey ? $this->consumerKey : DEFAULT_CONSUMER_KEY;
+			$this->consumerSecret = $this->consumerSecret ? $this->consumerSecret : DEFAULT_CONSUMER_SECRET;
 			$this->oauthToken = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
 			$this->oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token_secret', '');
 		}

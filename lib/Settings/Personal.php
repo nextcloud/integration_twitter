@@ -10,6 +10,8 @@ use OCP\Util;
 use OCP\IURLGenerator;
 use OCP\IInitialStateService;
 
+require_once __DIR__ . '/../constants.php';
+
 class Personal implements ISettings {
 
     private $request;
@@ -42,14 +44,19 @@ class Personal implements ISettings {
         $token = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
         $tokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token_secret', '');
 
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '') !== '';
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '') !== '';
+        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', DEFAULT_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', DEFAULT_CONSUMER_SECRET);
+        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_CONSUMER_KEY;
+        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_CONSUMER_SECRET;
+
+        $hasConsumerKey = ($consumerKey !== '');
+        $hasConsumerSecret = ($consumerSecret !== '');
 
         $userConfig = [
             'oauth_token' => $token,
             'oauth_token_secret' => $tokenSecret,
-            'consumer_key' => $consumerKey,
-            'consumer_secret' => $consumerSecret,
+            'consumer_key' => $hasConsumerKey,
+            'consumer_secret' => $hasConsumerSecret,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
         $response = new TemplateResponse('twitter', 'personalSettings');
