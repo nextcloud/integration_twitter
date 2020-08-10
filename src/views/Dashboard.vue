@@ -47,18 +47,33 @@ export default {
 			loop: null,
 			state: 'loading',
 			settingsUrl: generateUrl('/settings/user/linked-accounts'),
-			darkThemeColor: OCA.Accessibility.theme === 'dark' ? '181818' : 'ffffff',
+			darkThemeColor: OCA.Accessibility.theme === 'dark' ? 'ffffff' : '000000',
 		}
 	},
 
 	computed: {
 		items() {
-			return this.notifications.map((n) => {
+			// get rid of follow request counts
+			const items = this.notifications.filter((n) => {
+				return n.type !== 'follow_request'
+			})
+
+			// find the last follow request notif
+			const fr = this.notifications.find((n) => {
+				return n.type === 'follow_request'
+			})
+
+			// if we have follow requests, show them in first
+			if (fr && fr.number > 0) {
+				items.unshift(fr)
+			}
+
+			return items.map((n) => {
 				return {
 					id: n.id,
 					targetUrl: this.getNotificationTarget(n),
 					avatarUrl: this.getUserAvatarUrl(n),
-					// avatarUsername: '',
+					avatarUsername: this.getAvatarText(n),
 					overlayIconUrl: this.getNotificationTypeImage(n),
 					mainText: this.getMainText(n),
 					subText: this.getSubline(n),
@@ -129,18 +144,32 @@ export default {
 				? generateUrl('/apps/twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
 				: ''
 		},
+		getAvatarText(n) {
+			if (['follow_request'].includes(n.type)) {
+				return '!'
+			}
+			return ''
+		},
 		getNotificationTarget(n) {
 			if (['retweet', 'mention'].includes(n.type)) {
 				return 'https://twitter.com/' + n.sender_screen_name + '/status/' + n.id_str
 			} else if (['message'].includes(n.type)) {
 				return 'https://twitter.com/messages'
+			} else if (['follow_request'].includes(n.type)) {
+				return 'https://twitter.com/follower_requests'
 			}
 			return ''
 		},
 		getMainText(n) {
+			if (['follow_request'].includes(n.type)) {
+				return t('twitter', '{nb} follow requests', { nb: n.number })
+			}
 			return n.text
 		},
 		getSubline(n) {
+			if (['follow_request'].includes(n.type)) {
+				return t('twitter', 'System')
+			}
 			return '@' + n.sender_screen_name
 		},
 		getNotificationTypeImage(n) {
@@ -150,6 +179,8 @@ export default {
 				return generateUrl('/svg/twitter/message?color=ffffff')
 			} else if (n.type === 'retweet') {
 				return generateUrl('/svg/twitter/retweet?color=ffffff')
+			} else if (n.type === 'follow_request') {
+				return generateUrl('/svg/twitter/sound?color=ffffff')
 			}
 			return ''
 		},

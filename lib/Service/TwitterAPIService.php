@@ -115,19 +115,17 @@ class TwitterAPIService {
 			}
 		}
 
-		//////////////// FRIENDSHIP REQUESTS
-		//$result = $this->classicRequest('friendships/incoming.json', $params);
-		//if (isset($result['ids']) and is_array($result['ids'])) {
-		//    foreach ($result['ids'] as $user_id) {
-		//        array_push($results, [
-		//            'type' => 'follow_request',
-		//            'sender_id' => $user_id,
-		//        ]);
-		//        if (!in_array($user_id, $missingUsers)) {
-		//            array_push($missingUsers, $user_id);
-		//        }
-		//    }
-		//}
+		////////////// FOLLOW REQUESTS
+		$result = $this->classicRequest('friendships/incoming.json', $params);
+		$nbFollowRequests = 0;
+		if (isset($result['ids']) and is_array($result['ids'])) {
+			$nbFollowRequests = count($result['ids']);
+		}
+		array_push($results, [
+			'type' => 'follow_request',
+			'number' => $nbFollowRequests,
+			'timestamp' => (new \Datetime())->getTimestamp()
+		]);
 
 		/////////////////// PRIVATE MESSAGES
 		$params = [
