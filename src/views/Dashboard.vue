@@ -54,19 +54,27 @@ export default {
 	computed: {
 		items() {
 			// get rid of follow request counts
-			const items = this.notifications.filter((n) => {
-				return n.type !== 'follow_request'
-			})
-
-			// find the last follow request notif
-			const fr = this.notifications.find((n) => {
-				return n.type === 'follow_request'
+			let items = this.notifications.filter((n) => {
+				return (!['follow_request'].includes(n.type))
 			})
 
 			// if we have follow requests, show them in first
-			if (fr && fr.number > 0) {
-				items.unshift(fr)
+			if (this.followRequestItem && this.followRequestItem.number > 0) {
+				items.unshift(this.followRequestItem)
 			}
+
+			// then filter out unnecessary private messages
+			const privMsgAuthorIds = []
+			items = items.filter((n) => {
+				if (n.type !== 'message') {
+					return true
+				} else if (privMsgAuthorIds.includes(n.sender_screen_name)) {
+					return false
+				} else {
+					privMsgAuthorIds.push(n.sender_screen_name)
+					return true
+				}
+			})
 
 			return items.map((n) => {
 				return {
@@ -78,6 +86,12 @@ export default {
 					mainText: this.getMainText(n),
 					subText: this.getSubline(n),
 				}
+			})
+		},
+		followRequestItem() {
+			// find the last follow request notif
+			return this.notifications.find((n) => {
+				return n.type === 'follow_request'
 			})
 		},
 		lastMoment() {
