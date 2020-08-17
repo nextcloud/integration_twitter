@@ -49,7 +49,7 @@ class TwitterWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getTitle(): string {
-        return $this->l10n->t('Twitter');
+        return $this->l10n->t('Twitter notifications');
         }
 
 	/**
