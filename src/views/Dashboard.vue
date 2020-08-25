@@ -6,17 +6,17 @@
 		<template v-slot:empty-content>
 			<div v-if="state === 'no-token'">
 				<a :href="settingsUrl">
-					{{ t('twitter', 'Click here to configure the access to your Twitter account.') }}
+					{{ t('integration_twitter', 'Click here to configure the access to your Twitter account.') }}
 				</a>
 			</div>
 			<div v-else-if="state === 'error'">
 				<a :href="settingsUrl">
-					{{ t('twitter', 'Incorrect access token.') }}
-					{{ t('twitter', 'Click here to configure the access to your Twitter account.') }}
+					{{ t('integration_twitter', 'Incorrect access token.') }}
+					{{ t('integration_twitter', 'Click here to configure the access to your Twitter account.') }}
 				</a>
 			</div>
 			<div v-else-if="state === 'ok'">
-				{{ t('twitter', 'Nothing to show') }}
+				{{ t('integration_twitter', 'Nothing to show') }}
 			</div>
 		</template>
 	</DashboardWidget>
@@ -121,7 +121,7 @@ export default {
 					since: this.lastDate,
 				}
 			}
-			axios.get(generateUrl('/apps/twitter/notifications'), req).then((response) => {
+			axios.get(generateUrl('/apps/integration_twitter/notifications'), req).then((response) => {
 				this.processNotifications(response.data)
 				this.state = 'ok'
 			}).catch((error) => {
@@ -129,7 +129,7 @@ export default {
 				if (error.response && error.response.status === 400) {
 					this.state = 'no-token'
 				} else if (error.response && error.response.status === 401) {
-					showError(t('twitter', 'Failed to get Twitter notifications.'))
+					showError(t('integration_twitter', 'Failed to get Twitter notifications.'))
 					this.state = 'error'
 				} else {
 					// there was an error in notif processing
@@ -161,7 +161,7 @@ export default {
 		},
 		getUserAvatarUrl(n) {
 			return n.profile_image_url_https
-				? generateUrl('/apps/twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
+				? generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
 				: ''
 		},
 		getAvatarText(n) {
@@ -182,25 +182,25 @@ export default {
 		},
 		getMainText(n) {
 			if (['follow_request'].includes(n.type)) {
-				return t('twitter', '{nb} follow requests', { nb: n.number })
+				return t('integration_twitter', '{nb} follow requests', { nb: n.number })
 			}
 			return n.text
 		},
 		getSubline(n) {
 			if (['follow_request'].includes(n.type)) {
-				return t('twitter', 'System')
+				return t('integration_twitter', 'System')
 			}
 			return '@' + n.sender_screen_name
 		},
 		getNotificationTypeImage(n) {
 			if (n.type === 'mention') {
-				return generateUrl('/svg/twitter/arobase?color=ffffff')
+				return generateUrl('/svg/integration_twitter/arobase?color=ffffff')
 			} else if (n.type === 'message') {
-				return generateUrl('/svg/twitter/message?color=ffffff')
+				return generateUrl('/svg/integration_twitter/message?color=ffffff')
 			} else if (n.type === 'retweet') {
-				return generateUrl('/svg/twitter/retweet?color=ffffff')
+				return generateUrl('/svg/integration_twitter/retweet?color=ffffff')
 			} else if (n.type === 'follow_request') {
-				return generateUrl('/svg/twitter/sound?color=ffffff')
+				return generateUrl('/svg/integration_twitter/sound?color=ffffff')
 			}
 			return ''
 		},

@@ -2,35 +2,35 @@
 	<div id="twitter_prefs" class="section">
 		<h2>
 			<a class="icon icon-twitter" />
-			{{ t('twitter', 'Twitter') }}
+			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
 		<p class="settings-hint">
-			{{ t('twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the consumer key and secret here.') }}
+			{{ t('integration_twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the consumer key and secret here.') }}
 			<br>
-			{{ t('twitter', 'Make sure you set this callback URL to your app in Twitter developer settings:') }}
+			{{ t('integration_twitter', 'Make sure you set this callback URL to your app in Twitter developer settings:') }}
 			<br><b> {{ redirect_uri }} </b>
 		</p>
 		<div class="grid-form">
 			<label for="twitter-client-id">
 				<a class="icon icon-category-auth" />
-				{{ t('twitter', 'Twitter application consumer key') }}
+				{{ t('integration_twitter', 'Twitter application consumer key') }}
 			</label>
 			<input id="twitter-client-id"
 				v-model="state.consumer_key"
 				type="password"
 				:readonly="readonly"
-				:placeholder="t('twitter', 'Consumer key of your Twitter application')"
+				:placeholder="t('integration_twitter', 'Consumer key of your Twitter application')"
 				@focus="readonly = false"
 				@input="onInput">
 			<label for="twitter-client-secret">
 				<a class="icon icon-category-auth" />
-				{{ t('twitter', 'Twitter application consumer secret') }}
+				{{ t('integration_twitter', 'Twitter application consumer secret') }}
 			</label>
 			<input id="twitter-client-secret"
 				v-model="state.consumer_secret"
 				type="password"
 				:readonly="readonly"
-				:placeholder="t('twitter', 'Consumer secret of your Twitter application')"
+				:placeholder="t('integration_twitter', 'Consumer secret of your Twitter application')"
 				@input="onInput"
 				@focus="readonly = false">
 		</div>
@@ -54,7 +54,7 @@ export default {
 
 	data() {
 		return {
-			state: loadState('twitter', 'admin-config'),
+			state: loadState('integration_twitter', 'admin-config'),
 			// to prevent some browsers to fill fields with remembered passwords
 			readonly: true,
 			redirect_uri: 'web+nextcloudtwitter://',
@@ -81,14 +81,14 @@ export default {
 					consumer_secret: this.state.consumer_secret,
 				},
 			}
-			const url = generateUrl('/apps/twitter/admin-config')
+			const url = generateUrl('/apps/integration_twitter/admin-config')
 			axios.put(url, req)
 				.then((response) => {
-					showSuccess(t('twitter', 'Twitter admin options saved.'))
+					showSuccess(t('integration_twitter', 'Twitter admin options saved.'))
 				})
 				.catch((error) => {
 					showError(
-						t('twitter', 'Failed to save Twitter admin options')
+						t('integration_twitter', 'Failed to save Twitter admin options')
 						+ ': ' + error.response.request.responseText
 					)
 					console.debug(error)

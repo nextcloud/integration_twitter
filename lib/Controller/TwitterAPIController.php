@@ -31,6 +31,7 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 
 use OCA\Twitter\Service\TwitterAPIService;
+use OCA\Twitter\AppInfo\Application;
 
 class TwitterAPIController extends Controller {
 
@@ -58,7 +59,7 @@ class TwitterAPIController extends Controller {
         $this->config = $config;
         $this->logger = $logger;
         $this->twitterAPIService = $twitterAPIService;
-        $this->accessToken = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
+        $this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
     }
 
     /**

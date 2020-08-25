@@ -10,6 +10,8 @@ use OCP\Util;
 use OCP\IURLGenerator;
 use OCP\IInitialStateService;
 
+use OCA\Twitter\AppInfo\Application;
+
 class Admin implements ISettings {
 
     private $request;
@@ -39,15 +41,15 @@ class Admin implements ISettings {
      * @return TemplateResponse
      */
     public function getForm() {
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', '');
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', '');
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', '');
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', '');
 
         $adminConfig = [
             'consumer_key' => $consumerKey,
             'consumer_secret' => $consumerSecret,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'admin-config', $adminConfig);
-        return new TemplateResponse('twitter', 'adminSettings');
+        return new TemplateResponse(Application::APP_ID, 'adminSettings');
     }
 
     public function getSection() {

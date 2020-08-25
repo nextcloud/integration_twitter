@@ -2,27 +2,27 @@
 	<div v-if="showOAuth" id="twitter_prefs" class="section">
 		<h2>
 			<a class="icon icon-twitter" />
-			{{ t('twitter', 'Twitter') }}
+			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
 		<p class="settings-hint">
-			{{ t('twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+			{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
 			<br><b> {{ redirect_uri }} </b>
 		</p>
 		<div class="twitter-grid-form">
 			<label for="twitter-token">
 				<a class="icon icon-category-auth" />
-				{{ t('twitter', 'Twitter access token') }}
+				{{ t('integration_twitter', 'Twitter access token') }}
 			</label>
 			<input id="twitter-token"
 				v-model="state.oauth_token"
 				type="password"
 				:readonly="readonly"
-				:placeholder="t('twitter', 'Token obtained with OAuth')"
+				:placeholder="t('integration_twitter', 'Token obtained with OAuth')"
 				@focus="readonly = false"
 				@input="onInput">
 			<button id="twitter-oauth" @click="onOAuthClick">
 				<span class="icon icon-external" />
-				{{ t('twitter', 'Get access with OAuth') }}
+				{{ t('integration_twitter', 'Get access with OAuth') }}
 			</button>
 		</div>
 	</div>
@@ -45,7 +45,7 @@ export default {
 
 	data() {
 		return {
-			state: loadState('twitter', 'user-config'),
+			state: loadState('integration_twitter', 'user-config'),
 			readonly: true,
 		}
 	},
@@ -61,17 +61,18 @@ export default {
 
 	mounted() {
 		const paramString = window.location.search.substr(1)
+		// eslint-disable-next-line
 		const urlParams = new URLSearchParams(paramString)
 		const twToken = urlParams.get('twitterToken')
 		if (twToken === 'success') {
-			showSuccess(t('twitter', 'Twitter OAuth access token successfully retrieved!'))
+			showSuccess(t('integration_twitter', 'Twitter OAuth access token successfully retrieved!'))
 		} else if (twToken === 'error') {
-			showError(t('twitter', 'Twitter OAuth error:') + ' ' + urlParams.get('message'))
+			showError(t('integration_twitter', 'Twitter OAuth error:') + ' ' + urlParams.get('message'))
 		}
 
 		// register protocol handler
 		if (window.isSecureContext && window.navigator.registerProtocolHandler) {
-			window.navigator.registerProtocolHandler('web+nextcloudtwitter', generateUrl('/apps/twitter/oauth-redirect') + '?url=%s', 'Nextcloud Twitter integration')
+			window.navigator.registerProtocolHandler('web+nextcloudtwitter', generateUrl('/apps/integration_twitter/oauth-redirect') + '?url=%s', 'Nextcloud Twitter integration')
 		}
 	},
 
@@ -88,14 +89,14 @@ export default {
 					oauth_token: this.state.oauth_token,
 				},
 			}
-			const url = generateUrl('/apps/twitter/config')
+			const url = generateUrl('/apps/integration_twitter/config')
 			axios.put(url, req)
 				.then((response) => {
-					showSuccess(t('twitter', 'Twitter options saved.'))
+					showSuccess(t('integration_twitter', 'Twitter options saved.'))
 				})
 				.catch((error) => {
 					showError(
-						t('twitter', 'Failed to save Twitter options')
+						t('integration_twitter', 'Failed to save Twitter options')
 						+ ': ' + error.response.request.responseText
 					)
 				})
@@ -103,14 +104,14 @@ export default {
 				})
 		},
 		onOAuthClick() {
-			const url = generateUrl('/apps/twitter/oauth-step1')
+			const url = generateUrl('/apps/integration_twitter/oauth-step1')
 			axios.get(url)
 				.then((response) => {
 					this.step2(response.data)
 				})
 				.catch((error) => {
 					showError(
-						t('twitter', 'Failed to request Twitter 1st step OAuth token')
+						t('integration_twitter', 'Failed to request Twitter 1st step OAuth token')
 						+ ': ' + error.response.request.responseText
 					)
 					console.debug(error)
@@ -121,7 +122,7 @@ export default {
 		step2(data) {
 			if (!data.startsWith('http')) {
 				showError(
-					t('twitter', 'OAuth failure')
+					t('integration_twitter', 'OAuth failure')
 					+ ': ' + data
 				)
 			} else {

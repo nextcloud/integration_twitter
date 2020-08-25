@@ -10,6 +10,8 @@ use OCP\Util;
 use OCP\IURLGenerator;
 use OCP\IInitialStateService;
 
+use OCA\Twitter\AppInfo\Application;
+
 require_once __DIR__ . '/../constants.php';
 
 class Personal implements ISettings {
@@ -41,11 +43,11 @@ class Personal implements ISettings {
      * @return TemplateResponse
      */
     public function getForm() {
-        $token = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token', '');
-        $tokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'oauth_token_secret', '');
+        $token = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
+        $tokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', '');
 
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', DEFAULT_CONSUMER_SECRET);
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
         $consumerKey = $consumerKey ? $consumerKey : DEFAULT_CONSUMER_KEY;
         $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_CONSUMER_SECRET;
 
@@ -59,7 +61,7 @@ class Personal implements ISettings {
             'consumer_secret' => $hasConsumerSecret,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
-        $response = new TemplateResponse('twitter', 'personalSettings');
+        $response = new TemplateResponse(Application::APP_ID, 'personalSettings');
         return $response;
     }
 

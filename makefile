@@ -1,4 +1,4 @@
-app_name=twitter
+app_name=integration_twitter
 app_version=$(version)
 project_dir=.
 build_dir=/tmp/build

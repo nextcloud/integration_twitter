@@ -1,8 +1,6 @@
 <?php
-/** @var $l \OCP\IL10N */
-/** @var $_ array */
-
-script('twitter', 'twitter-personalSettings');
+$appId = OCA\Twitter\AppInfo\Application::APP_ID;
+script($appId, $appId . '-personalSettings');
 ?>
 
 <div id="twitter_prefs"></div>

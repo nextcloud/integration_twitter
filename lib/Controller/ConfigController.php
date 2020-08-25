@@ -31,6 +31,7 @@ use OCP\AppFramework\Controller;
 require_once __DIR__ . '/../constants.php';
 
 use OCA\Twitter\Service\TwitterAPIService;
+use OCA\Twitter\AppInfo\Application;
 
 class ConfigController extends Controller {
 
@@ -71,7 +72,7 @@ class ConfigController extends Controller {
      */
     public function setConfig($values) {
         foreach ($values as $key => $value) {
-            $this->config->setUserValue($this->userId, 'twitter', $key, $value);
+            $this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
         }
         $response = new DataResponse(1);
         return $response;
@@ -82,7 +83,7 @@ class ConfigController extends Controller {
      */
     public function setAdminConfig($values) {
         foreach ($values as $key => $value) {
-            $this->config->setAppValue('twitter', $key, $value);
+            $this->config->setAppValue(Application::APP_ID, $key, $value);
         }
         $response = new DataResponse(1);
         return $response;
@@ -93,8 +94,8 @@ class ConfigController extends Controller {
      * @NoAdminRequired
      */
     public function doOauthStep1() {
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', DEFAULT_CONSUMER_SECRET);
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
         $consumerKey = $consumerKey ? $consumerKey : DEFAULT_CONSUMER_KEY;
         $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_CONSUMER_SECRET;
 
@@ -106,8 +107,8 @@ class ConfigController extends Controller {
         // save token of application to session
         $oauthToken = $requestToken['oauth_token'];
         $oauthTokenSecret = $requestToken['oauth_token_secret'];
-        $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token', $oauthToken);
-        $this->config->setUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', $oauthTokenSecret);
+        $this->config->setUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token', $oauthToken);
+        $this->config->setUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token_secret', $oauthTokenSecret);
 
         return new DataResponse('https://api.twitter.com/oauth/authorize?oauth_token=' . $oauthToken);
     }
@@ -121,13 +122,13 @@ class ConfigController extends Controller {
         parse_str($parts['query'], $params);
         $oauthVerifier = $params['oauth_verifier'];
 
-        $consumerKey = $this->config->getAppValue('twitter', 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue('twitter', 'consumer_secret', DEFAULT_CONSUMER_SECRET);
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
         $consumerKey = $consumerKey === '' ? DEFAULT_CONSUMER_KEY : $consumerKey;
         $consumerSecret = $consumerSecret === '' ? DEFAULT_CONSUMER_SECRET : $consumerSecret;
 
-        $oauthToken = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token', '');
-        $oauthTokenSecret = $this->config->getUserValue($this->userId, 'twitter', 'tmp_oauth_token_secret', '');
+        $oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token', '');
+        $oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token_secret', '');
 
         if (empty($oauthVerifier) || $oauthToken === '' || $oauthTokenSecret === '') {
             $result = $this->l->t('Problem in OAuth first or second step');
@@ -148,8 +149,8 @@ class ConfigController extends Controller {
         }
         $oauthToken = $token['oauth_token'];
         $oauthTokenSecret = $token['oauth_token_secret'];
-        $this->config->setUserValue($this->userId, 'twitter', 'oauth_token', $oauthToken);
-        $this->config->setUserValue($this->userId, 'twitter', 'oauth_token_secret', $oauthTokenSecret);
+        $this->config->setUserValue($this->userId, Application::APP_ID, 'oauth_token', $oauthToken);
+        $this->config->setUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', $oauthTokenSecret);
         return new RedirectResponse(
             $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
             '?twitterToken=success'

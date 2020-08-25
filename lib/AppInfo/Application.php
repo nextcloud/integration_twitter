@@ -27,13 +27,15 @@ use OCA\Twitter\Dashboard\TwitterWidget;
  */
 class Application extends App implements IBootstrap {
 
+    public const APP_ID = 'integration_twitter';
+
     /**
      * Constructor
      *
      * @param array $urlParams
      */
     public function __construct(array $urlParams = []) {
-        parent::__construct('twitter', $urlParams);
+        parent::__construct(self::APP_ID, $urlParams);
 
         $container = $this->getContainer();
     }

@@ -24,8 +24,9 @@
 namespace OCA\Twitter\Dashboard;
 
 use OCP\Dashboard\IWidget;
-
 use OCP\IL10N;
+
+use OCA\Twitter\AppInfo\Application;
 
 class TwitterWidget implements IWidget {
 
@@ -42,7 +43,7 @@ class TwitterWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getId(): string {
-		return 'twitter';
+		return 'twitter_notifications';
 	}
 
 	/**
@@ -77,7 +78,7 @@ class TwitterWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function load(): void {
-        \OC_Util::addScript('twitter', 'twitter-dashboard');
-        \OC_Util::addStyle('twitter', 'dashboard');
+        \OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboard');
+        \OC_Util::addStyle(Application::APP_ID, 'dashboard');
     }
 }
