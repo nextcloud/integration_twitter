@@ -6,7 +6,6 @@
 		</h2>
 		<p class="settings-hint">
 			{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
-			<br><b> {{ redirect_uri }} </b>
 		</p>
 		<div class="twitter-grid-form">
 			<label for="twitter-token">
