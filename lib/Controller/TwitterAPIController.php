@@ -68,7 +68,7 @@ class TwitterAPIController extends Controller {
      */
     public function getNotifications($since = null) {
         if ($this->accessToken === '') {
-            return new DataResponse($result, 400);
+            return new DataResponse([], 400);
         }
         $result = $this->twitterAPIService->getNotifications($since);
         if (!is_string($result)) {
