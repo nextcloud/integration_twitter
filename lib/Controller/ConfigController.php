@@ -94,10 +94,10 @@ class ConfigController extends Controller {
      * @NoAdminRequired
      */
     public function doOauthStep1() {
-        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
-        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_CONSUMER_KEY;
-        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_CONSUMER_SECRET;
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
+        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
+        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
 
         $requestToken = $this->twitterAPIService->requestTokenOAuthStep1($consumerKey, $consumerSecret);
         if (!isset($requestToken['oauth_token']) or !isset($requestToken['oauth_token_secret'])) {
@@ -122,10 +122,10 @@ class ConfigController extends Controller {
         parse_str($parts['query'], $params);
         $oauthVerifier = $params['oauth_verifier'];
 
-        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
-        $consumerKey = $consumerKey === '' ? DEFAULT_CONSUMER_KEY : $consumerKey;
-        $consumerSecret = $consumerSecret === '' ? DEFAULT_CONSUMER_SECRET : $consumerSecret;
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
+        $consumerKey = $consumerKey === '' ? DEFAULT_TWITTER_CONSUMER_KEY : $consumerKey;
+        $consumerSecret = $consumerSecret === '' ? DEFAULT_TWITTER_CONSUMER_SECRET : $consumerSecret;
 
         $oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token', '');
         $oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token_secret', '');

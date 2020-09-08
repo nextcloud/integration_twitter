@@ -46,10 +46,10 @@ class Personal implements ISettings {
         $token = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
         $tokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', '');
 
-        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
-        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_CONSUMER_KEY;
-        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_CONSUMER_SECRET;
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
+        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
+        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
 
         $hasConsumerKey = ($consumerKey !== '');
         $hasConsumerSecret = ($consumerSecret !== '');

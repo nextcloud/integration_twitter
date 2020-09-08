@@ -44,10 +44,10 @@ class TwitterAPIService {
 		$this->clientService = $clientService;
 		$this->client = $clientService->newClient();
 		if (!is_null($userId) and $userId !== '') {
-			$this->consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_CONSUMER_KEY);
-			$this->consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_CONSUMER_SECRET);
-			$this->consumerKey = $this->consumerKey ? $this->consumerKey : DEFAULT_CONSUMER_KEY;
-			$this->consumerSecret = $this->consumerSecret ? $this->consumerSecret : DEFAULT_CONSUMER_SECRET;
+			$this->consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
+			$this->consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
+			$this->consumerKey = $this->consumerKey ? $this->consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
+			$this->consumerSecret = $this->consumerSecret ? $this->consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
 			$this->oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
 			$this->oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', '');
 		}
