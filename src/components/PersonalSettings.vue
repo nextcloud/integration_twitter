@@ -1,11 +1,14 @@
 <template>
-	<div v-if="showOAuth" id="twitter_prefs" class="section">
+	<div id="twitter_prefs" class="section">
 		<h2>
 			<a class="icon icon-twitter" />
 			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
-		<p class="settings-hint">
+		<p v-if="showOAuth" class="settings-hint">
 			{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+		</p>
+		<p v-else class="settings-hint">
+			{{ t('integration_twitter', 'You must access this page with HTTPS to be able to authenticate to Twitter.') }}
 		</p>
 		<div class="twitter-grid-form">
 			<label for="twitter-token">
@@ -19,7 +22,7 @@
 				:placeholder="t('integration_twitter', 'Token obtained with OAuth')"
 				@focus="readonly = false"
 				@input="onInput">
-			<button id="twitter-oauth" @click="onOAuthClick">
+			<button v-if="showOAuth" id="twitter-oauth" @click="onOAuthClick">
 				<span class="icon icon-external" />
 				{{ t('integration_twitter', 'Get access with OAuth') }}
 			</button>
@@ -51,7 +54,7 @@ export default {
 
 	computed: {
 		showOAuth() {
-			return this.state.consumer_key && this.state.consumer_secret
+			return window.location.protocol === 'https:' && this.state.consumer_key && this.state.consumer_secret
 		},
 	},
 
