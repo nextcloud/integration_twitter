@@ -52,7 +52,7 @@ export default {
 			lastDate: null,
 			loop: null,
 			state: 'loading',
-			settingsUrl: generateUrl('/settings/user/linked-accounts'),
+			settingsUrl: generateUrl('/settings/user/connected-accounts'),
 			darkThemeColor: OCA.Accessibility.theme === 'dark' ? 'ffffff' : '000000',
 		}
 	},

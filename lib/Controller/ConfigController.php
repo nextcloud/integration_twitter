@@ -133,7 +133,7 @@ class ConfigController extends Controller {
         if (empty($oauthVerifier) || $oauthToken === '' || $oauthTokenSecret === '') {
             $result = $this->l->t('Problem in OAuth first or second step');
             return new RedirectResponse(
-                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
+                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
                 '?twitterToken=error&message=' . urlencode($result)
             );
         }
@@ -143,7 +143,7 @@ class ConfigController extends Controller {
             $result = $this->l->t('Problem in OAuth third step.');
             $result .= ' ' . $e->getMessage();
             return new RedirectResponse(
-                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
+                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
                 '?twitterToken=error&message=' . urlencode($result)
             );
         }
@@ -151,8 +151,17 @@ class ConfigController extends Controller {
         $oauthTokenSecret = $token['oauth_token_secret'];
         $this->config->setUserValue($this->userId, Application::APP_ID, 'oauth_token', $oauthToken);
         $this->config->setUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', $oauthTokenSecret);
+        // get my username
+        $creds = $this->twitterAPIService->classicRequest(
+            $consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret,
+            'account/verify_credentials.json', [], 'GET'
+        );
+        if (isset($creds['name']) && isset($creds['screen_name'])) {
+            $this->config->setUserValue($this->userId, Application::APP_ID, 'name', $creds['name']);
+            $this->config->setUserValue($this->userId, Application::APP_ID, 'screen_name', $creds['screen_name']);
+        }
         return new RedirectResponse(
-            $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'linked-accounts']) .
+            $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
             '?twitterToken=success'
         );
     }

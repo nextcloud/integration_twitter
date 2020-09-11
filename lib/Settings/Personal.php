@@ -54,11 +54,16 @@ class Personal implements ISettings {
         $hasConsumerKey = ($consumerKey !== '');
         $hasConsumerSecret = ($consumerSecret !== '');
 
+        $name = $this->config->getUserValue($this->userId, Application::APP_ID, 'name', '');
+        $screenName = $this->config->getUserValue($this->userId, Application::APP_ID, 'screen_name', '');
+
         $userConfig = [
             'oauth_token' => $token,
             'oauth_token_secret' => $tokenSecret,
             'consumer_key' => $hasConsumerKey,
             'consumer_secret' => $hasConsumerSecret,
+            'name' => $name,
+            'screen_name' => $screenName,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
         $response = new TemplateResponse(Application::APP_ID, 'personalSettings');
@@ -66,7 +71,7 @@ class Personal implements ISettings {
     }
 
     public function getSection() {
-        return 'linked-accounts';
+        return 'connected-accounts';
     }
 
     public function getPriority() {

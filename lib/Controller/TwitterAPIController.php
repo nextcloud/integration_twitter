@@ -33,6 +33,8 @@ use OCP\AppFramework\Controller;
 use OCA\Twitter\Service\TwitterAPIService;
 use OCA\Twitter\AppInfo\Application;
 
+require_once __DIR__ . '/../constants.php';
+
 class TwitterAPIController extends Controller {
 
 
@@ -59,7 +61,12 @@ class TwitterAPIController extends Controller {
         $this->config = $config;
         $this->logger = $logger;
         $this->twitterAPIService = $twitterAPIService;
-        $this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
+        $this->consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
+        $this->consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
+        $this->consumerKey = $this->consumerKey ? $this->consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
+        $this->consumerSecret = $this->consumerSecret ? $this->consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
+        $this->oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
+        $this->oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', '');
     }
 
     /**
@@ -67,10 +74,10 @@ class TwitterAPIController extends Controller {
      * @NoAdminRequired
      */
     public function getNotifications($since = null) {
-        if ($this->accessToken === '') {
+        if ($this->oauthToken === '') {
             return new DataResponse([], 400);
         }
-        $result = $this->twitterAPIService->getNotifications($since);
+        $result = $this->twitterAPIService->getNotifications($this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $since);
         if (!is_string($result)) {
             $response = new DataResponse($result);
         } else {

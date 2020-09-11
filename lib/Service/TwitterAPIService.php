@@ -43,21 +43,13 @@ class TwitterAPIService {
 		$this->userId = $userId;
 		$this->clientService = $clientService;
 		$this->client = $clientService->newClient();
-		if (!is_null($userId) and $userId !== '') {
-			$this->consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
-			$this->consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
-			$this->consumerKey = $this->consumerKey ? $this->consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
-			$this->consumerSecret = $this->consumerSecret ? $this->consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
-			$this->oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token', '');
-			$this->oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_token_secret', '');
-		}
 	}
 
 	public function getAvatar($url) {
 		return $this->client->get($url)->getBody();
 	}
 
-	public function getNotifications($since = null) {
+	public function getNotifications(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, $since = null) {
 		$results = [];
 		$missingUsers = [];
 
@@ -66,7 +58,7 @@ class TwitterAPIService {
 		//$result = $this->classicRequest('notifications/all.json', [], 'GET', '2');
 
 		//////////////// GET MY CREDENTIALS
-		$result = $this->classicRequest('account/verify_credentials.json', [], 'GET');
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'account/verify_credentials.json', [], 'GET');
 		$myId = $result['id'];
 		$myIdStr = $result['id_str'];
 
@@ -78,7 +70,7 @@ class TwitterAPIService {
 			'count' => 20,
 			// 'since_id' =>
 		];
-		$result = $this->classicRequest('statuses/mentions_timeline.json', $params);
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/mentions_timeline.json', $params);
 		if (is_array($result)) {
 			foreach ($result as $mention) {
 				$ts = (new \Datetime($mention['created_at']))->getTimestamp();
@@ -102,7 +94,7 @@ class TwitterAPIService {
 			'count' => 20,
 			// 'since_id' =>
 		];
-		$result = $this->classicRequest('statuses/retweets_of_me.json', $params);
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/retweets_of_me.json', $params);
 		if (is_array($result)) {
 			foreach ($result as $retweet) {
 				$ts = (new \Datetime($retweet['created_at']))->getTimestamp();
@@ -122,7 +114,7 @@ class TwitterAPIService {
 		}
 
 		////////////// FOLLOW REQUESTS
-		$result = $this->classicRequest('friendships/incoming.json', $params);
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'friendships/incoming.json', $params);
 		$nbFollowRequests = 0;
 		if (isset($result['ids']) and is_array($result['ids'])) {
 			$nbFollowRequests = count($result['ids']);
@@ -137,7 +129,7 @@ class TwitterAPIService {
 		$params = [
 			'count' => 20,
 		];
-		$result = $this->classicRequest('direct_messages/events/list.json', $params);
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'direct_messages/events/list.json', $params);
 		if (isset($result['events']) and is_array($result['events'])) {
 			$msgs = $result['events'];
 			foreach ($msgs as $msg) {
@@ -167,7 +159,7 @@ class TwitterAPIService {
 			$params = [
 				'user_id' => $user_id,
 			];
-			$result = $this->classicRequest('users/show.json', $params);
+			$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'users/show.json', $params);
 			if (isset($result['name']) and isset($result['screen_name']) and isset($result['profile_image_url_https'])) {
 				$userInfo[$user_id] = [
 					'sender_name' => $result['name'],
@@ -208,18 +200,19 @@ class TwitterAPIService {
 	 * manually signed API request
 	 * @NoAdminRequired
 	 */
-	public function classicRequest($endPoint, $params = [], $method = 'GET', $apiVersion = '1.1') {
+	public function classicRequest(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret,
+									string $endPoint, array $params = [], string $method = 'GET', string $apiVersion = '1.1') {
 		$url = 'https://api.twitter.com/' . $apiVersion . '/' . $endPoint;
 
 		$ts = (new \Datetime())->getTimestamp();
 		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
 		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
 		$headerParams = [
-			'oauth_consumer_key' => $this->consumerKey,
+			'oauth_consumer_key' => $consumerKey,
 			'oauth_nonce' => base64_encode($nonce),
 			'oauth_signature_method' => 'HMAC-SHA1',
 			'oauth_timestamp' => $ts,
-			'oauth_token' => $this->oauthToken,
+			'oauth_token' => $oauthToken,
 			'oauth_version' => '1.0',
 		];
 
@@ -236,7 +229,7 @@ class TwitterAPIService {
 		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
 
 		// generate signature
-		$signingKey = urlencode($this->consumerSecret) . '&' . urlencode($this->oauthTokenSecret);
+		$signingKey = urlencode($consumerSecret) . '&' . urlencode($oauthTokenSecret);
 		$signature = hash_hmac('sha1', $baseString, $signingKey, true);
 		$b64Signature = base64_encode($signature);
 		$headerParams['oauth_signature'] = $b64Signature;
@@ -367,7 +360,7 @@ class TwitterAPIService {
 		return $values;
 	}
 
-	private function request($url, $params = [], $method = 'GET', $authHeader = null, $json = true) {
+	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null, bool $json = true) {
 		try {
 			$options = [
 				'headers' => [

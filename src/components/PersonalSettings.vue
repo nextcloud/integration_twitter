@@ -4,29 +4,29 @@
 			<a class="icon icon-twitter" />
 			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
-		<p v-if="showOAuth" class="settings-hint">
-			{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
-		</p>
+		<div v-if="showOAuth" class="twitter-content">
+			<div v-if="!state.oauth_token">
+				<p class="settings-hint">
+					{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+				</p>
+				<button v-if="!state.oauth_token" id="twitter-oauth" @click="onOAuthClick">
+					<span class="icon icon-external" />
+					{{ t('integration_twitter', 'Connect to Twitter') }}
+				</button>
+			</div>
+			<div v-else>
+				<label>
+					{{ t('integration_twitter', 'Connected as {user}', { user: userName }) }}
+				</label>
+				<button id="twitter-rm-cred" @click="onLogoutClick">
+					<span class="icon icon-close" />
+					{{ t('integration_twitter', 'Disconnect from Twitter') }}
+				</button>
+			</div>
+		</div>
 		<p v-else class="settings-hint">
 			{{ t('integration_twitter', 'You must access this page with HTTPS to be able to authenticate to Twitter.') }}
 		</p>
-		<div class="twitter-grid-form">
-			<label for="twitter-token">
-				<a class="icon icon-category-auth" />
-				{{ t('integration_twitter', 'Twitter access token') }}
-			</label>
-			<input id="twitter-token"
-				v-model="state.oauth_token"
-				type="password"
-				:readonly="readonly"
-				:placeholder="t('integration_twitter', 'Token obtained with OAuth')"
-				@focus="readonly = false"
-				@input="onInput">
-			<button v-if="showOAuth" id="twitter-oauth" @click="onOAuthClick">
-				<span class="icon icon-external" />
-				{{ t('integration_twitter', 'Get access with OAuth') }}
-			</button>
-		</div>
 	</div>
 </template>
 
@@ -34,7 +34,6 @@
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
-import { delay } from '../utils'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 
 export default {
@@ -55,6 +54,9 @@ export default {
 	computed: {
 		showOAuth() {
 			return window.location.protocol === 'https:' && this.state.consumer_key && this.state.consumer_secret
+		},
+		userName() {
+			return this.state.name + ' (@' + this.state.screen_name + ')'
 		},
 	},
 
@@ -79,11 +81,9 @@ export default {
 	},
 
 	methods: {
-		onInput() {
-			const that = this
-			delay(() => {
-				that.saveOptions()
-			}, 2000)()
+		onLogoutClick() {
+			this.state.oauth_token = ''
+			this.saveOptions()
 		},
 		saveOptions() {
 			const req = {
@@ -136,27 +136,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.twitter-grid-form label {
-	line-height: 38px;
-}
-.twitter-grid-form input {
-	width: 100%;
-}
-.twitter-grid-form {
-	max-width: 900px;
-	display: grid;
-	grid-template: 1fr / 1fr 1fr 1fr;
-	margin-left: 30px;
-	button .icon {
-		margin-bottom: -1px;
-	}
-}
 #twitter_prefs .icon {
 	display: inline-block;
 	width: 32px;
-}
-#twitter_prefs .grid-form .icon {
-	margin-bottom: -3px;
 }
 .icon-twitter {
 	background-image: url(./../../img/app-dark.svg);
@@ -167,5 +149,8 @@ export default {
 
 body.dark .icon-twitter {
 	background-image: url(./../../img/app.svg);
+}
+.twitter-content {
+	margin-left: 40px;
 }
 </style>
