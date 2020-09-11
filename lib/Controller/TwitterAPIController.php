@@ -73,7 +73,7 @@ class TwitterAPIController extends Controller {
      * get notification list
      * @NoAdminRequired
      */
-    public function getNotifications($since = null) {
+    public function getNotifications(?int $since = null): DataResponse {
         if ($this->oauthToken === '') {
             return new DataResponse([], 400);
         }
@@ -91,7 +91,7 @@ class TwitterAPIController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function getAvatar($url) {
+    public function getAvatar(string $url): DataDisplayResponse {
         $response = new DataDisplayResponse($this->twitterAPIService->getAvatar($url));
         $response->cacheFor(60*60*24);
         return $response;

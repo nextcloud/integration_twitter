@@ -28,14 +28,12 @@ class TwitterAPIService {
 	/**
 	 * Service to make requests to Twitter v3 (JSON) API
 	 */
-	public function __construct (
-		string $appName,
-		ILogger $logger,
-		IL10N $l10n,
-		IConfig $config,
-		IClientService $clientService,
-		string $userId
-	) {
+	public function __construct (string $appName,
+								ILogger $logger,
+								IL10N $l10n,
+								IConfig $config,
+								IClientService $clientService,
+								string $userId) {
 		$this->appName = $appName;
 		$this->l10n = $l10n;
 		$this->logger = $logger;
@@ -45,11 +43,11 @@ class TwitterAPIService {
 		$this->client = $clientService->newClient();
 	}
 
-	public function getAvatar($url) {
+	public function getAvatar(string $url): string {
 		return $this->client->get($url)->getBody();
 	}
 
-	public function getNotifications(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, $since = null) {
+	public function getNotifications(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, ?int $since = null): array {
 		$results = [];
 		$missingUsers = [];
 
@@ -256,7 +254,7 @@ class TwitterAPIService {
 	 * manually signed OAuth step1 request
 	 * @NoAdminRequired
 	 */
-	public function requestTokenOAuthStep1($consumerKey, $consumerSecret) {
+	public function requestTokenOAuthStep1(string $consumerKey, string $consumerSecret): array {
 		$method = 'POST';
 		$url = 'https://api.twitter.com/oauth/request_token';
 
@@ -310,7 +308,8 @@ class TwitterAPIService {
 	 * manually signed OAuth step1 request
 	 * @NoAdminRequired
 	 */
-	public function requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier) {
+	public function requestTokenOAuthStep3(string $consumerKey, string $consumerSecret, string $oauthToken,
+											string $oauthTokenSecret, string $oauthVerifier): array {
 		$method = 'POST';
 		$url = 'https://api.twitter.com/oauth/access_token';
 

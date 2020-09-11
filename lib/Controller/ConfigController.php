@@ -70,7 +70,7 @@ class ConfigController extends Controller {
      * set config values
      * @NoAdminRequired
      */
-    public function setConfig($values) {
+    public function setConfig(array $values): DataResponse {
         foreach ($values as $key => $value) {
             $this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
         }
@@ -81,7 +81,7 @@ class ConfigController extends Controller {
     /**
      * set admin config values
      */
-    public function setAdminConfig($values) {
+    public function setAdminConfig(array $values): DataResponse {
         foreach ($values as $key => $value) {
             $this->config->setAppValue(Application::APP_ID, $key, $value);
         }
@@ -93,7 +93,7 @@ class ConfigController extends Controller {
      * perform 1st step of 3-legged twitter oauth
      * @NoAdminRequired
      */
-    public function doOauthStep1() {
+    public function doOauthStep1(): DataResponse {
         $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
         $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
         $consumerKey = $consumerKey ? $consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
@@ -117,7 +117,7 @@ class ConfigController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function oauthRedirect($url) {
+    public function oauthRedirect(string $url): RedirectResponse {
         $parts = parse_url($url);
         parse_str($parts['query'], $params);
         $oauthVerifier = $params['oauth_verifier'];
