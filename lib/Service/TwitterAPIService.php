@@ -201,7 +201,7 @@ class TwitterAPIService {
 	 * @NoAdminRequired
 	 */
 	public function classicRequest(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret,
-									string $endPoint, array $params = [], string $method = 'GET', string $apiVersion = '1.1') {
+									string $endPoint, array $params = [], string $method = 'GET', string $apiVersion = '1.1'): array {
 		$url = 'https://api.twitter.com/' . $apiVersion . '/' . $endPoint;
 
 		$ts = (new \Datetime())->getTimestamp();
@@ -244,10 +244,11 @@ class TwitterAPIService {
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
 		$response = $this->request($url, $params, $method, $authHeader);
-		if (is_array($response)) {
-			return $response;
+		$result = json_decode($response, true);
+		if (is_array($result)) {
+			return $result;
 		} else {
-			return $response;
+			return ['error' => $result];
 		}
 	}
 
@@ -300,7 +301,7 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->request($url, $params, $method, $authHeader, false);
+		$response = $this->request($url, $params, $method, $authHeader);
 		parse_str($response, $values);
 		return $values;
 	}
@@ -355,12 +356,12 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->request($url, $params, $method, $authHeader, false);
+		$response = $this->request($url, $params, $method, $authHeader);
 		parse_str($response, $values);
 		return $values;
 	}
 
-	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null, bool $json = true) {
+	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null): string {
 		try {
 			$options = [
 				'headers' => [
@@ -395,14 +396,10 @@ class TwitterAPIService {
 			if ($respCode >= 400) {
 				return $this->l10n->t('Request failed');
 			} else {
-				if ($json) {
-					return json_decode($body, true);
-				} else {
-					return $body;
-				}
+				return $body;
 			}
 		} catch (\Exception $e) {
-			$this->logger->warning('Twitter request error : '.$e, array('app' => $this->appName));
+			$this->logger->warning('Twitter request error : '.$e->getMessage(), array('app' => $this->appName));
 			return $e->getMessage();
 		}
 	}
