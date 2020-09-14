@@ -14,7 +14,7 @@
 					{{ t('integration_twitter', 'Connect to Twitter') }}
 				</button>
 			</div>
-			<div v-else>
+			<div v-else class="twitter-grid-form">
 				<label>
 					{{ t('integration_twitter', 'Connected as {user}', { user: userName }) }}
 				</label>
@@ -153,7 +153,15 @@ body.dark .icon-twitter {
 .twitter-content {
 	margin-left: 40px;
 }
-#twitter-rm-cred {
-	margin-left: 10px;
+.twitter-grid-form {
+    max-width: 600px;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    button .icon {
+        margin-bottom: -1px;
+    }
+}
+.twitter-grid-form label {
+    line-height: 38px;
 }
 </style>
