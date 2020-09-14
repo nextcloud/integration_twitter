@@ -153,4 +153,7 @@ body.dark .icon-twitter {
 .twitter-content {
 	margin-left: 40px;
 }
+#twitter-rm-cred {
+	margin-left: 10px;
+}
 </style>
