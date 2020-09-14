@@ -16,6 +16,7 @@
 			</div>
 			<div v-else class="twitter-grid-form">
 				<label>
+					<a class="icon icon-checkmark-color" />
 					{{ t('integration_twitter', 'Connected as {user}', { user: userName }) }}
 				</label>
 				<button id="twitter-rm-cred" @click="onLogoutClick">
