@@ -165,4 +165,7 @@ body.dark .icon-twitter {
 .twitter-grid-form label {
     line-height: 38px;
 }
+#twitter-rm-cred {
+	max-height: 34px;
+}
 </style>
