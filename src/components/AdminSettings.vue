@@ -5,15 +5,21 @@
 			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
 		<p class="settings-hint">
-			{{ t('integration_twitter', 'If you want to allow your Nextcloud users to use OAuth to authenticate to https://twitter.com, create a Twitter application in your Twitter settings and set the consumer key and secret here.') }}
-			<br>
-			{{ t('integration_twitter', 'Make sure you set this callback URL to your app in Twitter developer settings:') }}
-			<br><b> {{ redirect_uri }} </b>
+			{{ t('integration_twitter', 'Leave all fields empty to use the default Nextcloud Twitter OAuth app.') }}
+			<br><br>
+			{{ t('integration_twitter', 'If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the "Consumer key" and "Consumer secret" below.') }}
+			<a href="https://developer.twitter.com/en/portal/projects-and-apps" target="_blank" class="external">
+				{{ t('integration_twitter', 'Twitter developer app settings') }}
+			</a>
+			<br><br>
+			<span class="icon icon-details" />
+			{{ t('integration_twitter', 'Make sure you set this "callback URL" to your Twitter OAuth app:') }}
+			<b> {{ redirect_uri }} </b>
 		</p>
 		<div class="grid-form">
 			<label for="twitter-client-id">
 				<a class="icon icon-category-auth" />
-				{{ t('integration_twitter', 'Twitter application consumer key') }}
+				{{ t('integration_twitter', 'Consumer key') }}
 			</label>
 			<input id="twitter-client-id"
 				v-model="state.consumer_key"
@@ -24,7 +30,7 @@
 				@input="onInput">
 			<label for="twitter-client-secret">
 				<a class="icon icon-category-auth" />
-				{{ t('integration_twitter', 'Twitter application consumer secret') }}
+				{{ t('integration_twitter', 'Consumer secret') }}
 			</label>
 			<input id="twitter-client-secret"
 				v-model="state.consumer_secret"
