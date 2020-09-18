@@ -4,20 +4,18 @@
 		:show-more-text="title"
 		:loading="state === 'loading'">
 		<template v-slot:empty-content>
-			<div v-if="state === 'no-token'">
-				<a :href="settingsUrl">
-					{{ t('integration_twitter', 'Click here to configure the access to your Twitter account.') }}
-				</a>
-			</div>
-			<div v-else-if="state === 'error'">
-				<a :href="settingsUrl">
-					{{ t('integration_twitter', 'Incorrect access token.') }}
-					{{ t('integration_twitter', 'Click here to configure the access to your Twitter account.') }}
-				</a>
-			</div>
-			<div v-else-if="state === 'ok'">
-				{{ t('integration_twitter', 'Nothing to show') }}
-			</div>
+			<EmptyContent
+				v-if="emptyContentMessage"
+				:icon="emptyContentIcon">
+				<template #desc>
+					{{ emptyContentMessage }}
+					<div v-if="state === 'no-token' || state === 'error'" class="connect-button">
+						<a class="button" :href="settingsUrl">
+							{{ t('integration_twitter', 'Connect to Twitter') }}
+						</a>
+					</div>
+				</template>
+			</EmptyContent>
 		</template>
 	</DashboardWidget>
 </template>
@@ -28,12 +26,13 @@ import { generateUrl } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
+import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 
 export default {
 	name: 'Dashboard',
 
 	components: {
-		DashboardWidget,
+		DashboardWidget, EmptyContent,
 	},
 
 	props: {
@@ -52,7 +51,7 @@ export default {
 			lastDate: null,
 			loop: null,
 			state: 'loading',
-			settingsUrl: generateUrl('/settings/user/connected-accounts'),
+			settingsUrl: generateUrl('/settings/user/connected-accounts#twitter_prefs'),
 			darkThemeColor: OCA.Accessibility.theme === 'dark' ? 'ffffff' : '000000',
 		}
 	},
@@ -102,6 +101,26 @@ export default {
 		},
 		lastMoment() {
 			return moment(this.lastDate)
+		},
+		emptyContentMessage() {
+			if (this.state === 'no-token') {
+				return t('integration_twitter', 'No Twitter account connected')
+			} else if (this.state === 'error') {
+				return t('integration_twitter', 'Error connecting to Twitter')
+			} else if (this.state === 'ok') {
+				return t('integration_twitter', 'No Twitter notifications!')
+			}
+			return ''
+		},
+		emptyContentIcon() {
+			if (this.state === 'no-token') {
+				return 'icon-twitter'
+			} else if (this.state === 'error') {
+				return 'icon-close'
+			} else if (this.state === 'ok') {
+				return 'icon-checkmark'
+			}
+			return 'icon-checkmark'
 		},
 	},
 
@@ -212,4 +231,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+::v-deep .connect-button {
+	margin-top: 10px;
+}
+
+.icon-twitter {
+	background-image: url(./../../img/app-dark.svg);
+	background-size: 23px 23px;
+	height: 23px;
+	margin-bottom: -4px;
+}
+
+body.theme--dark .icon-twitter {
+	background-image: url(./../../img/app.svg);
+}
 </style>
