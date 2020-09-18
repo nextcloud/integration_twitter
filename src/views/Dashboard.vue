@@ -234,15 +234,4 @@ export default {
 ::v-deep .connect-button {
 	margin-top: 10px;
 }
-
-.icon-twitter {
-	background-image: url(./../../img/app-dark.svg);
-	background-size: 23px 23px;
-	height: 23px;
-	margin-bottom: -4px;
-}
-
-body.theme--dark .icon-twitter {
-	background-image: url(./../../img/app.svg);
-}
 </style>
