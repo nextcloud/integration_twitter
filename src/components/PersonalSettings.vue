@@ -7,7 +7,24 @@
 		<div v-if="showOAuth" class="twitter-content">
 			<div v-if="!state.oauth_token">
 				<p class="settings-hint">
+					<span class="icon icon-details" />
 					{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+					<span v-if="isChromium">
+						<br>
+						{{ t('integration_twitter', 'With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open "web+nextcloudtwitter" links.') }}
+						<br>
+						{{ t('integration_twitter', 'If you don\'t see the popup, you can still click on this icon in the address bar.') }}
+						<br>
+						<img :src="chromiumImagePath">
+						<br>
+						{{ t('integration_twitter', 'Then authorize this page to open "web+nextcloudtwitter" links.') }}
+					</span>
+					<span v-else-if="isFirefox">
+						<br>
+						{{ t('integration_twitter', 'With Firefox, you should see a bar on top of this page to authorize this page to open "web+nextcloudtwitter" links.') }}
+						<br><br>
+						<img :src="firefoxImagePath">
+					</span>
 				</p>
 				<button v-if="!state.oauth_token" id="twitter-oauth" @click="onOAuthClick">
 					<span class="icon icon-external" />
@@ -33,9 +50,10 @@
 
 <script>
 import { loadState } from '@nextcloud/initial-state'
-import { generateUrl } from '@nextcloud/router'
+import { generateUrl, imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import { detectBrowser } from '../utils'
 
 export default {
 	name: 'PersonalSettings',
@@ -49,6 +67,10 @@ export default {
 		return {
 			state: loadState('integration_twitter', 'user-config'),
 			readonly: true,
+			chromiumImagePath: imagePath('integration_twitter', 'chromium.png'),
+			firefoxImagePath: imagePath('integration_twitter', 'firefox.png'),
+			isChromium: detectBrowser() === 'chrome',
+			isFirefox: detectBrowser() === 'firefox',
 		}
 	},
 
@@ -61,10 +83,8 @@ export default {
 		},
 	},
 
-	watch: {
-	},
-
 	mounted() {
+		console.debug(detectBrowser())
 		const paramString = window.location.search.substr(1)
 		// eslint-disable-next-line
 		const urlParams = new URLSearchParams(paramString)
