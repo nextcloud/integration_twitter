@@ -94,7 +94,7 @@ export default {
 				})
 				.catch((error) => {
 					showError(
-						t('integration_twitter', 'Failed to save Twitter admin options')
+						t('integration_twitter', 'Failed to save Twitter admin options.')
 						+ ': ' + error.response.request.responseText
 					)
 					console.debug(error)
