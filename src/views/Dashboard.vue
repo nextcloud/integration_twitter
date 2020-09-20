@@ -104,9 +104,9 @@ export default {
 		},
 		emptyContentMessage() {
 			if (this.state === 'no-token') {
-				return t('integration_twitter', 'No Twitter account connected')
+				return t('integration_twitter', 'No Twitter account connected.')
 			} else if (this.state === 'error') {
-				return t('integration_twitter', 'Error connecting to Twitter')
+				return t('integration_twitter', 'Error connecting to Twitter.')
 			} else if (this.state === 'ok') {
 				return t('integration_twitter', 'No Twitter notifications!')
 			}
