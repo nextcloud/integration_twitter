@@ -1,7 +1,3 @@
-# Twitter Nextcloud application
+# Twitter integration into Nextcloud
 
-This app adds a dashboard item to see your main Twitter notifications.
-
-## Releases
-
-...
+🐦 This app provides a dashboard item to see your main Twitter notifications.

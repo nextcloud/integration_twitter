@@ -4,7 +4,7 @@
     <name>Twitter integration</name>
     <summary>Integration of Twitter microblogging and social networking service</summary>
     <description><![CDATA[Twitter integration provides a dashboard widget displaying your important notifications.]]></description>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <licence>agpl</licence>
     <author>Julien Veyssier</author>
     <namespace>Twitter</namespace>
