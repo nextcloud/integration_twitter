@@ -119,7 +119,7 @@ export default {
 				})
 				.catch((error) => {
 					showError(
-						t('integration_twitter', 'Failed to save Twitter options.')
+						t('integration_twitter', 'Failed to save Twitter options')
 						+ ': ' + error.response.request.responseText
 					)
 				})
@@ -134,7 +134,7 @@ export default {
 				})
 				.catch((error) => {
 					showError(
-						t('integration_twitter', 'Failed to request Twitter 1st step OAuth token.')
+						t('integration_twitter', 'Failed to request Twitter 1st step OAuth token')
 						+ ': ' + error.response.request.responseText
 					)
 					console.debug(error)
@@ -145,7 +145,7 @@ export default {
 		step2(data) {
 			if (!data.startsWith('http')) {
 				showError(
-					t('integration_twitter', 'OAuth failure.')
+					t('integration_twitter', 'OAuth failure')
 					+ ': ' + data
 				)
 			} else {
