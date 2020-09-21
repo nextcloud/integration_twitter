@@ -9,7 +9,6 @@ OC.L10N.register(
     "Connected as {user}" : "Connesso come {user}",
     "Disconnect from Twitter" : "Disconnetti da Twitter",
     "Twitter options saved." : "Opzioni di Twitter salvate.",
-    "No Twitter account connected" : "Nessun account Twitter connesso",
     "System" : "Sistema"
 },
 "nplurals=2; plural=(n != 1);");
