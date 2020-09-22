@@ -117,7 +117,14 @@ class ConfigController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function oauthRedirect(string $url): RedirectResponse {
+    public function oauthRedirect(?string $url = ''): RedirectResponse {
+        if ($url === '') {
+            $message = $this->l->t('Problem in OAuth third step.');
+            return new RedirectResponse(
+                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
+                '?twitterToken=error&message=' . urlencode($message)
+            );
+        }
         $parts = parse_url($url);
         parse_str($parts['query'], $params);
         $oauthVerifier = $params['oauth_verifier'];
