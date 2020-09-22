@@ -12,6 +12,7 @@ const config = {
 		personalSettings: path.join(__dirname, 'src', 'personalSettings.js'),
 		adminSettings: path.join(__dirname, 'src', 'adminSettings.js'),
 		dashboard: path.join(__dirname, 'src', 'dashboard.js'),
+		dashboardHome: path.join(__dirname, 'src', 'dashboardHome.js'),
 	},
 	plugins: [
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

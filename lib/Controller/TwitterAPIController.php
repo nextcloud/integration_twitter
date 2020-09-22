@@ -78,7 +78,24 @@ class TwitterAPIController extends Controller {
             return new DataResponse([], 400);
         }
         $result = $this->twitterAPIService->getNotifications($this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $since);
-        if (!is_string($result)) {
+        if (!isset($result['error'])) {
+            $response = new DataResponse($result);
+        } else {
+            $response = new DataResponse($result, 401);
+        }
+        return $response;
+    }
+
+    /**
+     * get home timeline
+     * @NoAdminRequired
+     */
+    public function getHomeTimeline(?int $since = null): DataResponse {
+        if ($this->oauthToken === '') {
+            return new DataResponse([], 400);
+        }
+        $result = $this->twitterAPIService->getHomeTimeline($this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $since);
+        if (!isset($result['error'])) {
             $response = new DataResponse($result);
         } else {
             $response = new DataResponse($result, 401);

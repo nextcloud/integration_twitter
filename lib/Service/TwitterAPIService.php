@@ -47,6 +47,19 @@ class TwitterAPIService {
 		return $this->client->get($url)->getBody();
 	}
 
+	public function getHomeTimeline(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, ?int $since = null): array {
+		// my home timeline
+		$params = [
+			'count' => 20,
+		];
+		if (!is_null($since)) {
+			$params['since_id'] = $since;
+		}
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/home_timeline.json', $params);
+
+		return $result;
+	}
+
 	public function getNotifications(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, ?int $since = null): array {
 		$results = [];
 		$missingUsers = [];
@@ -57,11 +70,11 @@ class TwitterAPIService {
 
 		//////////////// GET MY CREDENTIALS
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'account/verify_credentials.json', [], 'GET');
+		if (isset($result['error'])) {
+			return $result;
+		}
 		$myId = $result['id'];
 		$myIdStr = $result['id_str'];
-
-		// my home timeline
-		//$result = $this->classicRequest('statuses/home_timeline.json', $params);
 
 		////////////////// MENTIONS
 		$params = [
@@ -69,7 +82,7 @@ class TwitterAPIService {
 			// 'since_id' =>
 		];
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/mentions_timeline.json', $params);
-		if (is_array($result)) {
+		if (!isset($result['error'])) {
 			foreach ($result as $mention) {
 				$ts = (new \Datetime($mention['created_at']))->getTimestamp();
 				$resMention = [
@@ -85,6 +98,8 @@ class TwitterAPIService {
 				];
 				array_push($results, $resMention);
 			}
+		} else {
+			return $result;
 		}
 
 		////////////////// RETWEETS
@@ -93,7 +108,7 @@ class TwitterAPIService {
 			// 'since_id' =>
 		];
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/retweets_of_me.json', $params);
-		if (is_array($result)) {
+		if (!isset($result['error'])) {
 			foreach ($result as $retweet) {
 				$ts = (new \Datetime($retweet['created_at']))->getTimestamp();
 				$resRetweet = [
@@ -109,12 +124,17 @@ class TwitterAPIService {
 				];
 				array_push($results, $resRetweet);
 			}
+		} else {
+			return $result;
 		}
 
 		////////////// FOLLOW REQUESTS
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'friendships/incoming.json', $params);
+		if (isset($result['error'])) {
+			return $result;
+		}
 		$nbFollowRequests = 0;
-		if (isset($result['ids']) and is_array($result['ids'])) {
+		if (isset($result['ids']) && is_array($result['ids'])) {
 			$nbFollowRequests = count($result['ids']);
 		}
 		array_push($results, [
@@ -128,10 +148,13 @@ class TwitterAPIService {
 			'count' => 20,
 		];
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'direct_messages/events/list.json', $params);
-		if (isset($result['events']) and is_array($result['events'])) {
+		if (isset($result['error'])) {
+			return $result;
+		}
+		if (isset($result['events']) && is_array($result['events'])) {
 			$msgs = $result['events'];
 			foreach ($msgs as $msg) {
-				if (isset($msg['type']) and $msg['type'] === 'message_create' and isset($msg['message_create'])) {
+				if (isset($msg['type']) && $msg['type'] === 'message_create' && isset($msg['message_create'])) {
 					// ignore what I sent
 					if ($msg['message_create']['sender_id'] !== $myIdStr) {
 						//return [$msg->message_create->sender_id , $myId, $myIdStr, $msg];
@@ -158,7 +181,10 @@ class TwitterAPIService {
 				'user_id' => $user_id,
 			];
 			$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'users/show.json', $params);
-			if (isset($result['name']) and isset($result['screen_name']) and isset($result['profile_image_url_https'])) {
+			if (isset($result['error'])) {
+				return $result;
+			}
+			if (isset($result['name']) && isset($result['screen_name']) && isset($result['profile_image_url_https'])) {
 				$userInfo[$user_id] = [
 					'sender_name' => $result['name'],
 					'sender_screen_name' => $result['screen_name'],
@@ -241,12 +267,15 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->request($url, $params, $method, $authHeader);
-		$result = json_decode($response, true);
-		if (is_array($result)) {
+		$result = $this->request($url, $params, $method, $authHeader);
+		if (isset($result['error'])) {
 			return $result;
+		}
+		$decoded = json_decode($result['body'], true);
+		if (is_array($decoded)) {
+			return $decoded;
 		} else {
-			return ['error' => $result];
+			return ['error' => $this->l10n->t('Impossible to decode response')];
 		}
 	}
 
@@ -299,13 +328,16 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->request($url, $params, $method, $authHeader);
-		parse_str($response, $values);
-		return $values;
+		$result = $this->request($url, $params, $method, $authHeader);
+		if (isset($result['error'])) {
+			return $result;
+		}
+		parse_str($result['body'], $values);
+		return count($values) > 0 ? $values : ['error' => $this->l10n->t('Invalid return value in OAuth step 1')];
 	}
 
 	/**
-	 * manually signed OAuth step1 request
+	 * manually signed OAuth step3 request
 	 * @NoAdminRequired
 	 */
 	public function requestTokenOAuthStep3(string $consumerKey, string $consumerSecret, string $oauthToken,
@@ -355,12 +387,15 @@ class TwitterAPIService {
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
-		$response = $this->request($url, $params, $method, $authHeader);
-		parse_str($response, $values);
-		return $values;
+		$result = $this->request($url, $params, $method, $authHeader);
+		if (isset($result['error'])) {
+			return $result;
+		}
+		parse_str($result['body'], $values);
+		return count($values) > 0 ? $values : ['error' => $this->l10n->t('Invalid return value in OAuth step 1')];
 	}
 
-	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null): string {
+	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null): array {
 		try {
 			$options = [
 				'headers' => [
@@ -393,13 +428,13 @@ class TwitterAPIService {
 			$respCode = $response->getStatusCode();
 
 			if ($respCode >= 400) {
-				return $this->l10n->t('Request failed');
+				return ['error' => $this->l10n->t('Request failed')];
 			} else {
-				return $body;
+				return ['body' => $body];
 			}
 		} catch (\Exception $e) {
 			$this->logger->warning('Twitter request error : '.$e->getMessage(), array('app' => $this->appName));
-			return $e->getMessage();
+			return ['error' => $e->getMessage()];
 		}
 	}
 }
