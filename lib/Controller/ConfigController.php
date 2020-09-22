@@ -169,7 +169,7 @@ class ConfigController extends Controller {
         }
         return new RedirectResponse(
             $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
-            '?twitterToken=success'
+            '?twitterToken=success#twitter_prefs'
         );
     }
 }
