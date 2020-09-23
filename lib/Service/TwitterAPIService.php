@@ -43,10 +43,26 @@ class TwitterAPIService {
 		$this->client = $clientService->newClient();
 	}
 
+	/**
+	 * Actually download the avatar (not authenticated)
+	 *
+	 * @param string $url where the avatar is
+	 * @return string the avatar image content
+	 */
 	public function getAvatar(string $url): string {
 		return $this->client->get($url)->getBody();
 	}
 
+	/**
+	 * Get tweets of the home timeline
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param ?int $since min ID
+	 * @return array the tweets
+	 */
 	public function getHomeTimeline(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, ?int $since = null): array {
 		// my home timeline
 		$params = [
@@ -60,6 +76,16 @@ class TwitterAPIService {
 		return $result;
 	}
 
+	/**
+	 * Get multiple kind of notifications
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param ?int $since limit timestamp
+	 * @return array the notifications, follow requests, mentions...
+	 */
 	public function getNotifications(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, ?int $since = null): array {
 		$results = [];
 		$missingUsers = [];
@@ -221,7 +247,16 @@ class TwitterAPIService {
 
 	/**
 	 * manually signed API request
-	 * @NoAdminRequired
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param string $endPoint suffix of the requested URL
+	 * @param array $params request parameters
+	 * @param string $method HTTP request method
+	 * @param string $apiVersion
+	 * @return array json decoded request result or error
 	 */
 	public function classicRequest(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret,
 									string $endPoint, array $params = [], string $method = 'GET', string $apiVersion = '1.1'): array {
@@ -280,7 +315,10 @@ class TwitterAPIService {
 
 	/**
 	 * manually signed OAuth step1 request
-	 * @NoAdminRequired
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @return array result body or request error
 	 */
 	public function requestTokenOAuthStep1(string $consumerKey, string $consumerSecret): array {
 		$method = 'POST';
@@ -337,7 +375,13 @@ class TwitterAPIService {
 
 	/**
 	 * manually signed OAuth step3 request
-	 * @NoAdminRequired
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param string $oauthVerifier
+	 * @return array result body or error
 	 */
 	public function requestTokenOAuthStep3(string $consumerKey, string $consumerSecret, string $oauthToken,
 											string $oauthTokenSecret, string $oauthVerifier): array {
@@ -394,6 +438,15 @@ class TwitterAPIService {
 		return count($values) > 0 ? $values : ['error' => $this->l10n->t('Invalid return value in OAuth step 1')];
 	}
 
+	/**
+	 * make an HTTP request
+	 *
+	 * @param string $url
+	 * @param array $params
+	 * @param string $method
+	 * @param ?string $authHeader
+	 * @return array response body or error
+	 */
 	private function request(string $url, array $params = [], string $method = 'GET', ?string $authHeader = null): array {
 		try {
 			$options = [

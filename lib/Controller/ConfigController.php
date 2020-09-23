@@ -69,6 +69,9 @@ class ConfigController extends Controller {
     /**
      * set config values
      * @NoAdminRequired
+     *
+     * @param array key/val pairs of config values
+     * @return DataResponse useless result
      */
     public function setConfig(array $values): DataResponse {
         foreach ($values as $key => $value) {
@@ -80,6 +83,9 @@ class ConfigController extends Controller {
 
     /**
      * set admin config values
+     *
+     * @param array key/val pairs of config values
+     * @return DataResponse useless result
      */
     public function setAdminConfig(array $values): DataResponse {
         foreach ($values as $key => $value) {
@@ -92,6 +98,8 @@ class ConfigController extends Controller {
     /**
      * perform 1st step of 3-legged twitter oauth
      * @NoAdminRequired
+     *
+     * @return DataResponse the URL to the next OAuth step
      */
     public function doOauthStep1(): DataResponse {
         $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
@@ -100,7 +108,7 @@ class ConfigController extends Controller {
         $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
 
         $requestToken = $this->twitterAPIService->requestTokenOAuthStep1($consumerKey, $consumerSecret);
-        if (!isset($requestToken['oauth_token']) or !isset($requestToken['oauth_token_secret'])) {
+        if (!isset($requestToken['oauth_token'], $requestToken['oauth_token_secret'])) {
             return new DataResponse($this->l->t('Problem in OAuth first step'));
         }
 
@@ -116,6 +124,9 @@ class ConfigController extends Controller {
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
+     *
+     * @param ?string $url the url parameter contained in the custom protocol redirection request
+     * @return RedirectResponse redirecting to the connected account settings
      */
     public function oauthRedirect(?string $url = ''): RedirectResponse {
         if ($url === '') {
@@ -146,7 +157,7 @@ class ConfigController extends Controller {
         }
 
         $token = $this->twitterAPIService->requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier);
-        if (!isset($token['oauth_token']) or !isset($token['oauth_token_secret'])) {
+        if (!isset($token['oauth_token'], $token['oauth_token_secret'])) {
             $result = $this->l->t('Problem in OAuth third step.');
             $result .= ' ' . $e->getMessage();
             return new RedirectResponse(
@@ -163,7 +174,7 @@ class ConfigController extends Controller {
             $consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret,
             'account/verify_credentials.json', [], 'GET'
         );
-        if (isset($creds['name']) && isset($creds['screen_name'])) {
+        if (isset($creds['name'], $creds['screen_name'])) {
             $this->config->setUserValue($this->userId, Application::APP_ID, 'name', $creds['name']);
             $this->config->setUserValue($this->userId, Application::APP_ID, 'screen_name', $creds['screen_name']);
         }

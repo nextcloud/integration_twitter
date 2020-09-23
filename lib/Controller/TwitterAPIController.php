@@ -72,6 +72,9 @@ class TwitterAPIController extends Controller {
     /**
      * get notification list
      * @NoAdminRequired
+     *
+     * @param ?int $since limit timestamp
+     * @return DataResponse notifications or error
      */
     public function getNotifications(?int $since = null): DataResponse {
         if ($this->oauthToken === '') {
@@ -89,6 +92,9 @@ class TwitterAPIController extends Controller {
     /**
      * get home timeline
      * @NoAdminRequired
+     *
+     * @param ?int $since min ID
+     * @return DataResponse the timeline items or an error
      */
     public function getHomeTimeline(?int $since = null): DataResponse {
         if ($this->oauthToken === '') {
@@ -107,6 +113,9 @@ class TwitterAPIController extends Controller {
      * get repository avatar
      * @NoAdminRequired
      * @NoCSRFRequired
+     *
+     * @param string $url where to get the avatar image
+     * @return DataDisplayResponse the avatar image data
      */
     public function getAvatar(string $url): DataDisplayResponse {
         $response = new DataDisplayResponse($this->twitterAPIService->getAvatar($url));
