@@ -96,7 +96,7 @@ class TwitterAPIService {
 					'sender_screen_name' => $mention['user']['screen_name'],
 					'profile_image_url_https' => $mention['user']['profile_image_url_https'],
 				];
-				array_push($results, $resMention);
+				$results[] = $resMention;
 			}
 		} else {
 			return $result;
@@ -122,7 +122,7 @@ class TwitterAPIService {
 					'sender_screen_name' => $retweet['user']['screen_name'],
 					'profile_image_url_https' => $retweet['user']['profile_image_url_https'],
 				];
-				array_push($results, $resRetweet);
+				$results[] = $resRetweet;
 			}
 		} else {
 			return $result;
@@ -137,11 +137,11 @@ class TwitterAPIService {
 		if (isset($result['ids']) && is_array($result['ids'])) {
 			$nbFollowRequests = count($result['ids']);
 		}
-		array_push($results, [
+		$results[] = [
 			'type' => 'follow_request',
 			'number' => $nbFollowRequests,
 			'timestamp' => (new \Datetime())->getTimestamp()
-		]);
+		];
 
 		/////////////////// PRIVATE MESSAGES
 		$params = [
@@ -155,9 +155,8 @@ class TwitterAPIService {
 			$msgs = $result['events'];
 			foreach ($msgs as $msg) {
 				if (isset($msg['type']) && $msg['type'] === 'message_create' && isset($msg['message_create'])) {
-					// ignore what I sent
-					if ($msg['message_create']['sender_id'] !== $myIdStr) {
-						//return [$msg->message_create->sender_id , $myId, $myIdStr, $msg];
+					// ignore if no sender ID and ignore what I sent
+					if ($msg['message_create']['sender_id'] && $msg['message_create']['sender_id'] !== $myIdStr) {
 						$resMsg = [
 							'type' => 'message',
 							'id' => $msg['id'],
@@ -165,9 +164,9 @@ class TwitterAPIService {
 							'sender_id' => $msg['message_create']['sender_id'],
 							'text' => $msg['message_create']['message_data']['text'],
 						];
-						array_push($results, $resMsg);
+						$results[] = $resMsg;
 						if (!in_array($msg['message_create']['sender_id'], $missingUsers)) {
-							array_push($missingUsers, $msg['message_create']['sender_id']);
+							$missingUsers[] = $msg['message_create']['sender_id'];
 						}
 					}
 				}
@@ -247,7 +246,7 @@ class TwitterAPIService {
 		sort($keys);
 		$paramStringArray = [];
 		foreach ($keys as $k) {
-			array_push($paramStringArray, urlencode($k) . '=' . urlencode($combinedParams[$k]));
+			$paramStringArray[] = urlencode($k) . '=' . urlencode($combinedParams[$k]);
 		}
 		$paramString = implode('&', $paramStringArray);
 		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
@@ -263,7 +262,7 @@ class TwitterAPIService {
 		sort($keys);
 		$authHeaderParts = [];
 		foreach ($keys as $k) {
-			array_push($authHeaderParts, urlencode($k) . '="' . urlencode($headerParams[$k]) . '"');
+			$authHeaderParts[] = urlencode($k) . '="' . urlencode($headerParams[$k]) . '"';
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
@@ -307,7 +306,7 @@ class TwitterAPIService {
 		sort($keys);
 		$paramStringArray = [];
 		foreach ($keys as $k) {
-			array_push($paramStringArray, urlencode($k) . '=' . urlencode($combinedParams[$k]));
+			$paramStringArray[] = urlencode($k) . '=' . urlencode($combinedParams[$k]);
 		}
 		$paramString = implode('&', $paramStringArray);
 		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
@@ -324,7 +323,7 @@ class TwitterAPIService {
 		sort($keys);
 		$authHeaderParts = [];
 		foreach ($keys as $k) {
-			array_push($authHeaderParts, urlencode($k) . '="' . urlencode($headerParams[$k]) . '"');
+			$authHeaderParts[] = urlencode($k) . '="' . urlencode($headerParams[$k]) . '"';
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
@@ -367,7 +366,7 @@ class TwitterAPIService {
 		sort($keys);
 		$paramStringArray = [];
 		foreach ($keys as $k) {
-			array_push($paramStringArray, urlencode($k) . '=' . urlencode($combinedParams[$k]));
+			$paramStringArray[] = urlencode($k) . '=' . urlencode($combinedParams[$k]);
 		}
 		$paramString = implode('&', $paramStringArray);
 		$baseString = $method . '&' . urlencode($url) . '&' . urlencode($paramString);
@@ -383,7 +382,7 @@ class TwitterAPIService {
 		sort($keys);
 		$authHeaderParts = [];
 		foreach ($keys as $k) {
-			array_push($authHeaderParts, urlencode($k) . '="' . urlencode($headerParams[$k]) . '"');
+			$authHeaderParts[] = urlencode($k) . '="' . urlencode($headerParams[$k]) . '"';
 		}
 		$authHeader = 'OAuth ' . implode(', ', $authHeaderParts);
 
