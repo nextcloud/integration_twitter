@@ -202,6 +202,12 @@ export default {
 		getMainText(n) {
 			if (['follow_request'].includes(n.type)) {
 				return t('integration_twitter', '{nb} follow requests', { nb: n.number })
+			} else if (['retweet', 'mention'].includes(n.type)) {
+				let text = n.text
+				while (text.startsWith('@')) {
+					text = text.replace(/^@[^\s]*\s/, '')
+					return text
+				}
 			}
 			return n.text
 		},
