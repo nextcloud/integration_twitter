@@ -94,14 +94,25 @@ export default {
 	},
 
 	beforeMount() {
-		this.fetchNotifications()
-		this.loop = setInterval(() => this.fetchNotifications(), 120000)
+		this.launchLoop()
 	},
 
 	mounted() {
 	},
 
 	methods: {
+		async launchLoop() {
+			// get my user name first
+			try {
+				const response = await axios.get(generateUrl('/apps/integration_twitter/username'))
+				this.myUsername = response.data
+			} catch (error) {
+				console.debug(error)
+			}
+			// then launch the loop
+			this.fetchNotifications()
+			this.loop = setInterval(() => this.fetchNotifications(), 120000)
+		},
 		fetchNotifications() {
 			const req = {}
 			if (this.lastId) {
@@ -156,6 +167,8 @@ export default {
 		getNotificationTypeImage(n) {
 			if (n.retweeted_status) {
 				return generateUrl('/svg/integration_twitter/retweet?color=ffffff')
+			} else if (n.in_reply_to_screen_name) {
+				return generateUrl('/svg/integration_twitter/reply?color=ffffff')
 			}
 			return ''
 		},
@@ -170,14 +183,23 @@ export default {
 				: ''
 		},
 		getMainText(n) {
-			return n.retweeted_status && n.retweeted_status.text
+			let text = n.retweeted_status && n.retweeted_status.text
 				? n.retweeted_status.text
 				: n.text
+
+			while (text.startsWith('@')) {
+				text = text.replace(/^@[^\s]*\s/, '')
+			}
+			return text
 		},
 		getSubline(n) {
 			return n.retweeted_status && n.retweeted_status.user && n.retweeted_status.user.screen_name
 				? '@' + n.retweeted_status.user.screen_name + ' (⮔@' + n.user.screen_name + ')'
-				: '@' + n.user.screen_name
+				: n.in_reply_to_screen_name
+					? n.in_reply_to_screen_name === this.myUsername
+						? t('integration_twitter', '{user} to you', { user: '@' + n.user.screen_name })
+						: t('integration_twitter', '{user1} to {user2}', { user1: '@' + n.user.screen_name, user2: n.in_reply_to_screen_name })
+					: '@' + n.user.screen_name
 		},
 		getFormattedDate(n) {
 			return moment(n.timestamp).format('LLL')

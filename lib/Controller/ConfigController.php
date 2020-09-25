@@ -67,6 +67,17 @@ class ConfigController extends Controller {
     }
 
     /**
+     * @NoAdminRequired
+     *
+     * @return DataResponse
+     */
+    public function getUsername(): DataResponse {
+        $username = $this->config->getUserValue($this->userId, Application::APP_ID, 'screen_name', '');
+        $response = new DataResponse($username);
+        return $response;
+    }
+
+    /**
      * set config values
      * @NoAdminRequired
      *

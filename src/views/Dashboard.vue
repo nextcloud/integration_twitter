@@ -206,8 +206,8 @@ export default {
 				let text = n.text
 				while (text.startsWith('@')) {
 					text = text.replace(/^@[^\s]*\s/, '')
-					return text
 				}
+				return text
 			}
 			return n.text
 		},
