@@ -97,7 +97,14 @@ export default {
 
 		// register protocol handler
 		if (window.isSecureContext && window.navigator.registerProtocolHandler) {
-			window.navigator.registerProtocolHandler('web+nextcloudtwitter', generateUrl('/apps/integration_twitter/oauth-redirect') + '?url=%s', 'Nextcloud Twitter integration')
+			const ncUrl = window.location.protocol
+				+ '//' + window.location.hostname
+				+ window.location.pathname.replace('settings/user/connected-accounts', '').replace('/index.php/', '')
+			window.navigator.registerProtocolHandler(
+				'web+nextcloudtwitter',
+				generateUrl('/apps/integration_twitter/oauth-redirect') + '?url=%s',
+				t('integration_twitter', 'Nextcloud Twitter integration on {ncUrl}', { ncUrl })
+			)
 		}
 	},
 
