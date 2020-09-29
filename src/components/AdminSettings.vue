@@ -90,7 +90,7 @@ export default {
 			const url = generateUrl('/apps/integration_twitter/admin-config')
 			axios.put(url, req)
 				.then((response) => {
-					showSuccess(t('integration_twitter', 'Twitter admin options saved.'))
+					showSuccess(t('integration_twitter', 'Twitter admin options saved'))
 				})
 				.catch((error) => {
 					showError(

@@ -90,7 +90,7 @@ export default {
 		const urlParams = new URLSearchParams(paramString)
 		const twToken = urlParams.get('twitterToken')
 		if (twToken === 'success') {
-			showSuccess(t('integration_twitter', 'Twitter OAuth access token successfully retrieved!'))
+			showSuccess(t('integration_twitter', 'Successfully connected to Twitter!'))
 		} else if (twToken === 'error') {
 			showError(t('integration_twitter', 'Twitter OAuth error:') + ' ' + urlParams.get('message'))
 		}
@@ -122,7 +122,7 @@ export default {
 			const url = generateUrl('/apps/integration_twitter/config')
 			axios.put(url, req)
 				.then((response) => {
-					showSuccess(t('integration_twitter', 'Twitter options saved.'))
+					showSuccess(t('integration_twitter', 'Twitter options saved'))
 				})
 				.catch((error) => {
 					showError(
