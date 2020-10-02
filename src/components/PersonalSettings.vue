@@ -18,6 +18,9 @@
 						<img :src="chromiumImagePath">
 						<br>
 						{{ t('integration_twitter', 'Then authorize this page to open "web+nextcloudtwitter" links.') }}
+						<br>
+						{{ t('integration_twitter', 'If you still don\'t manage to get the protocol registered, check your settings on this page:') }}
+						<b>chrome://settings/handlers</b>
 					</span>
 					<span v-else-if="isFirefox">
 						<br>
