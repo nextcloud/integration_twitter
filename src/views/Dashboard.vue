@@ -205,7 +205,7 @@ export default {
 			} else if (['retweet', 'mention'].includes(n.type)) {
 				let text = n.text
 				while (text.startsWith('@')) {
-					text = text.replace(/^@[^\s]*\s/, '')
+					text = text.replace(/^@[^\s]*\s?/, '')
 				}
 				return text
 			}

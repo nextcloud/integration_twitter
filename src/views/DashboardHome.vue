@@ -188,7 +188,7 @@ export default {
 				: n.text
 
 			while (text.startsWith('@')) {
-				text = text.replace(/^@[^\s]*\s/, '')
+				text = text.replace(/^@[^\s]*\s?/, '')
 			}
 			return text
 		},
