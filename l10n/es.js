@@ -2,8 +2,8 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problema en el primer paso de OAuth",
-    "Problem in OAuth first or second step" : "Problema en el primer o segundo paso de OAuth",
     "Problem in OAuth third step." : "Problema en el tercer paso de OAuth.",
+    "Problem in OAuth first or second step" : "Problema en el primer o segundo paso de OAuth",
     "Twitter notifications" : "Notificaciones de Twitter",
     "Request failed" : "La petición ha fallado",
     "Connected accounts" : "Cuentas conectadas",
@@ -17,8 +17,9 @@ OC.L10N.register(
     "Consumer key of your Twitter application" : "Clave de consumidor de tu aplicación de Twitter",
     "Consumer secret" : "Secreto de consumidor",
     "Consumer secret of your Twitter application" : "Secreto de consumidor de tu aplicación de Twitter",
-    "Twitter admin options saved." : "Opciones de administrador de Twitter guardadas.",
+    "Failed to save Twitter admin options" : "Fallo al guardar las opciones de administrador de Twitter",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "Asegúrate de que aceptaste el registro de protocolo al inicio de esta página si quieres autenticarte a Twitter.",
+    "Connected as {user}" : "Conectado como {user}",
     "System" : "Sistema"
 },
 "nplurals=2; plural=(n != 1);");

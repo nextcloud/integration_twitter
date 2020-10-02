@@ -1,12 +1,30 @@
 { "translations": {
+    "Problem in OAuth first step" : "Problema nel primo passaggio di OAuth",
+    "Problem in OAuth third step." : "Problema nel terzo passaggio di OAuth",
+    "Problem in OAuth first or second step" : "Problema nel primo o nel secondo passaggio di OAuth",
+    "Twitter home timeline" : "Timeline principale di Twitter",
     "Twitter notifications" : "Notifiche Twitter",
+    "Impossible to decode response" : "Impossibile decodificare la risposta",
     "Request failed" : "Richiesta non riuscita",
     "Connected accounts" : "Account connessi",
     "Twitter integration" : "Integrazione Twitter",
+    "Twitter admin options saved" : "Opzioni amministrative di Twitter salvate",
+    "Failed to save Twitter admin options" : "Salvataggio delle opzioni amministrative di Twitter non riuscito",
     "Connect to Twitter" : "Connetti a Twitter",
     "Connected as {user}" : "Connesso come {user}",
     "Disconnect from Twitter" : "Disconnetti da Twitter",
-    "Twitter options saved." : "Opzioni di Twitter salvate.",
-    "System" : "Sistema"
+    "Successfully connected to Twitter!" : "Connesso correttamente a Twitter!",
+    "Twitter OAuth error:" : "Errore OAuth di Twitter:",
+    "Nextcloud Twitter integration on {ncUrl}" : "Integrazione Twitter di Nextcloud su {ncUrl}",
+    "Twitter options saved" : "Opzioni di Twitter salvate",
+    "Failed to save Twitter options" : "Salvataggio delle opzioni di Twitter non riuscito",
+    "OAuth failure" : "OAuth non riuscita.",
+    "No Twitter account connected" : "Nessun account Twitter connesso",
+    "Error connecting to Twitter" : "Errore durante la connessione a Twitter",
+    "No Twitter notifications!" : "Nessuna notifica Twitter!",
+    "{nb} follow requests" : "{nb} richiesto di seguito",
+    "System" : "Sistema",
+    "{user} to you" : "{user} a te",
+    "{user1} to {user2}" : "{user1} a {user2}"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
