@@ -267,11 +267,9 @@ class TwitterAPIService {
 		$url = 'https://api.twitter.com/' . $apiVersion . '/' . $endPoint;
 
 		$ts = (new \Datetime())->getTimestamp();
-		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
-			'oauth_nonce' => base64_encode($nonce),
+			'oauth_nonce' => $this->makeNonce(),
 			'oauth_signature_method' => 'HMAC-SHA1',
 			'oauth_timestamp' => $ts,
 			'oauth_token' => $oauthToken,
@@ -329,11 +327,9 @@ class TwitterAPIService {
 		$url = 'https://api.twitter.com/oauth/request_token';
 
 		$ts = (new \Datetime())->getTimestamp();
-		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
-			'oauth_nonce' => base64_encode($nonce),
+			'oauth_nonce' => $this->makeNonce(),
 			'oauth_signature_method' => 'HMAC-SHA1',
 			'oauth_timestamp' => $ts,
 			'oauth_version' => '1.0',
@@ -393,11 +389,9 @@ class TwitterAPIService {
 		$url = 'https://api.twitter.com/oauth/access_token';
 
 		$ts = (new \Datetime())->getTimestamp();
-		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-		$nonce = substr(str_shuffle($permitted_chars), 0, 32);
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
-			'oauth_nonce' => base64_encode($nonce),
+			'oauth_nonce' => $this->makeNonce(),
 			'oauth_signature_method' => 'HMAC-SHA1',
 			'oauth_timestamp' => $ts,
 			'oauth_token' => $oauthToken,
@@ -492,5 +486,19 @@ class TwitterAPIService {
 			$this->logger->warning('Twitter request error : '.$e->getMessage(), array('app' => $this->appName));
 			return ['error' => $e->getMessage()];
 		}
+	}
+
+	private function makeNonce(): string {
+		$len = 32;
+		$buf = '';
+		$permittedChars = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$maxBound = strlen($permittedChars) - 1;
+
+		while ($len-- > 0) {
+			$choice = random_int(0, $maxBound);
+			$buf .= $permittedChars[$choice];
+		}
+
+		return $buf;
 	}
 }
