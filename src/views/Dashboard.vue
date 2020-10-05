@@ -22,7 +22,7 @@
 
 <script>
 import axios from '@nextcloud/axios'
-import { generateUrl } from '@nextcloud/router'
+import { generateUrl, imagePath } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
@@ -181,7 +181,9 @@ export default {
 		getUserAvatarUrl(n) {
 			return n.profile_image_url_https
 				? generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
-				: ''
+				: n.type === 'follow_request'
+					? imagePath('integration_twitter', 'twitter.png')
+					: ''
 		},
 		getAvatarText(n) {
 			if (['follow_request'].includes(n.type)) {
@@ -225,7 +227,7 @@ export default {
 			} else if (n.type === 'retweet') {
 				return generateUrl('/svg/integration_twitter/retweet?color=ffffff')
 			} else if (n.type === 'follow_request') {
-				return generateUrl('/svg/integration_twitter/sound?color=ffffff')
+				return generateUrl('/svg/integration_twitter/follow_request?color=ffffff')
 			}
 			return ''
 		},
