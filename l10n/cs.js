@@ -27,6 +27,7 @@ OC.L10N.register(
     "With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open \"web+nextcloudtwitter\" links." : "V případě prohlížeče Chrome/Chromium byste měli vlevo nahoře měli vidět vyskakovací upozornění, zda stránku chcete pověřit otevíráním odkazů „web+nextcloudtwitter“.",
     "If you don't see the popup, you can still click on this icon in the address bar." : "Pokud nevidíte vyskakovací upozornění, stále ještě můžete kliknout na tuto ikonu v adresním řádku.",
     "Then authorize this page to open \"web+nextcloudtwitter\" links." : "Poté tuto stránku pověřte otevíráním odkazů typu „web+nextcloudtwitter“.",
+    "If you still don't manage to get the protocol registered, check your settings on this page:" : "Pokud se pořád nedaří zaregistrovat protokol, zkontrolujte nastavení na této stránce:",
     "With Firefox, you should see a bar on top of this page to authorize this page to open \"web+nextcloudtwitter\" links." : "V případě prohlížeče Firefox byste měli vidět pruh na začátku této stránky, zda ji chcete pověřit otevíráním odkazů „web+nextcloudtwitter“.",
     "Connect to Twitter" : "Připojit k Twitter",
     "Connected as {user}" : "Připojení jako {user}",
