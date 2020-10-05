@@ -212,12 +212,12 @@ class TwitterAPIService {
 			$userInfo[$user_id] = [
 				'sender_name' => isset($result['name']) ? $result['name'] : 'unknown',
 				'sender_screen_name' => isset($result['screen_name']) ? $result['screen_name'] : 'unknown',
-				'profile_image_url_https' => isset($result['profile_image_url_https']) ? $result['profile_image_url_https'] : 'unknown',
+				'profile_image_url_https' => isset($result['profile_image_url_https']) ? $result['profile_image_url_https'] : '',
 			];
 		}
 		// fill missing info
 		foreach ($results as $i => $res) {
-			if (in_array($res['type'], ['message', 'follow_request'])) {
+			if (in_array($res['type'], ['message'])) {
 				if (isset($res['sender_id'])) {
 					$sender_id = $res['sender_id'];
 					$results[$i]['sender_name'] = $userInfo[$sender_id]['sender_name'];
@@ -226,7 +226,7 @@ class TwitterAPIService {
 				} else {
 					$results[$i]['sender_name'] = 'unknown';
 					$results[$i]['sender_screen_name'] = 'unknown';
-					$results[$i]['profile_image_url_https'] = 'unknown';
+					$results[$i]['profile_image_url_https'] = '';
 				}
 			}
 		}
