@@ -12,7 +12,7 @@
 namespace OCA\Twitter\Service;
 
 use OCP\IL10N;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 
@@ -29,7 +29,7 @@ class TwitterAPIService {
 	 * Service to make requests to Twitter v3 (JSON) API
 	 */
 	public function __construct (string $appName,
-								ILogger $logger,
+								LoggerInterface $logger,
 								IL10N $l10n,
 								IConfig $config,
 								IClientService $clientService,
