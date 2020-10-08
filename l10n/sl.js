@@ -1,8 +1,28 @@
 OC.L10N.register(
     "integration_twitter",
     {
+    "Twitter home timeline" : "Časovnica objav Twitter",
+    "Twitter notifications" : "Obvestila Twitter",
+    "Impossible to decode response" : "Ni mogoče odkodirati odziva",
+    "Request failed" : "Zahteva je spodletela",
     "Connected accounts" : "Povezani računi",
-    "Connected as {user}" : "Poveži kot {user}",
-    "System" : "Sistem"
+    "Twitter integration" : "Podpora za račune Twitter",
+    "Integration of Twitter microblogging and social networking service" : "Podpora za mikrospletnik Twitter in storitve družbenega mreženja",
+    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Podpora za Twitter omogoča gradnike za prikazovanje pomembnih obvestil in osebno časovnico objav.",
+    "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Za uporabo privzetega programa za overitev računa Twitter z OAuth pustite polja prazna.",
+    "Twitter developer app settings" : "Nastavitve razvijalskega programa Twitter",
+    "Twitter admin options saved" : "Skrbniške nastavitve za Twitter so shranjene",
+    "Connect to Twitter" : "Poveži z računom Twitter",
+    "Connected as {user}" : "Vzpostavljena je povezava z računom {user}",
+    "Disconnect from Twitter" : "Prekini povezavo s Twitter",
+    "Successfully connected to Twitter!" : "Povezava s računom Twitter je uspešno vzpostavljena!",
+    "Twitter OAuth error:" : "Napaka overitve OAuth za Twitter:",
+    "Twitter options saved" : "Nastavitve Twitter so shranjene",
+    "Failed to save Twitter options" : "Shranjevanje nastavitev Twitter je spodletelo",
+    "OAuth failure" : "Napaka overitve OAuth",
+    "No Twitter account connected" : "Ni povezanega računa Twitter",
+    "Error connecting to Twitter" : "Napaka povezovanja z računom Twitter",
+    "System" : "Sistem",
+    "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");
