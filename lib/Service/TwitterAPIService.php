@@ -47,10 +47,14 @@ class TwitterAPIService {
 	 * Actually download the avatar (not authenticated)
 	 *
 	 * @param string $url where the avatar is
-	 * @return string the avatar image content
+	 * @return ?string the avatar image content
 	 */
-	public function getAvatar(string $url): string {
-		return $this->client->get($url)->getBody();
+	public function getAvatar(string $url): ?string {
+		$pUrl = parse_url($url);
+		if ($pUrl && preg_match('/pbs\.twimg\.com$/', $pUrl['host'])) {
+			return $this->client->get($url)->getBody();
+		}
+		return null;
 	}
 
 	/**
