@@ -156,10 +156,10 @@ export default {
 			return notifications
 		},
 		getUserAvatarUrl(n) {
-			if (n.retweeted_status && n.retweeted_status.user && n.retweeted_status.user.profile_image_url_https) {
-				return generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.retweeted_status.user.profile_image_url_https)
-			} else if (n.user && n.user.profile_image_url_https) {
-				return generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.user.profile_image_url_https)
+			if (n.retweeted_status && n.retweeted_status.user && n.retweeted_status.user.profile_image_url_https && n.retweeted_status.user.id_str) {
+				return generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('userId') + '=' + encodeURIComponent(n.retweeted_status.user.id_str)
+			} else if (n.user && n.user.profile_image_url_https && n.user.id_str) {
+				return generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('userId') + '=' + encodeURIComponent(n.user.id_str)
 			} else {
 				return ''
 			}

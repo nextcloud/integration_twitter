@@ -179,8 +179,8 @@ export default {
 			return notifications
 		},
 		getUserAvatarUrl(n) {
-			return n.profile_image_url_https
-				? generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('url') + '=' + encodeURIComponent(n.profile_image_url_https)
+			return (n.profile_image_url_https && n.sender_id_str)
+				? generateUrl('/apps/integration_twitter/avatar?') + encodeURIComponent('userId') + '=' + encodeURIComponent(n.sender_id_str)
 				: n.type === 'follow_request'
 					? imagePath('integration_twitter', 'twitter.png')
 					: ''

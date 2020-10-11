@@ -46,13 +46,20 @@ class TwitterAPIService {
 	/**
 	 * Actually download the avatar (not authenticated)
 	 *
-	 * @param string $url where the avatar is
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param string $twitterUserId
 	 * @return ?string the avatar image content
 	 */
-	public function getAvatar(string $url): ?string {
-		$pUrl = parse_url($url);
-		if ($pUrl && preg_match('/pbs\.twimg\.com$/', $pUrl['host'])) {
-			return $this->client->get($url)->getBody();
+	public function getAvatar(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret, string $twitterUserId): ?string {
+		$params = [
+			'user_id' => $twitterUserId,
+		];
+		$userInfo = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'users/show.json', $params);
+		if (!isset($userInfo['error']) && isset($userInfo['profile_image_url_https'])) {
+			return $this->client->get($userInfo['profile_image_url_https'])->getBody();
 		}
 		return null;
 	}
@@ -122,6 +129,7 @@ class TwitterAPIService {
 					'timestamp' => $ts,
 					'text' => $mention['text'],
 					'sender_id' => $mention['user']['id'],
+					'sender_id_str' => $mention['user']['id_str'] ?? '',
 					'sender_name' => $mention['user']['name'],
 					'sender_screen_name' => $mention['user']['screen_name'],
 					'profile_image_url_https' => $mention['user']['profile_image_url_https'],
@@ -148,6 +156,7 @@ class TwitterAPIService {
 					'timestamp' => $ts,
 					'text' => $retweet['text'],
 					'sender_id' => $retweet['user']['id'],
+					'sender_id_str' => $retweet['user']['id_str'] ?? '',
 					'sender_name' => $retweet['user']['name'],
 					'sender_screen_name' => $retweet['user']['screen_name'],
 					'profile_image_url_https' => $retweet['user']['profile_image_url_https'],
@@ -186,7 +195,7 @@ class TwitterAPIService {
 			foreach ($msgs as $msg) {
 				if (isset($msg['type']) && $msg['type'] === 'message_create' && isset($msg['message_create'])) {
 					// ignore if no sender ID and ignore what I sent
-					if ($msg['message_create']['sender_id'] && $msg['message_create']['sender_id'] !== $myIdStr) {
+					if (isset($msg['message_create']['sender_id']) && $msg['message_create']['sender_id'] !== $myIdStr) {
 						$resMsg = [
 							'type' => 'message',
 							'id' => $msg['id'],
@@ -214,9 +223,10 @@ class TwitterAPIService {
 				return $result;
 			}
 			$userInfo[$user_id] = [
-				'sender_name' => isset($result['name']) ? $result['name'] : 'unknown',
-				'sender_screen_name' => isset($result['screen_name']) ? $result['screen_name'] : 'unknown',
-				'profile_image_url_https' => isset($result['profile_image_url_https']) ? $result['profile_image_url_https'] : '',
+				'sender_id_str' => $result['id_str'] ?? '',
+				'sender_name' => $result['name'] ?? 'unknown',
+				'sender_screen_name' => $result['screen_name'] ?? 'unknown',
+				'profile_image_url_https' => $result['profile_image_url_https'] ?? '',
 			];
 		}
 		// fill missing info
@@ -224,10 +234,12 @@ class TwitterAPIService {
 			if (in_array($res['type'], ['message'])) {
 				if (isset($res['sender_id'])) {
 					$sender_id = $res['sender_id'];
+					$results[$i]['sender_id_str'] = $userInfo[$sender_id]['sender_id_str'];
 					$results[$i]['sender_name'] = $userInfo[$sender_id]['sender_name'];
 					$results[$i]['sender_screen_name'] = $userInfo[$sender_id]['sender_screen_name'];
 					$results[$i]['profile_image_url_https'] = $userInfo[$sender_id]['profile_image_url_https'];
 				} else {
+					$results[$i]['sender_id_str'] = '';
 					$results[$i]['sender_name'] = 'unknown';
 					$results[$i]['sender_screen_name'] = 'unknown';
 					$results[$i]['profile_image_url_https'] = '';

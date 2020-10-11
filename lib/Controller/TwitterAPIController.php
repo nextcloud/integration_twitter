@@ -100,7 +100,9 @@ class TwitterAPIController extends Controller {
 		if ($this->oauthToken === '') {
 			return new DataResponse([], 400);
 		}
-		$result = $this->twitterAPIService->getHomeTimeline($this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $since);
+		$result = $this->twitterAPIService->getHomeTimeline(
+			$this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $since
+		);
 		if (!isset($result['error'])) {
 			$response = new DataResponse($result);
 		} else {
@@ -114,11 +116,13 @@ class TwitterAPIController extends Controller {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 *
-	 * @param string $url where to get the avatar image
+	 * @param string $userId
 	 * @return DataDisplayResponse the avatar image data
 	 */
-	public function getAvatar(string $url): DataDisplayResponse {
-		$avatar = $this->twitterAPIService->getAvatar($url);
+	public function getAvatar(string $userId): DataDisplayResponse {
+		$avatar = $this->twitterAPIService->getAvatar(
+			$this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $userId
+		);
 		if (is_null($avatar)) {
 			return new DataDisplayResponse('', 400);
 		} else {
