@@ -1,0 +1,6 @@
+{ "translations": {
+    "Connected accounts" : "Konektaturiko kontuak",
+    "Connected as {user}" : "{user} gisa konektatuta",
+    "System" : "Sistema"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
