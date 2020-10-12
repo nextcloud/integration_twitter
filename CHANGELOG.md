@@ -6,7 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## 0.0.3 – 2020-10-21
+## 0.0.4 – 2020-10-12
+### Changed
+- generate avatar URL on server side
+- improve icon of follow requests
+
+### Fixed
+- some API edge cases when getting notifications
+- more secure nonce generation
+[#5](https://github.com/nextcloud/integration_twitter/pull/5) @aszlig
+
+## 0.0.3 – 2020-10-02
 ### Added
 - lots of translations
 
