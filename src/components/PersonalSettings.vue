@@ -171,6 +171,7 @@ export default {
 	display: inline-block;
 	width: 32px;
 }
+
 .icon-twitter {
 	background-image: url(./../../img/app-dark.svg);
 	background-size: 23px 23px;
@@ -181,21 +182,26 @@ export default {
 body.theme--dark .icon-twitter {
 	background-image: url(./../../img/app.svg);
 }
+
 .twitter-content {
 	margin-left: 40px;
 }
+
 .twitter-grid-form {
-    max-width: 600px;
-    display: grid;
-    grid-template: 1fr / 1fr 1fr;
-    button .icon {
-        margin-bottom: -1px;
-    }
+	max-width: 600px;
+	display: grid;
+	grid-template: 1fr / 1fr 1fr;
+	button .icon {
+		margin-bottom: -1px;
+	}
 }
+
 .twitter-grid-form label {
-    line-height: 38px;
+	line-height: 38px;
 }
+
 #twitter-rm-cred {
 	max-height: 34px;
 }
+
 </style>
