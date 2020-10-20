@@ -22,6 +22,7 @@ OC.L10N.register(
     "OAuth failure" : "Napaka overitve OAuth",
     "No Twitter account connected" : "Ni povezanega računa Twitter",
     "Error connecting to Twitter" : "Napaka povezovanja z računom Twitter",
+    "No Twitter notifications!" : "Ni obvestil Twitter!",
     "System" : "Sistem",
     "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo"
 },
