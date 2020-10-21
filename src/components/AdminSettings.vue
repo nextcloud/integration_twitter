@@ -15,6 +15,8 @@
 			<span class="icon icon-details" />
 			{{ t('integration_twitter', 'Make sure you set this "callback URL" to your Twitter OAuth app:') }}
 			<b> {{ redirect_uri }} </b>
+			<br>
+			{{ t('integration_twitter', 'And give it "Read + Write + Direct Messages" permissions.') }}
 		</p>
 		<div class="grid-form">
 			<label for="twitter-client-id">
