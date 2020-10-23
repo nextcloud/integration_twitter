@@ -15,6 +15,7 @@
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Wenn Sie Ihre eigene Twitter OAuth-App zur Authentifizierung bei Twitter verwenden möchten, erstellen Sie eine Twitter-Anwendung in Ihren Twitter-Entwicklereinstellungen und geben Sie unten den \"Verbraucherschlüssel\" und das \"Verbrauchergeheimnis\" ein.",
     "Twitter developer app settings" : "Einstellungen für Twitter-Entwickler-App",
     "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Stellen Sie sicher, dass Sie diese \"Rückruf-URL\" in Ihrer Twitter OAuth-App setzen:",
+    "And give it \"Read + Write + Direct Messages\" permissions." : "Und geben Sie die Berechtigungen \"Lesen + Schreiben + Direktnachrichten\".",
     "Consumer key" : "Verbraucherschlüssel",
     "Consumer key of your Twitter application" : "Verbraucherschlüssel Ihrer Twitter-Anwendung",
     "Consumer secret" : "Verbrauchergeheimnis",
