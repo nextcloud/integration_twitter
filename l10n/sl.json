@@ -4,7 +4,7 @@
     "Impossible to decode response" : "Ni mogoče odkodirati odziva",
     "Request failed" : "Zahteva je spodletela",
     "Connected accounts" : "Povezani računi",
-    "Twitter integration" : "Podpora za račune Twitter",
+    "Twitter integration" : "Podpora Twitter",
     "Integration of Twitter microblogging and social networking service" : "Podpora za mikrospletnik Twitter in storitve družbenega mreženja",
     "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Podpora za Twitter omogoča gradnike za prikazovanje pomembnih obvestil in osebno časovnico objav.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Za uporabo privzetega programa za overitev računa Twitter z OAuth pustite polja prazna.",
