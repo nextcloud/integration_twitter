@@ -1,0 +1,6 @@
+{ "translations": {
+    "Connected accounts" : "계정 연결됨",
+    "Connected as {user}" : "[user]로 연결됨",
+    "System" : "시스템"
+},"pluralForm" :"nplurals=1; plural=0;"
+}

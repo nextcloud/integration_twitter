@@ -1,9 +1,12 @@
 OC.L10N.register(
     "integration_twitter",
     {
-    "Twitter home timeline" : "推特主页时间线",
-    "Twitter notifications" : "推特通知",
+    "Twitter home timeline" : "Twitter 主页时间线",
+    "Twitter notifications" : "Twitter 通知",
     "Request failed" : "请求失败",
+    "Connected accounts" : "账号已连接",
+    "Twitter integration" : "Twitter 集成",
+    "Connected as {user}" : "作为 {user} 已连接",
     "System" : "系统"
 },
 "nplurals=1; plural=0;");
