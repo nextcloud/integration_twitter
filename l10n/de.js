@@ -39,7 +39,7 @@ OC.L10N.register(
     "Nextcloud Twitter integration on {ncUrl}" : "Twitter-Einbindung in Nextcloud auf {ncUrl}",
     "Twitter options saved" : "Twitter-Einstellungen gespeichert",
     "Failed to save Twitter options" : "Fehler beim Speichern der Twitter-Einstellungen",
-    "Failed to request Twitter 1st step OAuth token" : "Fehler beim Abrufen des 1.Schritt OAuth-Token",
+    "Failed to request Twitter 1st step OAuth token" : "Fehler beim Abrufen des 1. Schritt OAuth-Token",
     "OAuth failure" : "OAuth fehlgeschlagen",
     "No Twitter account connected" : "Kein Twitter-Konto verbunden",
     "Error connecting to Twitter" : "Fehler bei der Verbindung mit Twitter",

@@ -17,6 +17,7 @@ OC.L10N.register(
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Twitter kimlik doğrulaması için kendi Twitter OAuth uygulamanızı kullanmak istiyorsanız, Twitter geliştirici ayarlarınızdan bir Twitter uygulaması oluşturun ve aşağıya \"Tüketici anahtarı\" ile \"Tüketici sırrı\" bilgilerini yazın.",
     "Twitter developer app settings" : "Twitter geliştirici uygulaması ayarları",
     "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Twitter OAuth uygulamanızda bu \"geri çağırma adresini\" ayarladığından emin olun:",
+    "And give it \"Read + Write + Direct Messages\" permissions." : "Ve \"Okuma + Yazma + Doğrudan İleti\" izinlerini verin.",
     "Consumer key" : "Tüketici anahtarı",
     "Consumer key of your Twitter application" : "Twitter uygulamanızın tüketici anahtarı",
     "Consumer secret" : "Tüketici sırrı",
