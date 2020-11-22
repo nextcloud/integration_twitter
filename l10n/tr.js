@@ -12,7 +12,7 @@ OC.L10N.register(
     "Connected accounts" : "Bağlı hesaplar",
     "Twitter integration" : "Twitter bütünleştirmesi",
     "Integration of Twitter microblogging and social networking service" : "Twittter mikro günlük ve sosyal ağ hizmeti ile bütünleştirme",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter bütünleştirmesi zaman akışınızdaki önemli bildirimleri görüntüleyen pano gereçleri sağlar.",
+    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter bütünleştirmesi zaman akışınızdaki önemli bildirimleri görüntüleyen pano bileşenleri sağlar.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Varsayılan Nextcloud Twitter OAuth uygulamasını kullanmak için tüm alanları boş bırakın.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Twitter kimlik doğrulaması için kendi Twitter OAuth uygulamanızı kullanmak istiyorsanız, Twitter geliştirici ayarlarınızdan bir Twitter uygulaması oluşturun ve aşağıya \"Tüketici anahtarı\" ile \"Tüketici sırrı\" bilgilerini yazın.",
     "Twitter developer app settings" : "Twitter geliştirici uygulaması ayarları",
