@@ -21,7 +21,7 @@
     "Consumer secret" : "Consumer secret",
     "Consumer secret of your Twitter application" : "Consumer secret van je Twitter applicatie",
     "Twitter admin options saved" : "Twitter admin opties opgeslagen",
-    "Failed to save Twitter admin options" : "Kon Twitter admin opties niet opslaan",
+    "Failed to save Twitter admin options" : "Kon Twitter admin-opties niet opslaan",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "Accepteer de protocol-registratie bovenaan deze pagina om authenticatie bij Twitter mogelijk te maken.",
     "With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open \"web+nextcloudtwitter\" links." : "In Chrome/Chromium zou je linksboven in de browser een pop-up moeten zien om deze pagina toestemming te geven om \"web+nextcloudtwitter\" links te openen.",
     "If you don't see the popup, you can still click on this icon in the address bar." : "Als u deze pop-up niet ziet, kunt u not steeds op dit icoon in de adresbalk klikken.",
