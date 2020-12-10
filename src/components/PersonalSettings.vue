@@ -87,7 +87,6 @@ export default {
 	},
 
 	mounted() {
-		console.debug(detectBrowser())
 		const paramString = window.location.search.substr(1)
 		// eslint-disable-next-line
 		const urlParams = new URLSearchParams(paramString)

@@ -49,7 +49,6 @@ export default {
 			loop: null,
 			state: 'loading',
 			settingsUrl: generateUrl('/settings/user/connected-accounts#twitter_prefs'),
-			darkThemeColor: OCA.Accessibility.theme === 'dark' ? 'ffffff' : '000000',
 		}
 	},
 
