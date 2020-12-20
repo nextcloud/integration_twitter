@@ -44,11 +44,11 @@ OC.L10N.register(
     "No Twitter account connected" : "No s'ha connectat cap compte de Twitter",
     "Error connecting to Twitter" : "S'ha produït un error en connectar-se a Twitter",
     "No Twitter notifications!" : "No hi ha notificacions de Twitter!",
-    "Failed to get Twitter notifications" : "No s'han pogut rebre les notificacions de Twitter",
+    "Failed to get Twitter notifications" : "No s'han pogut obtenir les notificacions de Twitter",
     "{nb} follow requests" : "{nb} segueix les sol·licituds",
     "System" : "Sistema",
     "Failed to get Twitter home timeline" : "No s'ha pogut obtenir la cronologia de Twitter d’inici",
-    "{user} to you" : "{user} a vostè",
+    "{user} to you" : "{user} a vós",
     "{user1} to {user2}" : "{user1} a {user2}"
 },
 "nplurals=2; plural=(n != 1);");
