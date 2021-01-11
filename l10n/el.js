@@ -17,6 +17,7 @@ OC.L10N.register(
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Εάν θέλετε να χρησιμοποιήσετε τη δική σας εφαρμογή Twitter OAuth για έλεγχο ταυτότητας στο Twitter, δημιουργήστε μια εφαρμογή Twitter στις ρυθμίσεις προγραμματιστή Twitter και τοποθετήστε το «Κλειδί καταναλωτή» και «Μυστικό του καταναλωτή» παρακάτω.",
     "Twitter developer app settings" : "Ρυθμίσεις εφαρμογής προγραμματιστή Twitter",
     "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Βεβαιωθείτε ότι έχετε ορίσει αυτό το \"URL επιστροφής κλήσης\" στην εφαρμογή Twitter OAuth:",
+    "And give it \"Read + Write + Direct Messages\" permissions." : "Και δώστε τα δικαιώματα \"Ανάγνωση + Εγγραφή + Άμεσα μηνύματα\".",
     "Consumer key" : "Κλειδί καταναλωτή",
     "Consumer key of your Twitter application" : "Κλειδί καταναλωτή της εφαρμογής Twitter",
     "Consumer secret" : "Μυστικό καταναλωτή",
