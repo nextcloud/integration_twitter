@@ -9,6 +9,7 @@ OC.L10N.register(
     "Connected as {user}" : "{user} gisa konektatuta",
     "Disconnect from Twitter" : "Deskonektatu Twitter-etik",
     "Twitter OAuth error:" : "Twitter OAuth errorea:",
+    "Error connecting to Twitter" : "Errorea Twitter-era konektatzean",
     "System" : "Sistema"
 },
 "nplurals=2; plural=(n != 1);");
