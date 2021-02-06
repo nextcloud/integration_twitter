@@ -1,0 +1,26 @@
+{ "translations": {
+    "Twitter home timeline" : "Twitter 主頁時間軸",
+    "Twitter notifications" : "Twitter 通知",
+    "Request failed" : "請求失敗",
+    "Connected accounts" : "已連線的帳號",
+    "Twitter integration" : "Twitter 整合",
+    "Consumer secret of your Twitter application" : "您 Twitter 應用程式的客戶端密碼",
+    "Twitter admin options saved" : "已儲存 Twitter 管理員選項",
+    "Failed to save Twitter admin options" : "儲存 Twitter 管理員選項失敗",
+    "Connect to Twitter" : "連接到 Twitter",
+    "Connected as {user}" : "以 {user} 身份連線",
+    "Disconnect from Twitter" : "與 Twitter 斷開連線",
+    "Successfully connected to Twitter!" : "與 Twitter 連線成功！",
+    "Twitter OAuth error:" : "Twitter OAuth 錯誤：",
+    "Twitter options saved" : "已儲存 Twitter 選項",
+    "Failed to save Twitter options" : "儲存 Twitter 選項失敗",
+    "No Twitter account connected" : "未連線至 Twitter 帳號",
+    "Error connecting to Twitter" : "連線至 Twitter 時發生錯誤",
+    "No Twitter notifications!" : "無 Twitter 通知！",
+    "Failed to get Twitter notifications" : "取得 Twitter 通知失敗",
+    "System" : "系统",
+    "Failed to get Twitter home timeline" : "取得 Twitter 主頁時間軸失敗",
+    "{user} to you" : "{user} 給你",
+    "{user1} to {user2}" : "{user1} 至 {user2}"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
