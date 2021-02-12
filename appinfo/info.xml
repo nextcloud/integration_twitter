@@ -4,7 +4,7 @@
     <name>Twitter integration</name>
     <summary>Integration of Twitter microblogging and social networking service</summary>
     <description><![CDATA[Twitter integration provides dashboard widgets displaying your important notifications and your home timeline.]]></description>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
     <licence>agpl</licence>
     <author>Julien Veyssier</author>
     <namespace>Twitter</namespace>
@@ -20,7 +20,7 @@
         <database min-version="9.4">pgsql</database>
         <database>sqlite</database>
         <database min-version="5.5">mysql</database>
-        <nextcloud min-version="20" max-version="21"/>
+        <nextcloud min-version="21" max-version="22"/>
     </dependencies>
     <settings>
         <admin>OCA\Twitter\Settings\Admin</admin>
