@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.10 – 2021-02-23
+### Fixed
+- bring back 20 compatibility
+
 ## 0.0.9 – 2021-02-16
 ### Changed
 - app certificate
