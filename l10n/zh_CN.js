@@ -7,6 +7,7 @@ OC.L10N.register(
     "Connected accounts" : "关联账号",
     "Twitter integration" : "Twitter 集成",
     "Connected as {user}" : "作为 {user} 已连接",
+    "Nextcloud Twitter integration on {ncUrl}" : "Nextcloud Twitter集成在 {ncUrl}",
     "System" : "系统"
 },
 "nplurals=1; plural=0;");
