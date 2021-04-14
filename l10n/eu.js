@@ -12,7 +12,10 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Deskonektatu Twitter-etik",
     "Twitter OAuth error:" : "Twitter OAuth errorea:",
     "Twitter options saved" : "Twitter aukerak gordeta",
+    "OAuth failure" : "OAuth akatsa",
+    "No Twitter account connected" : "Ez dago Twitter konturik konektatuta",
     "Error connecting to Twitter" : "Errorea Twitter-era konektatzean",
+    "No Twitter notifications!" : "Ez dago Twitter jakinarazpenik!",
     "System" : "Sistema"
 },
 "nplurals=2; plural=(n != 1);");
