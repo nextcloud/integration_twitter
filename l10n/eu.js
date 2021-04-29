@@ -1,10 +1,17 @@
 OC.L10N.register(
     "integration_twitter",
     {
+    "Problem in OAuth third step." : "Arazoa OAuth-eko hirugarren pausuan.",
+    "Problem in OAuth first or second step" : "Arazoa OAuth-eko lehenengo edo bigarren pausuan",
+    "Twitter home timeline" : "Twitter orri nagusiaren kronologia",
     "Twitter notifications" : "Twitter jakinarazpenak",
+    "Impossible to decode response" : "Ezin izan da erantzuna deskodetu",
     "Request failed" : "Eskaerak huts egin du",
     "Connected accounts" : "Konektaturiko kontuak",
     "Twitter integration" : "Twitter integrazioa",
+    "Consumer key of your Twitter application" : "Kontsumitzailearen sekretua zure Twitter aplikaziorako",
+    "Consumer secret" : "Kontsumitzailearen sekretua",
+    "Failed to save Twitter admin options" : "Twitter administratzaile aukerak gordetzeak huts egin du",
     "If you don't see the popup, you can still click on this icon in the address bar." : "Popup-a ikusten ez baduzu, ikono honetan klik egin dezakezu helbide-barran.",
     "If you still don't manage to get the protocol registered, check your settings on this page:" : "Protokoloa erregistratzen lortzen ez baduzu, egiaztatu ezarpenak orri honetan:",
     "Connect to Twitter" : "Konektatu Twitter-era",
@@ -12,10 +19,12 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Deskonektatu Twitter-etik",
     "Twitter OAuth error:" : "Twitter OAuth errorea:",
     "Twitter options saved" : "Twitter aukerak gordeta",
+    "Failed to save Twitter options" : "Twitter aukerak gordetzeak huts egin du",
     "OAuth failure" : "OAuth akatsa",
     "No Twitter account connected" : "Ez dago Twitter konturik konektatuta",
     "Error connecting to Twitter" : "Errorea Twitter-era konektatzean",
     "No Twitter notifications!" : "Ez dago Twitter jakinarazpenik!",
+    "{nb} follow requests" : "{nb} jarraitu eskaerak",
     "System" : "Sistema"
 },
 "nplurals=2; plural=(n != 1);");
