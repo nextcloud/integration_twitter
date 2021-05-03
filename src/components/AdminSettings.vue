@@ -88,6 +88,9 @@ export default {
 	methods: {
 		onInput() {
 			delay(() => {
+				if (this.state.followed_user.match(/^@/)) {
+					this.state.followed_user = this.state.followed_user.replace(/^@/, '')
+				}
 				this.saveOptions()
 			}, 2000)()
 		},

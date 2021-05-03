@@ -47,10 +47,15 @@
 					<a class="icon icon-user" />
 					{{ t('integration_twitter', 'User to follow') }}
 				</label>
-				<input id="twitter-followed-user"
+				<span v-if="state.followed_user_admin">
+					{{ t('integration_twitter', 'Set to \'@{name}\' in admin settings', { name: state.followed_user_admin}) }}
+				</span>
+				<input v-else
+					id="twitter-followed-user"
 					v-model="state.followed_user"
 					type="text"
-					:placeholder="t('integration_twitter', 'Twitter user to follow in \'User timeline\' widget')"
+					:title="t('integration_twitter', 'Display name of Twitter user to follow in \'User timeline\' widget')"
+					:placeholder="t('integration_twitter', 'Display name of Twitter user to follow in \'User timeline\' widget')"
 					@input="onFollowedUserInput">
 			</div>
 		</div>
@@ -122,8 +127,10 @@ export default {
 
 	methods: {
 		onFollowedUserInput() {
-			// this.state.followed_user = val
 			delay(() => {
+				if (this.state.followed_user.match(/^@/)) {
+					this.state.followed_user = this.state.followed_user.replace(/^@/, '')
+				}
 				this.saveOptions({ followed_user: this.state.followed_user })
 			}, 2000)()
 		},
@@ -207,6 +214,10 @@ body.theme--dark .icon-twitter {
 	button .icon {
 		margin-bottom: -1px;
 	}
+	input {
+		width: 100%;
+	}
+
 }
 
 .twitter-grid-form label {
