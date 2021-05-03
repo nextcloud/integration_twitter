@@ -43,6 +43,15 @@
 					<span class="icon icon-close" />
 					{{ t('integration_twitter', 'Disconnect from Twitter') }}
 				</button>
+				<label for="twitter-followed-user">
+					<a class="icon icon-user" />
+					{{ t('integration_twitter', 'User to follow') }}
+				</label>
+				<input id="twitter-followed-user"
+					v-model="state.followed_user"
+					type="text"
+					:placeholder="t('integration_twitter', 'Twitter user to follow in \'User timeline\' widget')"
+					@input="onFollowedUserInput">
 			</div>
 		</div>
 		<p v-else class="settings-hint">
@@ -57,7 +66,7 @@ import { generateUrl, imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import '@nextcloud/dialogs/styles/toast.scss'
-import { detectBrowser } from '../utils'
+import { detectBrowser, delay } from '../utils'
 
 export default {
 	name: 'PersonalSettings',
@@ -112,15 +121,19 @@ export default {
 	},
 
 	methods: {
+		onFollowedUserInput() {
+			// this.state.followed_user = val
+			delay(() => {
+				this.saveOptions({ followed_user: this.state.followed_user })
+			}, 2000)()
+		},
 		onLogoutClick() {
 			this.state.oauth_token = ''
-			this.saveOptions()
+			this.saveOptions({ oauth_token: this.state.oauth_token })
 		},
-		saveOptions() {
+		saveOptions(values) {
 			const req = {
-				values: {
-					oauth_token: this.state.oauth_token,
-				},
+				values,
 			}
 			const url = generateUrl('/apps/integration_twitter/config')
 			axios.put(url, req)

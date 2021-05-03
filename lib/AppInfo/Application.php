@@ -20,6 +20,7 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCA\Twitter\Controller\PageController;
 use OCA\Twitter\Dashboard\TwitterWidget;
 use OCA\Twitter\Dashboard\TwitterHomeWidget;
+use OCA\Twitter\Dashboard\TwitterUserFollowWidget;
 
 /**
  * Class Application
@@ -44,6 +45,7 @@ class Application extends App implements IBootstrap {
     public function register(IRegistrationContext $context): void {
         $context->registerDashboardWidget(TwitterWidget::class);
         $context->registerDashboardWidget(TwitterHomeWidget::class);
+        $context->registerDashboardWidget(TwitterUserFollowWidget::class);
     }
 
     public function boot(IBootContext $context): void {

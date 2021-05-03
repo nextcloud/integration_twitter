@@ -18,6 +18,7 @@ return [
         ['name' => 'config#setAdminConfig', 'url' => '/admin-config', 'verb' => 'PUT'],
         ['name' => 'twitterAPI#getNotifications', 'url' => '/notifications', 'verb' => 'GET'],
         ['name' => 'twitterAPI#getHomeTimeline', 'url' => '/home', 'verb' => 'GET'],
+        ['name' => 'twitterAPI#getUserTimeline', 'url' => '/user', 'verb' => 'GET'],
         ['name' => 'twitterAPI#getAvatar', 'url' => '/avatar', 'verb' => 'GET'],
     ]
 ];

@@ -88,6 +88,32 @@ class TwitterAPIService {
 	}
 
 	/**
+	 * Get tweets of the home timeline
+	 *
+	 * @param string $consumerKey
+	 * @param string $consumerSecret
+	 * @param string $oauthToken
+	 * @param string $oauthTokenSecret
+	 * @param string $twitterUserId
+	 * @param ?int $since min ID
+	 * @return array the tweets
+	 */
+	public function getUserTimeline(string $consumerKey, string $consumerSecret, string $oauthToken, string $oauthTokenSecret,
+									string $twitterUserId, ?int $since = null): array {
+		// my home timeline
+		$params = [
+			'count' => 20,
+			'screen_name' => $twitterUserId,
+		];
+		if (!is_null($since)) {
+			$params['since_id'] = $since;
+		}
+		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/user_timeline.json', $params);
+
+		return $result;
+	}
+
+	/**
 	 * Get multiple kind of notifications
 	 *
 	 * @param string $consumerKey

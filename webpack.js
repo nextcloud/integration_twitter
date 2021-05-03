@@ -15,6 +15,7 @@ webpackConfig.entry = {
     adminSettings: { import: path.join(__dirname, 'src', 'adminSettings.js'), filename: 'integration_twitter-adminSettings.js' },
     dashboard: { import: path.join(__dirname, 'src', 'dashboard.js'), filename: 'integration_twitter-dashboard.js' },
     dashboardHome: { import: path.join(__dirname, 'src', 'dashboardHome.js'), filename: 'integration_twitter-dashboardHome.js' },
+    dashboardUser: { import: path.join(__dirname, 'src', 'dashboardUser.js'), filename: 'integration_twitter-dashboardUser.js' },
 }
 
 module.exports = webpackConfig

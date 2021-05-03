@@ -112,6 +112,35 @@ class TwitterAPIController extends Controller {
 	}
 
 	/**
+	 * get timeline of a given user
+	 * @NoAdminRequired
+	 *
+	 * @param ?int $since min ID
+	 * @return DataResponse the timeline items or an error
+	 */
+	public function getUserTimeline(?int $since = null): DataResponse {
+		if ($this->oauthToken === '') {
+			return new DataResponse(['error' => 'Not connected'], 400);
+		}
+		$userToFollow = $this->config->getAppValue(Application::APP_ID, 'followed_user', '');
+		if ($userToFollow === '') {
+			$userToFollow = $this->config->getUserValue($this->userId, Application::APP_ID, 'followed_user', '');
+		}
+		if ($userToFollow === '') {
+			return new DataResponse(['error' => 'No user to follow'], 418);
+		}
+		$result = $this->twitterAPIService->getUserTimeline(
+			$this->consumerKey, $this->consumerSecret, $this->oauthToken, $this->oauthTokenSecret, $userToFollow, $since
+		);
+		if (!isset($result['error'])) {
+			$response = new DataResponse($result);
+		} else {
+			$response = new DataResponse($result, 401);
+		}
+		return $response;
+	}
+
+	/**
 	 * get repository avatar
 	 * @NoAdminRequired
 	 * @NoCSRFRequired

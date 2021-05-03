@@ -43,10 +43,12 @@ class Admin implements ISettings {
     public function getForm(): TemplateResponse {
         $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', '');
         $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', '');
+		$userToFollow = $this->config->getAppValue(Application::APP_ID, 'followed_user', '');
 
         $adminConfig = [
             'consumer_key' => $consumerKey,
             'consumer_secret' => $consumerSecret,
+            'followed_user' => $userToFollow,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'admin-config', $adminConfig);
         return new TemplateResponse(Application::APP_ID, 'adminSettings');

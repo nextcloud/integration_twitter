@@ -41,6 +41,15 @@
 				:placeholder="t('integration_twitter', 'Consumer secret of your Twitter application')"
 				@input="onInput"
 				@focus="readonly = false">
+			<label for="twitter-followed-user">
+				<a class="icon icon-user" />
+				{{ t('integration_twitter', 'User to follow') }}
+			</label>
+			<input id="twitter-followed-user"
+				v-model="state.followed_user"
+				type="text"
+				:placeholder="t('integration_twitter', 'Twitter user to follow in \'User timeline\' widget')"
+				@input="onInput">
 		</div>
 	</div>
 </template>
@@ -78,9 +87,8 @@ export default {
 
 	methods: {
 		onInput() {
-			const that = this
 			delay(() => {
-				that.saveOptions()
+				this.saveOptions()
 			}, 2000)()
 		},
 		saveOptions() {
@@ -88,6 +96,7 @@ export default {
 				values: {
 					consumer_key: this.state.consumer_key,
 					consumer_secret: this.state.consumer_secret,
+					followed_user: this.state.followed_user,
 				},
 			}
 			const url = generateUrl('/apps/integration_twitter/admin-config')

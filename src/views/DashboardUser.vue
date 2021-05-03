@@ -1,5 +1,5 @@
 <template>
-	<DashboardTimeline mode="home"
+	<DashboardTimeline mode="user"
 		:title="title" />
 </template>
 
@@ -7,7 +7,7 @@
 import DashboardTimeline from './DashboardTimeline'
 
 export default {
-	name: 'DashboardHome',
+	name: 'DashboardUser',
 
 	components: {
 		DashboardTimeline,

@@ -57,6 +57,8 @@ class Personal implements ISettings {
         $name = $this->config->getUserValue($this->userId, Application::APP_ID, 'name', '');
         $screenName = $this->config->getUserValue($this->userId, Application::APP_ID, 'screen_name', '');
 
+        $userToFollow = $this->config->getUserValue($this->userId, Application::APP_ID, 'followed_user', '');
+
         $userConfig = [
             'oauth_token' => $token,
             'oauth_token_secret' => $tokenSecret,
@@ -64,6 +66,7 @@ class Personal implements ISettings {
             'consumer_secret' => $hasConsumerSecret,
             'name' => $name,
             'screen_name' => $screenName,
+            'followed_user' => $userToFollow,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
         $response = new TemplateResponse(Application::APP_ID, 'personalSettings');
