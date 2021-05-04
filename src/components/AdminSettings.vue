@@ -48,7 +48,7 @@
 			<input id="twitter-followed-user"
 				v-model="state.followed_user"
 				type="text"
-				:placeholder="t('integration_twitter', 'Twitter user to follow in \'User timeline\' widget')"
+				:placeholder="t('integration_twitter', 'Twitter user to follow in \"User timeline\" widget')"
 				@input="onInput">
 		</div>
 	</div>
