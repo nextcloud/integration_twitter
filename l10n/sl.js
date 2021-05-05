@@ -5,6 +5,7 @@ OC.L10N.register(
     "Problem in OAuth third step." : "Težave z overitvijo OAuth na tretjemm koraku.",
     "Problem in OAuth first or second step" : "Težave z overitvijo OAuth na prvem ali drugem koraku.",
     "Twitter home timeline" : "Časovnica objav Twitter",
+    "Twitter user timeline" : "Časovnica objav Twitter",
     "Twitter notifications" : "Obvestila Twitter",
     "Impossible to decode response" : "Ni mogoče odkodirati odziva",
     "Invalid return value in OAuth step 1" : "Neveljavne vrnjena vrednost prvega koraka OAuth",
@@ -22,6 +23,7 @@ OC.L10N.register(
     "Consumer key of your Twitter application" : "Uporabniški ključ programa Twitter",
     "Consumer secret" : "Uporabniška koda",
     "Consumer secret of your Twitter application" : "Uporabniška koda programa Twitter",
+    "User to follow" : "Uporabnik za sledenje",
     "Twitter admin options saved" : "Skrbniške nastavitve povezave Twitter so shranjene",
     "Failed to save Twitter admin options" : "Shranjevanje skrbniških nastavitev računa Twitter je spodletelo",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "Vpis protokola na vrhu te strani je treba odobriti in nato dovoliti overitev okolja Twitter.",
@@ -46,6 +48,8 @@ OC.L10N.register(
     "No Twitter notifications!" : "Ni obvestil Twitter!",
     "Failed to get Twitter notifications" : "Pridobivanje obvestil Twitter je spodletelo",
     "System" : "Sistem",
+    "No Twits!" : "Ni še zabeleženih objav!",
+    "Configure Twitter connected account" : "Nastavi povezan račun Twitter",
     "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");
