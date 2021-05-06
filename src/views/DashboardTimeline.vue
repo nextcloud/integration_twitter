@@ -82,7 +82,7 @@ export default {
 			} else if (this.state === 'error') {
 				return t('integration_twitter', 'Error connecting to Twitter')
 			} else if (this.state === 'ok') {
-				return t('integration_twitter', 'No Twits!')
+				return t('integration_twitter', 'No tweets!')
 			} else if (this.state === 'nothing-to-show') {
 				return t('integration_twitter', 'No Twitter user timeline to show')
 			}

@@ -48,14 +48,14 @@
 					{{ t('integration_twitter', 'User to follow') }}
 				</label>
 				<span v-if="state.followed_user_admin">
-					{{ t('integration_twitter', 'Set to \'@{name}\' in admin settings', { name: state.followed_user_admin}) }}
+					{{ t('integration_twitter', 'Set to "@{name}" in admin settings', { name: state.followed_user_admin}) }}
 				</span>
 				<input v-else
 					id="twitter-followed-user"
 					v-model="state.followed_user"
 					type="text"
-					:title="t('integration_twitter', 'Display name of Twitter user to follow in \'User timeline\' widget')"
-					:placeholder="t('integration_twitter', 'Display name of Twitter user to follow in \'User timeline\' widget')"
+					:title="t('integration_twitter', 'Display name of Twitter user to follow in "User timeline" widget')"
+					:placeholder="t('integration_twitter', 'Display name of Twitter user to follow in "User timeline" widget')"
 					@input="onFollowedUserInput">
 			</div>
 		</div>
