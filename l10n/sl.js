@@ -48,7 +48,6 @@ OC.L10N.register(
     "No Twitter notifications!" : "Ni obvestil Twitter!",
     "Failed to get Twitter notifications" : "Pridobivanje obvestil Twitter je spodletelo",
     "System" : "Sistem",
-    "No Twits!" : "Ni še zabeleženih objav!",
     "Configure Twitter connected account" : "Nastavi povezan račun Twitter",
     "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo"
 },
