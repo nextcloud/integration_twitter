@@ -24,6 +24,7 @@ OC.L10N.register(
     "Consumer secret" : "Uporabniška koda",
     "Consumer secret of your Twitter application" : "Uporabniška koda programa Twitter",
     "User to follow" : "Uporabnik za sledenje",
+    "Twitter user to follow in \"User timeline\" widget" : "Uporabnik okolja Twitter, katerega vsebina se zbira v »časovnici objav« .",
     "Twitter admin options saved" : "Skrbniške nastavitve povezave Twitter so shranjene",
     "Failed to save Twitter admin options" : "Shranjevanje skrbniških nastavitev računa Twitter je spodletelo",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "Vpis protokola na vrhu te strani je treba odobriti in nato dovoliti overitev okolja Twitter.",
@@ -35,6 +36,8 @@ OC.L10N.register(
     "Connect to Twitter" : "Poveži z računom Twitter",
     "Connected as {user}" : "Povezan je uporabniški račun {user}",
     "Disconnect from Twitter" : "Prekini povezavo s Twitter",
+    "Set to \"@{name}\" in admin settings" : "Nastavi na »@{name}« med skrbniškimi nastavitvami",
+    "Display name of Twitter user to follow in \"User timeline\" widget" : "Pokaži ime uporabnik okolja Twitter, katerega vsebina se zbira v »časovnici objav« .",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Za overitev računa Twitter mora biti vzpostavljena povezava prek protokola HTTPS.",
     "Successfully connected to Twitter!" : "Povezava s računom Twitter je uspešno vzpostavljena!",
     "Twitter OAuth error:" : "Napaka overitve OAuth za Twitter:",
@@ -48,7 +51,12 @@ OC.L10N.register(
     "No Twitter notifications!" : "Ni obvestil Twitter!",
     "Failed to get Twitter notifications" : "Pridobivanje obvestil Twitter je spodletelo",
     "System" : "Sistem",
+    "No tweets!" : "Ni še objav!",
+    "No Twitter user timeline to show" : "Ni še navedenih časovnic za prikaz",
     "Configure Twitter connected account" : "Nastavi povezan račun Twitter",
-    "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo"
+    "about {name}" : "o {name}",
+    "Failed to get Twitter home timeline" : "Pridobivanje časovnice objav Twitter je spodletelo",
+    "{user} to you" : "{user} pošlje vam",
+    "{user1} to {user2}" : "{user1} pošlje {user2}"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");
