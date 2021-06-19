@@ -49,6 +49,8 @@ OC.L10N.register(
     "Failed to get Twitter notifications" : "Fehler beim Abrufen der Twitter-Benachrichtigungen",
     "{nb} follow requests" : "{nb} folgende Anfragen",
     "System" : "System",
+    "No tweets!" : "Keine Tweets!",
+    "about {name}" : "Über {name}",
     "Failed to get Twitter home timeline" : "Fehler beim Abrufen der Twitter-Home-Zeitleiste",
     "{user} to you" : "{user} an Dich",
     "{user1} to {user2}" : "{user1} an {user2}"
