@@ -28,7 +28,7 @@ use OCP\IL10N;
 
 use OCA\Twitter\AppInfo\Application;
 
-class TwitterWidget implements IWidget {
+class TwitterNotificationsWidget implements IWidget {
 
 	/** @var IL10N */
 	private $l10n;
@@ -78,7 +78,7 @@ class TwitterWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function load(): void {
-		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboard');
+		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardNotifications');
 		\OC_Util::addStyle(Application::APP_ID, 'dashboard');
 	}
 }

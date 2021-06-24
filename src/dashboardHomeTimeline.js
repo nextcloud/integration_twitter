@@ -13,12 +13,12 @@
 
 import Vue from 'vue'
 import './bootstrap'
-import DashboardHome from './views/DashboardHome'
+import DashboardHomeTimeline from './views/DashboardHomeTimeline'
 
 document.addEventListener('DOMContentLoaded', function() {
 
 	OCA.Dashboard.register('twitter_home_timeline', (el, { widget }) => {
-		const View = Vue.extend(DashboardHome)
+		const View = Vue.extend(DashboardHomeTimeline)
 		new View({
 			propsData: { title: widget.title },
 		}).$mount(el)

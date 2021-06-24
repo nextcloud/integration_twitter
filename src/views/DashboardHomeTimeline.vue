@@ -7,7 +7,7 @@
 import DashboardTimeline from './DashboardTimeline'
 
 export default {
-	name: 'DashboardHome',
+	name: 'DashboardHomeTimeline',
 
 	components: {
 		DashboardTimeline,

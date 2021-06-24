@@ -55,6 +55,7 @@ export default {
 			loop: null,
 			state: 'loading',
 			settingsUrl: generateUrl('/settings/user/connected-accounts#twitter_prefs'),
+			windowVisibility: true,
 		}
 	},
 
@@ -119,14 +120,36 @@ export default {
 		},
 	},
 
+	watch: {
+		windowVisibility(newValue) {
+			if (newValue) {
+				this.launchLoop()
+			} else {
+				this.stopLoop()
+			}
+		},
+	},
+
+	beforeDestroy() {
+		document.removeEventListener('visibilitychange', this.changeWindowVisibility)
+	},
+
 	beforeMount() {
+		console.debug('in dashboardTIMELINE')
 		this.launchLoop()
+		document.addEventListener('visibilitychange', this.changeWindowVisibility)
 	},
 
 	mounted() {
 	},
 
 	methods: {
+		changeWindowVisibility() {
+			this.windowVisibility = !document.hidden
+		},
+		stopLoop() {
+			clearInterval(this.loop)
+		},
 		async launchLoop() {
 			// get my user name first
 			try {

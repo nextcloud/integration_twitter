@@ -78,7 +78,7 @@ class TwitterHomeWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function load(): void {
-		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardHome');
+		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardHomeTimeline');
 		\OC_Util::addStyle(Application::APP_ID, 'dashboard');
 	}
 }

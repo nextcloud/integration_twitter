@@ -13,9 +13,9 @@ webpackConfig.stats = {
 webpackConfig.entry = {
     personalSettings: { import: path.join(__dirname, 'src', 'personalSettings.js'), filename: 'integration_twitter-personalSettings.js' },
     adminSettings: { import: path.join(__dirname, 'src', 'adminSettings.js'), filename: 'integration_twitter-adminSettings.js' },
-    dashboard: { import: path.join(__dirname, 'src', 'dashboard.js'), filename: 'integration_twitter-dashboard.js' },
-    dashboardHome: { import: path.join(__dirname, 'src', 'dashboardHome.js'), filename: 'integration_twitter-dashboardHome.js' },
-    dashboardUser: { import: path.join(__dirname, 'src', 'dashboardUser.js'), filename: 'integration_twitter-dashboardUser.js' },
+    dashboardNotifications: { import: path.join(__dirname, 'src', 'dashboardNotifications.js'), filename: 'integration_twitter-dashboardNotifications.js' },
+    dashboardHomeTimeline: { import: path.join(__dirname, 'src', 'dashboardHomeTimeline.js'), filename: 'integration_twitter-dashboardHomeTimeline.js' },
+    dashboardUserTimeline: { import: path.join(__dirname, 'src', 'dashboardUserTimeline.js'), filename: 'integration_twitter-dashboardUserTimeline.js' },
 }
 
 module.exports = webpackConfig

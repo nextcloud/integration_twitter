@@ -89,7 +89,7 @@ class TwitterUserFollowWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function load(): void {
-		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardUser');
+		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardUserTimeline');
 		\OC_Util::addStyle(Application::APP_ID, 'dashboard');
 	}
 }

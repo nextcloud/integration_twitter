@@ -8,17 +8,17 @@
  * later. See the COPYING file.
  *
  * @author Julien Veyssier <eneiluj@posteo.net>
- * @copyright Julien Veyssier 2021
+ * @copyright Julien Veyssier 2020
  */
 
 import Vue from 'vue'
 import './bootstrap'
-import DashboardUser from './views/DashboardUser'
+import DashboardNotifications from './views/DashboardNotifications'
 
 document.addEventListener('DOMContentLoaded', function() {
 
-	OCA.Dashboard.register('twitter_user_timeline', (el, { widget }) => {
-		const View = Vue.extend(DashboardUser)
+	OCA.Dashboard.register('twitter_notifications', (el, { widget }) => {
+		const View = Vue.extend(DashboardNotifications)
 		new View({
 			propsData: { title: widget.title },
 		}).$mount(el)

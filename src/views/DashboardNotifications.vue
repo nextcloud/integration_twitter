@@ -30,7 +30,7 @@ import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 
 export default {
-	name: 'Dashboard',
+	name: 'DashboardNotifications',
 
 	components: {
 		DashboardWidget, EmptyContent,
@@ -53,6 +53,7 @@ export default {
 			loop: null,
 			state: 'loading',
 			settingsUrl: generateUrl('/settings/user/connected-accounts#twitter_prefs'),
+			windowVisibility: true,
 		}
 	},
 
@@ -124,15 +125,40 @@ export default {
 		},
 	},
 
+	watch: {
+		windowVisibility(newValue) {
+			if (newValue) {
+				this.launchLoop()
+			} else {
+				this.stopLoop()
+			}
+		},
+	},
+
+	beforeDestroy() {
+		document.removeEventListener('visibilitychange', this.changeWindowVisibility)
+	},
+
 	beforeMount() {
-		this.fetchNotifications()
-		this.loop = setInterval(() => this.fetchNotifications(), 120000)
+		console.debug('in dashboard')
+		this.launchLoop()
+		document.addEventListener('visibilitychange', this.changeWindowVisibility)
 	},
 
 	mounted() {
 	},
 
 	methods: {
+		changeWindowVisibility() {
+			this.windowVisibility = !document.hidden
+		},
+		stopLoop() {
+			clearInterval(this.loop)
+		},
+		launchLoop() {
+			this.fetchNotifications()
+			this.loop = setInterval(() => this.fetchNotifications(), 120000)
+		},
 		fetchNotifications() {
 			const req = {}
 			if (this.lastDate) {
