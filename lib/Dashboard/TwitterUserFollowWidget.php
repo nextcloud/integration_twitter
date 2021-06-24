@@ -28,17 +28,35 @@ use OCP\IL10N;
 use OCP\IConfig;
 
 use OCA\Twitter\AppInfo\Application;
+use OCP\IURLGenerator;
+use OCP\Util;
 
 class TwitterUserFollowWidget implements IWidget {
 
-	/** @var IL10N */
+	/**
+	 * @var IL10N
+	 */
 	private $l10n;
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+	/**
+	 * @var IURLGenerator
+	 */
+	private $url;
+	/**
+	 * @var string|null
+	 */
+	private $userId;
 
 	public function __construct(IL10N $l10n,
 								IConfig $config,
+								IURLGenerator $url,
 								?string $userId) {
 		$this->l10n = $l10n;
 		$this->config = $config;
+		$this->url = $url;
 		$this->userId = $userId;
 	}
 
@@ -53,9 +71,9 @@ class TwitterUserFollowWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getTitle(): string {
-		$userToFollow = $this->config->getAppValue(Application::APP_ID, 'followed_user', '');
+		$userToFollow = $this->config->getAppValue(Application::APP_ID, 'followed_user');
 		if ($userToFollow === '') {
-			$userToFollow = $this->config->getUserValue($this->userId, Application::APP_ID, 'followed_user', '');
+			$userToFollow = $this->config->getUserValue($this->userId, Application::APP_ID, 'followed_user');
 		}
 		if ($userToFollow !== '') {
 			return '@' . $userToFollow;
@@ -82,14 +100,14 @@ class TwitterUserFollowWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getUrl(): ?string {
-		return \OC::$server->getURLGenerator()->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']);
+		return $this->url->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']);
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function load(): void {
-		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardUserTimeline');
-		\OC_Util::addStyle(Application::APP_ID, 'dashboard');
+		Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardUserTimeline');
+		Util::addStyle(Application::APP_ID, 'dashboard');
 	}
 }

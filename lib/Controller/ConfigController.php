@@ -11,60 +11,54 @@
 
 namespace OCA\Twitter\Controller;
 
-use OCP\App\IAppManager;
-use OCP\Files\IAppData;
-
 use OCP\IURLGenerator;
 use OCP\IConfig;
-use OCP\IServerContainer;
 use OCP\IL10N;
-use Psr\Log\LoggerInterface;
-
 use OCP\IRequest;
-use OCP\IDBConnection;
-use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Controller;
-
-require_once __DIR__ . '/../constants.php';
 
 use OCA\Twitter\Service\TwitterAPIService;
 use OCA\Twitter\AppInfo\Application;
 
 class ConfigController extends Controller {
 
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+	/**
+	 * @var IURLGenerator
+	 */
+	private $urlGenerator;
+	/**
+	 * @var IL10N
+	 */
+	private $l;
+	/**
+	 * @var TwitterAPIService
+	 */
+	private $twitterAPIService;
+	/**
+	 * @var string|null
+	 */
+	private $userId;
 
-    private $userId;
-    private $config;
-    private $dbconnection;
-    private $dbtype;
-
-    public function __construct($AppName,
-                                IRequest $request,
-                                IServerContainer $serverContainer,
-                                IConfig $config,
-                                IAppManager $appManager,
-                                IAppData $appData,
-                                IDBConnection $dbconnection,
-                                IURLGenerator $urlGenerator,
-                                IL10N $l,
-                                LoggerInterface $logger,
-                                TwitterAPIService $twitterAPIService,
-                                $userId) {
-        parent::__construct($AppName, $request);
-        $this->l = $l;
-        $this->appName = $AppName;
-        $this->userId = $userId;
-        $this->appData = $appData;
-        $this->serverContainer = $serverContainer;
-        $this->config = $config;
-        $this->dbconnection = $dbconnection;
-        $this->urlGenerator = $urlGenerator;
-        $this->logger = $logger;
-        $this->twitterAPIService = $twitterAPIService;
-    }
+	public function __construct(string $appName,
+								IRequest $request,
+								IConfig $config,
+								IURLGenerator $urlGenerator,
+								IL10N $l,
+								TwitterAPIService $twitterAPIService,
+								?string $userId) {
+        parent::__construct($appName, $request);
+		$this->config = $config;
+		$this->urlGenerator = $urlGenerator;
+		$this->l = $l;
+		$this->twitterAPIService = $twitterAPIService;
+		$this->userId = $userId;
+	}
 
     /**
      * @NoAdminRequired
@@ -72,9 +66,8 @@ class ConfigController extends Controller {
      * @return DataResponse
      */
     public function getUsername(): DataResponse {
-        $username = $this->config->getUserValue($this->userId, Application::APP_ID, 'screen_name', '');
-        $response = new DataResponse($username);
-        return $response;
+        $username = $this->config->getUserValue($this->userId, Application::APP_ID, 'screen_name');
+        return new DataResponse($username);
     }
 
     /**
@@ -88,8 +81,7 @@ class ConfigController extends Controller {
         foreach ($values as $key => $value) {
             $this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
         }
-        $response = new DataResponse(1);
-        return $response;
+        return new DataResponse(1);
     }
 
     /**
@@ -102,8 +94,7 @@ class ConfigController extends Controller {
         foreach ($values as $key => $value) {
             $this->config->setAppValue(Application::APP_ID, $key, $value);
         }
-        $response = new DataResponse(1);
-        return $response;
+        return new DataResponse(1);
     }
 
     /**
@@ -113,10 +104,10 @@ class ConfigController extends Controller {
      * @return DataResponse the URL to the next OAuth step
      */
     public function doOauthStep1(): DataResponse {
-        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
-        $consumerKey = $consumerKey ? $consumerKey : DEFAULT_TWITTER_CONSUMER_KEY;
-        $consumerSecret = $consumerSecret ? $consumerSecret : DEFAULT_TWITTER_CONSUMER_SECRET;
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', Application::DEFAULT_TWITTER_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', Application::DEFAULT_TWITTER_CONSUMER_SECRET);
+        $consumerKey = $consumerKey ?: Application::DEFAULT_TWITTER_CONSUMER_KEY;
+        $consumerSecret = $consumerSecret ?: Application::DEFAULT_TWITTER_CONSUMER_SECRET;
 
         $requestToken = $this->twitterAPIService->requestTokenOAuthStep1($consumerKey, $consumerSecret);
         if (!isset($requestToken['oauth_token'], $requestToken['oauth_token_secret'])) {
@@ -151,13 +142,13 @@ class ConfigController extends Controller {
         parse_str($parts['query'], $params);
         $oauthVerifier = $params['oauth_verifier'];
 
-        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', DEFAULT_TWITTER_CONSUMER_KEY);
-        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', DEFAULT_TWITTER_CONSUMER_SECRET);
-        $consumerKey = $consumerKey === '' ? DEFAULT_TWITTER_CONSUMER_KEY : $consumerKey;
-        $consumerSecret = $consumerSecret === '' ? DEFAULT_TWITTER_CONSUMER_SECRET : $consumerSecret;
+        $consumerKey = $this->config->getAppValue(Application::APP_ID, 'consumer_key', Application::DEFAULT_TWITTER_CONSUMER_KEY);
+        $consumerSecret = $this->config->getAppValue(Application::APP_ID, 'consumer_secret', Application::DEFAULT_TWITTER_CONSUMER_SECRET);
+        $consumerKey = $consumerKey === '' ? Application::DEFAULT_TWITTER_CONSUMER_KEY : $consumerKey;
+        $consumerSecret = $consumerSecret === '' ? Application::DEFAULT_TWITTER_CONSUMER_SECRET : $consumerSecret;
 
-        $oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token', '');
-        $oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token_secret', '');
+        $oauthToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token');
+        $oauthTokenSecret = $this->config->getUserValue($this->userId, Application::APP_ID, 'tmp_oauth_token_secret');
 
         if (empty($oauthVerifier) || $oauthToken === '' || $oauthTokenSecret === '') {
             $result = $this->l->t('Problem in OAuth first or second step');
@@ -170,7 +161,7 @@ class ConfigController extends Controller {
         $token = $this->twitterAPIService->requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier);
         if (!isset($token['oauth_token'], $token['oauth_token_secret'])) {
             $result = $this->l->t('Problem in OAuth third step.');
-            $result .= ' ' . $e->getMessage();
+//            $result .= ' ' . $e->getMessage();
             return new RedirectResponse(
                 $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
                 '?twitterToken=error&message=' . urlencode($result)

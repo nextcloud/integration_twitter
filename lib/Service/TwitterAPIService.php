@@ -11,19 +11,29 @@
 
 namespace OCA\Twitter\Service;
 
+use Datetime;
+use Exception;
 use OCP\IL10N;
 use Psr\Log\LoggerInterface;
-use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 
-use OCA\Twitter\AppInfo\Application;
-
-require_once __DIR__ . '/../constants.php';
-
 class TwitterAPIService {
-
-	private $l10n;
+	/**
+	 * @var string
+	 */
+	private $appName;
+	/**
+	 * @var LoggerInterface
+	 */
 	private $logger;
+	/**
+	 * @var IL10N
+	 */
+	private $l10n;
+	/**
+	 * @var \OCP\Http\Client\IClient
+	 */
+	private $client;
 
 	/**
 	 * Service to make requests to Twitter v3 (JSON) API
@@ -31,15 +41,10 @@ class TwitterAPIService {
 	public function __construct (string $appName,
 								LoggerInterface $logger,
 								IL10N $l10n,
-								IConfig $config,
-								IClientService $clientService,
-								string $userId) {
+								IClientService $clientService) {
 		$this->appName = $appName;
-		$this->l10n = $l10n;
 		$this->logger = $logger;
-		$this->config = $config;
-		$this->userId = $userId;
-		$this->clientService = $clientService;
+		$this->l10n = $l10n;
 		$this->client = $clientService->newClient();
 	}
 
@@ -82,9 +87,7 @@ class TwitterAPIService {
 		if (!is_null($since)) {
 			$params['since_id'] = $since;
 		}
-		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/home_timeline.json', $params);
-
-		return $result;
+		return $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/home_timeline.json', $params);
 	}
 
 	/**
@@ -108,9 +111,7 @@ class TwitterAPIService {
 		if (!is_null($since)) {
 			$params['since_id'] = $since;
 		}
-		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/user_timeline.json', $params);
-
-		return $result;
+		return $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/user_timeline.json', $params);
 	}
 
 	/**
@@ -132,11 +133,14 @@ class TwitterAPIService {
 		//$result = $this->classicRequest('notifications/all.json', [], 'GET', '2');
 
 		//////////////// GET MY CREDENTIALS
-		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'account/verify_credentials.json', [], 'GET');
+		$result = $this->classicRequest(
+			$consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret,
+			'account/verify_credentials.json', [], 'GET'
+		);
 		if (isset($result['error'])) {
 			return $result;
 		}
-		$myId = $result['id'];
+//		$myId = $result['id'];
 		$myIdStr = $result['id_str'];
 
 		////////////////// MENTIONS
@@ -147,7 +151,7 @@ class TwitterAPIService {
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/mentions_timeline.json', $params);
 		if (!isset($result['error'])) {
 			foreach ($result as $mention) {
-				$ts = (new \Datetime($mention['created_at']))->getTimestamp();
+				$ts = (new Datetime($mention['created_at']))->getTimestamp();
 				$resMention = [
 					'type' => 'mention',
 					'id' => $mention['id'],
@@ -174,7 +178,7 @@ class TwitterAPIService {
 		$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'statuses/retweets_of_me.json', $params);
 		if (!isset($result['error'])) {
 			foreach ($result as $retweet) {
-				$ts = (new \Datetime($retweet['created_at']))->getTimestamp();
+				$ts = (new Datetime($retweet['created_at']))->getTimestamp();
 				$resRetweet = [
 					'type' => 'retweet',
 					'id' => $retweet['id'],
@@ -205,7 +209,7 @@ class TwitterAPIService {
 		$results[] = [
 			'type' => 'follow_request',
 			'number' => $nbFollowRequests,
-			'timestamp' => (new \Datetime())->getTimestamp()
+			'timestamp' => (new Datetime())->getTimestamp()
 		];
 
 		/////////////////// PRIVATE MESSAGES
@@ -282,7 +286,7 @@ class TwitterAPIService {
 		}
 
 		// sort by date
-		$a = usort($results, function($a, $b) {
+		usort($results, function($a, $b) {
 			$ta = $a['timestamp'];
 			$tb = $b['timestamp'];
 			return ($ta > $tb) ? -1 : 1;
@@ -308,7 +312,7 @@ class TwitterAPIService {
 									string $endPoint, array $params = [], string $method = 'GET', string $apiVersion = '1.1'): array {
 		$url = 'https://api.twitter.com/' . $apiVersion . '/' . $endPoint;
 
-		$ts = (new \Datetime())->getTimestamp();
+		$ts = (new Datetime())->getTimestamp();
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
 			'oauth_nonce' => $this->makeNonce(),
@@ -368,7 +372,7 @@ class TwitterAPIService {
 		$method = 'POST';
 		$url = 'https://api.twitter.com/oauth/request_token';
 
-		$ts = (new \Datetime())->getTimestamp();
+		$ts = (new Datetime())->getTimestamp();
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
 			'oauth_nonce' => $this->makeNonce(),
@@ -430,7 +434,7 @@ class TwitterAPIService {
 		$method = 'POST';
 		$url = 'https://api.twitter.com/oauth/access_token';
 
-		$ts = (new \Datetime())->getTimestamp();
+		$ts = (new Datetime())->getTimestamp();
 		$headerParams = [
 			'oauth_consumer_key' => $consumerKey,
 			'oauth_nonce' => $this->makeNonce(),
@@ -515,6 +519,8 @@ class TwitterAPIService {
 				$response = $this->client->put($url, $options);
 			} else if ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
+			} else {
+				return ['error' => $this->l10n->t('Bad HTTP method')];
 			}
 			$body = $response->getBody();
 			$respCode = $response->getStatusCode();
@@ -524,7 +530,7 @@ class TwitterAPIService {
 			} else {
 				return ['body' => $body];
 			}
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$this->logger->warning('Twitter request error : '.$e->getMessage(), array('app' => $this->appName));
 			return ['error' => $e->getMessage()];
 		}

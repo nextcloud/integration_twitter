@@ -25,6 +25,8 @@ namespace OCA\Twitter\Dashboard;
 
 use OCP\Dashboard\IWidget;
 use OCP\IL10N;
+use OCP\IURLGenerator;
+use OCP\Util;
 
 use OCA\Twitter\AppInfo\Application;
 
@@ -32,11 +34,15 @@ class TwitterNotificationsWidget implements IWidget {
 
 	/** @var IL10N */
 	private $l10n;
+	/**
+	 * @var IURLGenerator
+	 */
+	private $url;
 
-	public function __construct(
-		IL10N $l10n
-	) {
+	public function __construct(IL10N $l10n,
+								IURLGenerator $url) {
 		$this->l10n = $l10n;
+		$this->url = $url;
 	}
 
 	/**
@@ -71,14 +77,14 @@ class TwitterNotificationsWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getUrl(): ?string {
-		return \OC::$server->getURLGenerator()->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']);
+		return $this->url->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']);
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function load(): void {
-		\OC_Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardNotifications');
-		\OC_Util::addStyle(Application::APP_ID, 'dashboard');
+		Util::addScript(Application::APP_ID, Application::APP_ID . '-dashboardNotifications');
+		Util::addStyle(Application::APP_ID, 'dashboard');
 	}
 }
