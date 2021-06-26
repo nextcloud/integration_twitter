@@ -7,6 +7,7 @@
     "Twitter user timeline" : "Twitter-Benutzer-Timeline",
     "Impossible to decode response" : "Die Antwort konnte entschlüsselt werden",
     "Invalid return value in OAuth step 1" : "Ungültiger Rückgabewert in OAuth Schritt 1",
+    "Bad HTTP method" : "Ungültige HTTP-Methode",
     "Request failed" : "Anforderung fehlgeschlagen",
     "Connected accounts" : "Verbundene Konten",
     "Twitter integration" : "Twitter-Einbindung",
