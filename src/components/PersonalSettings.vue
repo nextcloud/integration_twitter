@@ -48,14 +48,14 @@
 					{{ t('integration_twitter', 'User to follow') }}
 				</label>
 				<span v-if="state.followed_user_admin">
-					{{ t('integration_twitter', 'Set to "@{name}" in admin settings', { name: state.followed_user_admin}) }}
+					{{ followedUserAdminString }}
 				</span>
 				<input v-else
 					id="twitter-followed-user"
 					v-model="state.followed_user"
 					type="text"
-					:title="t('integration_twitter', 'Display name of Twitter user to follow in "User timeline" widget')"
-					:placeholder="t('integration_twitter', 'Display name of Twitter user to follow in "User timeline" widget')"
+					:title="followedUserTitle"
+					:placeholder="followedUserTitle"
 					@input="onFollowedUserInput">
 			</div>
 		</div>
@@ -89,10 +89,14 @@ export default {
 			firefoxImagePath: imagePath('integration_twitter', 'firefox.png'),
 			isChromium: detectBrowser() === 'chrome',
 			isFirefox: detectBrowser() === 'firefox',
+			followedUserTitle: t('integration_twitter', 'Display name of Twitter user to follow in "User timeline" widget'),
 		}
 	},
 
 	computed: {
+		followedUserAdminString() {
+			return t('integration_twitter', 'Set to "@{name}" in admin settings', { name: this.state.followed_user_admin })
+		},
 		showOAuth() {
 			return window.location.protocol === 'https:' && this.state.consumer_key && this.state.consumer_secret
 		},

@@ -48,7 +48,7 @@
 			<input id="twitter-followed-user"
 				v-model="state.followed_user"
 				type="text"
-				:placeholder="t('integration_twitter', 'Twitter user to follow in "User timeline" widget')"
+				:placeholder="followedUserString"
 				@input="onInput">
 		</div>
 	</div>
@@ -76,6 +76,7 @@ export default {
 			// to prevent some browsers to fill fields with remembered passwords
 			readonly: true,
 			redirect_uri: 'web+nextcloudtwitter://',
+			followedUserString: t('integration_twitter', 'Twitter user to follow in "User timeline" widget'),
 		}
 	},
 
