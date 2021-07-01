@@ -9,6 +9,7 @@ OC.L10N.register(
     "Twitter user timeline" : "Twitter erabiltzailearen kronologia",
     "Impossible to decode response" : "Ezin izan da erantzuna deskodetu",
     "Invalid return value in OAuth step 1" : "Baliogabeko erantzuna jaso da lehenengo OAuth pausuan",
+    "Bad HTTP method" : "HTTP metodo okerra",
     "Request failed" : "Eskaerak huts egin du",
     "Connected accounts" : "Konektaturiko kontuak",
     "Twitter integration" : "Twitter integrazioa",
