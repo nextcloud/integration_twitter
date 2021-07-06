@@ -45,6 +45,7 @@
     "Failed to get Twitter notifications" : "Impossible d'obtenir les notifications Twitter",
     "{nb} follow requests" : "{nb} demandes de suivi",
     "System" : "Système",
+    "No tweets!" : "Pas de tweet !",
     "Failed to get Twitter home timeline" : "Impossible d'obtenir le fil d'actualités Twitter",
     "{user} to you" : "{user} à vous",
     "{user1} to {user2}" : "{user1} à {user2}"
