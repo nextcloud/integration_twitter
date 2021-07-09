@@ -9,6 +9,7 @@ OC.L10N.register(
     "Twitter user timeline" : "Twitter account tijdlijn",
     "Impossible to decode response" : "Kon reactie niet decoderen",
     "Invalid return value in OAuth step 1" : "Ongeldige returnwaarde in OAuth stap 1",
+    "Bad HTTP method" : "Foute HTTP methode",
     "Request failed" : "Aanvraag mislukt",
     "Connected accounts" : "Verbonden accounts",
     "Twitter integration" : "Twitter integratie",
