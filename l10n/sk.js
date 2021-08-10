@@ -37,9 +37,11 @@ OC.L10N.register(
     "Error connecting to Twitter" : "Chyba pri pripájaní k Twitteru",
     "No Twitter notifications!" : "Žiadne upozornenia z Twitteru!",
     "Failed to get Twitter notifications" : "Chyba pri získavaní upozornení z Twitteru",
+    "{nb} follow requests" : "{nb} žiadostí o sledovanie",
     "System" : "Systém",
     "No tweets!" : "Žiadne tweety!",
     "about {name}" : "o {name}",
-    "{user} to you" : "{user} vám"
+    "{user} to you" : "{user} vám",
+    "{user1} to {user2}" : "{user1} pre {user2}"
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
