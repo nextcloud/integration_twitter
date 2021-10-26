@@ -7,6 +7,7 @@
     "Twitter user timeline" : "Časovnica objav Twitter",
     "Impossible to decode response" : "Ni mogoče odkodirati odziva",
     "Invalid return value in OAuth step 1" : "Neveljavne vrnjena vrednost prvega koraka OAuth",
+    "Bad HTTP method" : "Neustrezna metoda HTTP",
     "Request failed" : "Zahteva je spodletela",
     "Connected accounts" : "Povezani računi",
     "Twitter integration" : "Združevalnik Twitter",
