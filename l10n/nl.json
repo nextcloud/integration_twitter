@@ -17,7 +17,7 @@
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Als je je eigen Twitter OAuth app wilt gebruiken om te authenticeren bij Twitter, maak dan een Twitter applicatie aan in je Twitter developer instellingen en plaats \"Consumer key\" en \"Consumer secret\" hieronder.",
     "Twitter developer app settings" : "Twitter developer app instellingen",
     "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Zorg ervoor dat de Twitter OAuth app \"Callback URL\" is ingesteld op:",
-    "And give it \"Read + Write + Direct Messages\" permissions." : "En verstrek de \"Read + Write + Direct Messages\" permissies.",
+    "And give it \"Read + Write + Direct Messages\" permissions." : "En verstrek de \"Read + Write + Direct Messages\" machtigingen.",
     "Consumer key" : "Consumer key",
     "Consumer key of your Twitter application" : "Consumer key van je Twitter applicatie",
     "Consumer secret" : "Consumer secret",
