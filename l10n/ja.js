@@ -10,6 +10,7 @@ OC.L10N.register(
     "Invalid return value in OAuth step 1" : "OAuth の1つ目のステップで無効な値が返されました",
     "Request failed" : "リクエストに失敗しました",
     "Connected accounts" : "接続済みアカウント",
+    "Twitter developer app settings" : "Twitter開発者アプリ設定",
     "Connect to Twitter" : "Twitter に接続",
     "Connected as {user}" : "{user} に接続済み",
     "Disconnect from Twitter" : "Twitter から切断",
