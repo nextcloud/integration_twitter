@@ -31,7 +31,7 @@ OC.L10N.register(
     "If you still don't manage to get the protocol registered, check your settings on this page:" : "Si encara no aconseguiu registrar el protocol, comproveu la configuració d'aquesta pàgina:",
     "With Firefox, you should see a bar on top of this page to authorize this page to open \"web+nextcloudtwitter\" links." : "Amb Firefox, hauríeu de veure una barra a la part superior d'aquesta pàgina per autoritzar aquesta pàgina a obrir enllaços \"web+nextcloudtwitter\".",
     "Connect to Twitter" : "Connecta't a Twitter",
-    "Connected as {user}" : "S'ha connectat com a {usuari}",
+    "Connected as {user}" : "S'ha connectat com a {user}",
     "Disconnect from Twitter" : "Desconnecta de Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Heu d'accedir a aquesta pàgina amb HTTPS per poder autenticar-se a Twitter.",
     "Successfully connected to Twitter!" : "S'ha connectat correctament amb Twitter!",
