@@ -6,6 +6,7 @@ OC.L10N.register(
     "Problem in OAuth first or second step" : "Problemos pirmame ar antrame „OAuth“ žingsnyje",
     "Twitter notifications" : "„Twitter“ pranešimai",
     "Impossible to decode response" : "Neįmanoma iškoduoti atsakymo",
+    "Bad HTTP method" : "Blogas HTTP metodas",
     "Request failed" : "Užklausa nepavyko",
     "Connected accounts" : "Prijungtos paskyros",
     "Twitter integration" : "„Twitter“ integracija",

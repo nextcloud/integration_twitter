@@ -6,6 +6,7 @@
     "Twitter notifications" : "Уведомления Twitter",
     "Impossible to decode response" : "Невозможно расшифровать ответ",
     "Invalid return value in OAuth step 1" : "Неверное возвращаемое значение на этапе 1 OAuth",
+    "Bad HTTP method" : "Неверный метод HTTP",
     "Request failed" : "Запрос не выполнен",
     "Connected accounts" : "Подключённые учётные записи",
     "Twitter integration" : "Интеграция с Twitter",

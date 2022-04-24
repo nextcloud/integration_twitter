@@ -1,6 +1,7 @@
 OC.L10N.register(
     "integration_twitter",
     {
+    "Bad HTTP method" : "Felaktig HTTP-metod",
     "Request failed" : "Förfrågan misslyckades",
     "Connected accounts" : "Anslutna konton",
     "Twitter integration" : "Twitter-integrering",

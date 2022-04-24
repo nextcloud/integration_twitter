@@ -8,6 +8,7 @@ OC.L10N.register(
     "Twitter notifications" : "Notificacions de Twitter",
     "Impossible to decode response" : "Impossible descodificar la resposta",
     "Invalid return value in OAuth step 1" : "El valor de retorn no és vàlid al pas 1 d’OAuth",
+    "Bad HTTP method" : "Mètode HTTP incorrecte",
     "Request failed" : "La petició ha fallat",
     "Connected accounts" : "Comptes connectades",
     "Twitter integration" : "Integració de Twitter",
