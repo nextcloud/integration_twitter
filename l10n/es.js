@@ -61,4 +61,4 @@ OC.L10N.register(
     "{user} to you" : "{user} a ti",
     "{user1} to {user2}" : "{user1} a {user2}"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

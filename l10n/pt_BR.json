@@ -58,5 +58,5 @@
     "Failed to get Twitter home timeline" : "Falha ao obter a linha do tempo inicial do Twitter",
     "{user} to you" : "{user} para você",
     "{user1} to {user2}" : "{user1} para {user2}"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+},"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
