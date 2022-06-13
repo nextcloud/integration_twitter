@@ -10,7 +10,7 @@ OC.L10N.register(
     "Invalid return value in OAuth step 1" : "El valor de retorn no és vàlid al pas 1 d’OAuth",
     "Bad HTTP method" : "Mètode HTTP incorrecte",
     "Request failed" : "La petició ha fallat",
-    "Connected accounts" : "Comptes connectades",
+    "Connected accounts" : "Comptes connectats",
     "Twitter integration" : "Integració de Twitter",
     "Integration of Twitter microblogging and social networking service" : "Integració de microblogs i servei de xarxes socials de Twitter",
     "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "La integració amb Twitter ofereix ginys pel tauler amb notificacions importants i la vostra cronologia.",
