@@ -12,7 +12,7 @@
     "Connected accounts" : "Propojené účty",
     "Twitter integration" : "Napojení na Twitter",
     "Integration of Twitter microblogging and social networking service" : "Napojení na službu Twitter – sociální síť a platformu pro mikroblogy",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Napojení na Twitter poskytuje ovládací prvek na přehled, zobrazující důležitá upozornění a vaši domovskou časovou osu.",
+    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Napojení na Twitter poskytuje ovládací prvek pro nástěnku, zobrazující důležitá upozornění a vaši domovskou časovou osu.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Pokud chcete použít výchozí Nextcloud Twitter OAuth aplikaci, ponechte všechny kolonky nevyplněné.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Pokud chcete pro ověřování se vůči službě Twitter používat svou vlastní Twitter OAuth aplikaci, vytvořte ve svých nastaveních pro vývojáře Twitter příslušnou aplikaci a níže zadejte „Klíč spotřebitele“ a „Tajemství pro spotřebitele“.",
     "Twitter developer app settings" : "Nastavení aplikace pro vývojáře Twitter",
