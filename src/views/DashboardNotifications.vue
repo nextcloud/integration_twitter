@@ -28,6 +28,8 @@ import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent.js'
 
+import { convert } from 'html-to-text'
+
 export default {
 	name: 'DashboardNotifications',
 
@@ -234,9 +236,9 @@ export default {
 				while (text.startsWith('@')) {
 					text = text.replace(/^@[^\s]*\s?/, '')
 				}
-				return text
+				return convert(text)
 			}
-			return n.text
+			return convert(n.text)
 		},
 		getSubline(n) {
 			if (['follow_request'].includes(n.type)) {

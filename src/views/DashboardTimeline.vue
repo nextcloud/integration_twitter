@@ -29,6 +29,8 @@ import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent.js'
 
+import { convert } from 'html-to-text'
+
 export default {
 	name: 'DashboardTimeline',
 
@@ -241,7 +243,7 @@ export default {
 			while (text.startsWith('@')) {
 				text = text.replace(/^@[^\s]*\s?/, '')
 			}
-			return text
+			return convert(text)
 		},
 		getSubline(n) {
 			return n.retweeted_status && n.retweeted_status.user && n.retweeted_status.user.screen_name
