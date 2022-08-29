@@ -246,13 +246,13 @@ export default {
 		},
 		getNotificationTypeImage(n) {
 			if (n.type === 'mention') {
-				return generateUrl('/svg/integration_twitter/arobase?color=ffffff')
+				return imagePath('integration_twitter', 'arobase.svg')
 			} else if (n.type === 'message') {
-				return generateUrl('/svg/integration_twitter/message?color=ffffff')
+				return imagePath('integration_twitter', 'message.svg')
 			} else if (n.type === 'retweet') {
-				return generateUrl('/svg/integration_twitter/retweet?color=ffffff')
+				return imagePath('integration_twitter', 'retweet.svg')
 			} else if (n.type === 'follow_request') {
-				return generateUrl('/svg/integration_twitter/follow_request?color=ffffff')
+				return imagePath('integration_twitter', 'follow_request.svg')
 			}
 			return ''
 		},

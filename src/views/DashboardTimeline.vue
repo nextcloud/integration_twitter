@@ -23,7 +23,7 @@
 
 <script>
 import axios from '@nextcloud/axios'
-import { generateUrl } from '@nextcloud/router'
+import { generateUrl, imagePath } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
@@ -217,9 +217,9 @@ export default {
 		},
 		getNotificationTypeImage(n) {
 			if (n.retweeted_status) {
-				return generateUrl('/svg/integration_twitter/retweet?color=ffffff')
+				return imagePath('integration_twitter', 'retweet.svg')
 			} else if (n.in_reply_to_screen_name) {
-				return generateUrl('/svg/integration_twitter/reply?color=ffffff')
+				return imagePath('integration_twitter', 'reply.svg')
 			}
 			return ''
 		},
