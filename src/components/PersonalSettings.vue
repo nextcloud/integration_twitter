@@ -1,62 +1,73 @@
 <template>
 	<div id="twitter_prefs" class="section">
 		<h2>
-			<a class="icon icon-twitter" />
+			<TwitterIcon class="icon" />
 			{{ t('integration_twitter', 'Twitter integration') }}
 		</h2>
-		<div v-if="showOAuth" class="twitter-content">
-			<div v-if="!state.oauth_token">
+		<div v-if="!state.oauth_token">
+			<p class="settings-hint">
+				<InformationOutlineIcon :size="20" class="icon" />
+				{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
+			</p>
+			<span v-if="isChromium">
 				<p class="settings-hint">
-					<span class="icon icon-details" />
-					{{ t('integration_twitter', 'Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter.') }}
-					<span v-if="isChromium">
-						<br>
-						{{ t('integration_twitter', 'With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open "web+nextcloudtwitter" links.') }}
-						<br>
-						{{ t('integration_twitter', 'If you don\'t see the popup, you can still click on this icon in the address bar.') }}
-						<br>
-						<img :src="chromiumImagePath">
-						<br>
-						{{ t('integration_twitter', 'Then authorize this page to open "web+nextcloudtwitter" links.') }}
-						<br>
-						{{ t('integration_twitter', 'If you still don\'t manage to get the protocol registered, check your settings on this page:') }}
-						<b>chrome://settings/handlers</b>
-					</span>
-					<span v-else-if="isFirefox">
-						<br>
-						{{ t('integration_twitter', 'With Firefox, you should see a bar on top of this page to authorize this page to open "web+nextcloudtwitter" links.') }}
-						<br><br>
-						<img :src="firefoxImagePath">
-					</span>
+					{{ t('integration_twitter', 'With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open "web+nextcloudtwitter" links.') }}
+					<br>
+					{{ t('integration_twitter', 'If you don\'t see the popup, you can still click on this icon in the address bar.') }}
 				</p>
-				<button v-if="!state.oauth_token" id="twitter-oauth" @click="onOAuthClick">
-					<span class="icon icon-external" />
-					{{ t('integration_twitter', 'Connect to Twitter') }}
-				</button>
-			</div>
-			<div v-else class="twitter-grid-form">
-				<label>
-					<a class="icon icon-checkmark-color" />
-					{{ t('integration_twitter', 'Connected as {user}', { user: userName }) }}
-				</label>
-				<button id="twitter-rm-cred" @click="onLogoutClick">
-					<span class="icon icon-close" />
-					{{ t('integration_twitter', 'Disconnect from Twitter') }}
-				</button>
-				<label for="twitter-followed-user">
-					<a class="icon icon-user" />
-					{{ t('integration_twitter', 'User to follow') }}
-				</label>
-				<span v-if="state.followed_user_admin">
-					{{ followedUserAdminString }}
-				</span>
-				<input v-else
-					id="twitter-followed-user"
-					v-model="state.followed_user"
-					type="text"
-					:title="followedUserTitle"
-					:placeholder="followedUserTitle"
-					@input="onFollowedUserInput">
+				<img :src="chromiumImagePath">
+				<br><br>
+				<p class="settings-hint">
+					{{ t('integration_twitter', 'Then authorize this page to open "web+nextcloudtwitter" links.') }}
+					<br>
+					{{ t('integration_twitter', 'If you still don\'t manage to get the protocol registered, check your settings on this page:') }}
+				</p>
+				<strong>chrome://settings/handlers</strong>
+			</span>
+			<span v-else-if="isFirefox">
+				<p class="settings-hint">
+					{{ t('integration_twitter', 'With Firefox, you should see a bar on top of this page to authorize this page to open "web+nextcloudtwitter" links.') }}
+				</p>
+				<img :src="firefoxImagePath">
+			</span>
+			<br><br>
+		</div>
+		<div v-if="showOAuth" id="twitter-content">
+			<NcButton v-if="!state.oauth_token" @click="onOAuthClick">
+				<template #icon>
+					<OpenInNewIcon :size="20" />
+				</template>
+				{{ t('integration_twitter', 'Connect to Twitter') }}
+			</NcButton>
+			<div v-else>
+				<div class="line">
+					<label>
+						<CheckIcon :size="20" class="icon" />
+						{{ t('integration_twitter', 'Connected as {user}', { user: userName }) }}
+					</label>
+					<NcButton @click="onLogoutClick">
+						<template #icon>
+							<CloseIcon :size="20" />
+						</template>
+						{{ t('integration_twitter', 'Disconnect from Twitter') }}
+					</NcButton>
+				</div>
+				<div class="line">
+					<label for="twitter-followed-user">
+						<AccountIcon :size="20" class="icon" />
+						{{ t('integration_twitter', 'User to follow') }}
+					</label>
+					<span v-if="state.followed_user_admin">
+						{{ followedUserAdminString }}
+					</span>
+					<input v-else
+						id="twitter-followed-user"
+						v-model="state.followed_user"
+						type="text"
+						:title="followedUserTitle"
+						:placeholder="followedUserTitle"
+						@input="onFollowedUserInput">
+				</div>
 			</div>
 		</div>
 		<p v-else class="settings-hint">
@@ -66,17 +77,33 @@
 </template>
 
 <script>
+import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
+import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
+import CheckIcon from 'vue-material-design-icons/Check.vue'
+import CloseIcon from 'vue-material-design-icons/Close.vue'
+import AccountIcon from 'vue-material-design-icons/Account.vue'
+
+import TwitterIcon from './icons/TwitterIcon.vue'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl, imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showSuccess, showError } from '@nextcloud/dialogs'
-import '@nextcloud/dialogs/styles/toast.scss'
-import { detectBrowser, delay } from '../utils'
+import { detectBrowser, delay } from '../utils.js'
+
+import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 export default {
 	name: 'PersonalSettings',
 
 	components: {
+		NcButton,
+		TwitterIcon,
+		InformationOutlineIcon,
+		CloseIcon,
+		CheckIcon,
+		OpenInNewIcon,
+		AccountIcon,
 	},
 
 	props: [],
@@ -95,7 +122,7 @@ export default {
 
 	computed: {
 		followedUserAdminString() {
-			return t('integration_twitter', 'Set to "@{name}" in admin settings', { name: this.state.followed_user_admin })
+			return t('integration_twitter', 'Defined by an administrator: "@{name}"', { name: this.state.followed_user_admin })
 		},
 		showOAuth() {
 			return window.location.protocol === 'https:' && this.state.consumer_key && this.state.consumer_secret
@@ -191,45 +218,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#twitter_prefs .icon {
-	display: inline-block;
-	width: 32px;
-}
-
-.icon-twitter {
-	background-image: url(./../../img/app-dark.svg);
-	background-size: 23px 23px;
-	height: 23px;
-	margin-bottom: -4px;
-}
-
-body.theme--dark .icon-twitter {
-	background-image: url(./../../img/app.svg);
-}
-
-.twitter-content {
-	margin-left: 40px;
-}
-
-.twitter-grid-form {
-	max-width: 600px;
-	display: grid;
-	grid-template: 1fr / 1fr 1fr;
-	button .icon {
-		margin-bottom: -1px;
+#twitter_prefs {
+	#twitter-content {
+		margin-left: 40px;
 	}
-	input {
-		width: 100%;
+	h2,
+	.line,
+	.settings-hint {
+		display: flex;
+		align-items: center;
+		.icon {
+			margin-right: 4px;
+		}
 	}
 
-}
+	h2 .icon {
+		margin-right: 8px;
+	}
 
-.twitter-grid-form label {
-	line-height: 38px;
+	.line {
+		> label {
+			width: 300px;
+			display: flex;
+			align-items: center;
+		}
+		> input {
+			width: 250px;
+		}
+	}
 }
-
-#twitter-rm-cred {
-	max-height: 34px;
-}
-
 </style>

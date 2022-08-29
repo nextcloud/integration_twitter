@@ -12,8 +12,8 @@
  */
 
 import Vue from 'vue'
-import './bootstrap'
-import DashboardHomeTimeline from './views/DashboardHomeTimeline'
+import './bootstrap.js'
+import DashboardHomeTimeline from './views/DashboardHomeTimeline.vue'
 
 document.addEventListener('DOMContentLoaded', function() {
 

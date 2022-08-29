@@ -12,8 +12,8 @@
  */
 
 import Vue from 'vue'
-import './bootstrap'
-import DashboardNotifications from './views/DashboardNotifications'
+import './bootstrap.js'
+import DashboardNotifications from './views/DashboardNotifications.vue'
 
 document.addEventListener('DOMContentLoaded', function() {
 

@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import DashboardTimeline from './DashboardTimeline'
+import DashboardTimeline from './DashboardTimeline.vue'
 
 export default {
 	name: 'DashboardUserTimeline',

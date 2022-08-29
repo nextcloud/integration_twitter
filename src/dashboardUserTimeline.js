@@ -12,8 +12,8 @@
  */
 
 import Vue from 'vue'
-import './bootstrap'
-import DashboardUserTimeline from './views/DashboardUserTimeline'
+import './bootstrap.js'
+import DashboardUserTimeline from './views/DashboardUserTimeline.vue'
 
 document.addEventListener('DOMContentLoaded', function() {
 
