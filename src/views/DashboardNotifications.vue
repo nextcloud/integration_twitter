@@ -5,13 +5,20 @@
 		:loading="state === 'loading'">
 		<template #empty-content>
 			<EmptyContent
-				v-if="emptyContentMessage"
-				:icon="emptyContentIcon">
+				v-if="emptyContentMessage">
+				<template #icon>
+					<component :is="emptyContentIcon" />
+				</template>
 				<template #desc>
 					{{ emptyContentMessage }}
 					<div v-if="state === 'no-token' || state === 'error'" class="connect-button">
-						<a class="button" :href="settingsUrl">
-							{{ t('integration_twitter', 'Connect to Twitter') }}
+						<a :href="settingsUrl">
+							<NcButton>
+								<template #icon>
+									<LoginVariantIcon />
+								</template>
+								{{ t('integration_twitter', 'Connect to Twitter') }}
+							</NcButton>
 						</a>
 					</div>
 				</template>
@@ -21,12 +28,19 @@
 </template>
 
 <script>
+import LoginVariantIcon from 'vue-material-design-icons/LoginVariant.vue'
+import CheckIcon from 'vue-material-design-icons/Check.vue'
+import CloseIcon from 'vue-material-design-icons/Close.vue'
+
+import TwitterIcon from '../components/icons/TwitterIcon.vue'
+
 import axios from '@nextcloud/axios'
 import { generateUrl, imagePath } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent.js'
+import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 import { convert } from 'html-to-text'
 
@@ -34,7 +48,10 @@ export default {
 	name: 'DashboardNotifications',
 
 	components: {
-		DashboardWidget, EmptyContent,
+		DashboardWidget,
+		EmptyContent,
+		NcButton,
+		LoginVariantIcon,
 	},
 
 	props: {
@@ -116,13 +133,13 @@ export default {
 		},
 		emptyContentIcon() {
 			if (this.state === 'no-token') {
-				return 'icon-twitter'
+				return TwitterIcon
 			} else if (this.state === 'error') {
-				return 'icon-close'
+				return CloseIcon
 			} else if (this.state === 'ok') {
-				return 'icon-checkmark'
+				return CheckIcon
 			}
-			return 'icon-checkmark'
+			return CheckIcon
 		},
 	},
 
