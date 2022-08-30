@@ -37,7 +37,6 @@
     "Disconnect from Twitter" : "Desconectar de Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Debes acceder a esta página con HTTPS para poder autenticarte con Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Mostrar nombre del usuario de Twitter a seguir en el widget \"Línea temporal del usuario\"",
-    "Set to \"@{name}\" in admin settings" : "Establecer a \"@{name}\" en configuración del administrador",
     "Successfully connected to Twitter!" : "¡Conectado a Twitter con éxito!",
     "Twitter OAuth error:" : "Error OAuth de Twitter:",
     "Nextcloud Twitter integration on {ncUrl}" : "Integración con Twitter de Nextcloud en {ncUrl}",

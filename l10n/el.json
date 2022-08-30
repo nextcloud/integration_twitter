@@ -35,7 +35,6 @@
     "Connected as {user}" : "Συνδεδεμένος ως {user}",
     "Disconnect from Twitter" : "Αποσύνδεση από το Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Πρέπει να αποκτήσετε πρόσβαση σε αυτήν τη σελίδα με HTTPS για να μπορείτε να κάνετε έλεγχο ταυτότητας στο Twitter.",
-    "Set to \"@{name}\" in admin settings" : "Ορίστε σε \"@{name}\" στις ρυθμίσεις διαχειριστή",
     "Successfully connected to Twitter!" : "Επιτυχημένη σύνδεση στο Twitter!",
     "Twitter OAuth error:" : "Σφάλμα OAuth Twitter:",
     "Nextcloud Twitter integration on {ncUrl}" : "Ενσωμάτωση Twitter Nextcloud στο {ncUrl}",

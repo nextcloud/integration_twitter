@@ -39,7 +39,6 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Odpojit od Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Aby bylo možné se ověřit vůči Twitter, je třeba k této stránce přistupovat prostřednictvím HTTPS.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Zobrazované jméno uživatele z Twitter, kterého následovat na ovládacím prvku „Časová osa uživatele“",
-    "Set to \"@{name}\" in admin settings" : "Nastavit na „@{name}“ v nastavení správy",
     "Successfully connected to Twitter!" : "Úspěšně spojeno s Twitter!",
     "Twitter OAuth error:" : "Chyba Twitter OAuth:",
     "Nextcloud Twitter integration on {ncUrl}" : "Napojení Nextcloud na Twitter na adrese {ncUrl}",

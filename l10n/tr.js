@@ -39,7 +39,6 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Twitter bağlantısını kes",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Twitter kimlik doğrulaması yapabilmek için bu sayfaya HTTPS üzerinden erişmelisiniz.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "\"Kullanıcı zaman akışı\" pano gerecinde takip edilecek Twitter kullanıcısının görüntülenecek adı",
-    "Set to \"@{name}\" in admin settings" : "Yönetici ayarları bölümünden \"@{name}\" olarak ayarlayın",
     "Successfully connected to Twitter!" : "Twitter ile bağlantı kuruldu!",
     "Twitter OAuth error:" : "Twitter OAuth sorunu:",
     "Nextcloud Twitter integration on {ncUrl}" : "{ncUrl} üzerinde Nextcloud Twitter bütünleştirmesi",

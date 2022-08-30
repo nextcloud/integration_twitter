@@ -37,7 +37,6 @@
     "Disconnect from Twitter" : "Prekini povezavo s Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Za overitev računa Twitter mora biti vzpostavljena povezava prek protokola HTTPS.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Pokaži ime uporabnik okolja Twitter, katerega vsebina se zbira v »časovnici objav« .",
-    "Set to \"@{name}\" in admin settings" : "Nastavi na »@{name}« med skrbniškimi nastavitvami",
     "Successfully connected to Twitter!" : "Povezava s računom Twitter je uspešno vzpostavljena!",
     "Twitter OAuth error:" : "Napaka overitve OAuth za Twitter:",
     "Nextcloud Twitter integration on {ncUrl}" : "Združevalnik Twitter na naslovu {ncUrl}",

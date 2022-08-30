@@ -37,7 +37,6 @@
     "Disconnect from Twitter" : "Verbinding met Twitter verbreken",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Je moet deze pagina openen met HTTPS om te kunnen authenticeren bij Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Weergavenaam of Twitter account om te volgen in de widget \"Tijdlijn gebruiker\"",
-    "Set to \"@{name}\" in admin settings" : "Instellen op \"@{name}\" in beheerinstellingen",
     "Successfully connected to Twitter!" : "Succesvol verbonden met Twitter!",
     "Twitter OAuth error:" : "Twitter OAuth fout:",
     "Nextcloud Twitter integration on {ncUrl}" : "Nextcloud Twitter-integratie op {ncUrl}",

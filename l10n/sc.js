@@ -39,7 +39,6 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Disconnete dae Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Depes intrare a custa pàgina cun HTTPS pro èssere a tretu de t'identificare in Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Mustra su nùmene utente de Twitter pro ddu sighire in su trastu \"lìnia de tempus de s'utente\"",
-    "Set to \"@{name}\" in admin settings" : "Imposta a \"@{name}\" in is impostarziones de amministratzione",
     "Successfully connected to Twitter!" : "Connètidu deretu a Twitter!",
     "Twitter OAuth error:" : "Errore Twitter OAuth:",
     "Nextcloud Twitter integration on {ncUrl}" : "Integrazione Twitter de Nextcloud in {ncUrl}",

@@ -39,7 +39,6 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Kapcsolat bontva a Twitterrel",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Ezt az oldalt HTTPS kapcsolaton keresztül kell elérni, hogy a Twitter hitelesítés működjön.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "A „Felhasználói idővonal” modulban követendő Twitter felhasználó megjelenítendő neve",
-    "Set to \"@{name}\" in admin settings" : "Beállítva a következőre a rendszergazdai beállításokban: „@{name}”",
     "Successfully connected to Twitter!" : "Sikeresen kapcsolódva a Twitterhez.",
     "Twitter OAuth error:" : "Twitter OAuth hiba:",
     "Nextcloud Twitter integration on {ncUrl}" : "Twitter Nextcloud integráció itt: {ncUrl}",

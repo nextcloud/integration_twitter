@@ -39,7 +39,6 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Прекъсване на връзката с Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Трябва да получите достъп до тази страница с HTTPS, за да е възможно удостоверяване в Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Име за визуализация на потребител на Twitter, който да следвате в изпълним модул„Времева линия на потребителя“.",
-    "Set to \"@{name}\" in admin settings" : "Задаване на „@{name}“ в настройките на администратора",
     "Successfully connected to Twitter!" : "Успешно свързване с Twitter!",
     "Twitter OAuth error:" : "Грешка в Twitter OAuth:",
     "Nextcloud Twitter integration on {ncUrl}" : "Интегриране на Nextcloud Twitter на {ncUrl}",
