@@ -39,6 +39,7 @@ OC.L10N.register(
     "Disconnect from Twitter" : "與 Twitter 斷開連線",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "您必須使用HTTPS訪問此頁面才能進行 Twitter 身分驗證。",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "在“用戶時間軸”小部件中關注 Twitter 用戶的顯示名稱",
+    "Defined by an administrator: \"@{name}\"" : "由管理員定義：“@{name}”",
     "Successfully connected to Twitter!" : "與 Twitter 連線成功！",
     "Twitter OAuth error:" : "Twitter OAuth 錯誤：",
     "Nextcloud Twitter integration on {ncUrl}" : "{ncUrl} 上的 Nextcloud Twitter  整合",
