@@ -132,7 +132,7 @@ class ConfigController extends Controller {
      */
     public function oauthRedirect(?string $url = ''): RedirectResponse {
         if ($url === '') {
-            $message = $this->l->t('Problem in OAuth third step.');
+            $message = $this->l->t('Problem in OAuth third step');
             return new RedirectResponse(
                 $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
                 '?twitterToken=error&message=' . urlencode($message)
@@ -160,7 +160,7 @@ class ConfigController extends Controller {
 
         $token = $this->twitterAPIService->requestTokenOAuthStep3($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, $oauthVerifier);
         if (!isset($token['oauth_token'], $token['oauth_token_secret'])) {
-            $result = $this->l->t('Problem in OAuth third step.');
+            $result = $this->l->t('Problem in OAuth third step');
 //            $result .= ' ' . $e->getMessage();
             return new RedirectResponse(
                 $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'connected-accounts']) .
