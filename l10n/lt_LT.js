@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problemos pirmame „OAuth“ žingsnyje",
-    "Problem in OAuth third step." : "Problemos trečiame „OAuth“ žingsnyje.",
     "Problem in OAuth first or second step" : "Problemos pirmame ar antrame „OAuth“ žingsnyje",
     "Twitter notifications" : "„Twitter“ pranešimai",
     "Impossible to decode response" : "Neįmanoma iškoduoti atsakymo",

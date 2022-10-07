@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Težave z overitvijo OAuth na prvem koraku.",
-    "Problem in OAuth third step." : "Težave z overitvijo OAuth na tretjemm koraku.",
     "Problem in OAuth first or second step" : "Težave z overitvijo OAuth na prvem ali drugem koraku.",
     "Twitter home timeline" : "Časovnica objav Twitter",
     "Twitter notifications" : "Obvestila Twitter",

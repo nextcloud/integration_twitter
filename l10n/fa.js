@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "مشکل در نخستین گام OAuth",
-    "Problem in OAuth third step." : "مشکل در سومین گام OAuth",
     "Problem in OAuth first or second step" : "مشکل در اولین یا دومین گام OAuth",
     "Twitter home timeline" : "خط زمانی خانه توییتر",
     "Twitter notifications" : "اعلان‌های توییتر",

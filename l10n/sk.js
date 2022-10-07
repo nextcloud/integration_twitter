@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problém v prvom kroku OAuth",
-    "Problem in OAuth third step." : "Problém v treťom kroku OAuth",
     "Problem in OAuth first or second step" : "Problém v prvom alebo druhom kroku OAuth",
     "Twitter home timeline" : "Domáca časová os v Twitteru",
     "Twitter notifications" : "Twitter notifikácie",
