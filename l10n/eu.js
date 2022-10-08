@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Arazoa OAuth-eko lehen pausuan",
+    "Problem in OAuth third step" : "Arazoa OAuth hirugarren urratsean",
     "Problem in OAuth first or second step" : "Arazoa OAuth-eko lehenengo edo bigarren pausuan",
     "Twitter home timeline" : "Twitter orri nagusiaren kronologia",
     "Twitter notifications" : "Twitter jakinarazpenak",

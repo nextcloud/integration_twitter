@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "OAuth第一步中的問題",
+    "Problem in OAuth third step" : "OAuth第三步出現問題",
     "Problem in OAuth first or second step" : "OAuth第一步或第二步出現問題",
     "Twitter home timeline" : "Twitter 主頁時間軸",
     "Twitter notifications" : "Twitter 通知",
