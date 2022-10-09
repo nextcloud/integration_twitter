@@ -2,7 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Проблем в първата стъпка на OAuth",
-    "Problem in OAuth third step." : "Проблем в третата стъпка на OAuth",
+    "Problem in OAuth third step" : "Проблем в третата стъпка на OAuth",
     "Problem in OAuth first or second step" : "Проблем в първата или втората стъпка на OAuth",
     "Twitter home timeline" : "Домашна времева линия в Twitter",
     "Twitter notifications" : "Twitter известия",
@@ -34,7 +34,7 @@ OC.L10N.register(
     "Then authorize this page to open \"web+nextcloudtwitter\" links." : "След това упълномощете тази страница да отваря „web+nextcloudtwitter“ връзки.",
     "If you still don't manage to get the protocol registered, check your settings on this page:" : "Ако все още не успявате да регистрирате протокола, проверете настройките си на тази страница:",
     "With Firefox, you should see a bar on top of this page to authorize this page to open \"web+nextcloudtwitter\" links." : "С Firefox трябва да видите лента в горната част на тази страница, за да упълномощите страницата да отваря „web+nextcloudtwitter“ връзки.",
-    "Connect to Twitter" : "Свързване с Twitter",
+    "Connect to Twitter" : "Свързване с Twitter/Туитър/",
     "Connected as {user}" : "Свързване като {user}",
     "Disconnect from Twitter" : "Прекъсване на връзката с Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Трябва да получите достъп до тази страница с HTTPS, за да е възможно удостоверяване в Twitter.",
