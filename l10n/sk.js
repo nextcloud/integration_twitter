@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problém v prvom kroku OAuth",
+    "Problem in OAuth third step" : "Problém v treťom kroku OAuth",
     "Problem in OAuth first or second step" : "Problém v prvom alebo druhom kroku OAuth",
     "Twitter home timeline" : "Domáca časová os v Twitteru",
     "Twitter notifications" : "Twitter notifikácie",
@@ -38,6 +39,7 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Odpojiť od Twitteru",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Na túto stránku musíte pristupovať pomocou protokolu HTTPS, aby ste sa mohli autentifikovať na serveri Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Zobrazované meno na Twitteri, ktoré nasledovať na ovládacom prvku \"Časová os užívateľa\"",
+    "Defined by an administrator: \"@{name}\"" : "Zadané adminitrátorom: \"@{name}\"",
     "Successfully connected to Twitter!" : "Úspešne pripojené k Twitteru!",
     "Twitter OAuth error:" : "Chyba Twitter OAuth:",
     "Nextcloud Twitter integration on {ncUrl}" : "Integrácia Nextcloud Twitter na {ncUrl}",
