@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problema en el primer paso de OAuth",
+    "Problem in OAuth third step" : "Problema en el tercer paso de OAuth.",
     "Problem in OAuth first or second step" : "Problema en el primer o segundo paso de OAuth",
     "Twitter home timeline" : "Timeline de Twitter",
     "Twitter notifications" : "Notificaciones de Twitter",
@@ -38,6 +39,7 @@ OC.L10N.register(
     "Disconnect from Twitter" : "Desconectar de Twitter",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Debes acceder a esta página con HTTPS para poder autenticarte con Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Mostrar nombre del usuario de Twitter a seguir en el widget \"Línea temporal del usuario\"",
+    "Defined by an administrator: \"@{name}\"" : "Definido por un administrador: \"@{name}\"",
     "Successfully connected to Twitter!" : "¡Conectado a Twitter con éxito!",
     "Twitter OAuth error:" : "Error OAuth de Twitter:",
     "Nextcloud Twitter integration on {ncUrl}" : "Integración con Twitter de Nextcloud en {ncUrl}",
