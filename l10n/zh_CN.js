@@ -24,6 +24,7 @@ OC.L10N.register(
     "Consumer secret of your Twitter application" : "您twitter应用的密码",
     "User to follow" : "建议关注",
     "Twitter user to follow in \"User timeline\" widget" : "要在“用户时间线”小部件中关注的Twitter用户",
+    "Failed to save Twitter admin options" : "保存Twitter管理员选项失败",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "如果您想进行Twitter身份验证，请确保您接受了此页面顶部的协议注册。",
     "With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open \"web+nextcloudtwitter\" links." : "如果使用Chrome/Chromium浏览器，你应该会在浏览器左上角看到一个弹出窗口，授权本页面打开“web+nextcloudtwitter”链接。",
     "If you don't see the popup, you can still click on this icon in the address bar." : "如果你没有看到弹出窗口，你仍然可以在地址栏点击这个图标。",
@@ -39,6 +40,7 @@ OC.L10N.register(
     "Nextcloud Twitter integration on {ncUrl}" : "Nextcloud Twitter集成在 {ncUrl}",
     "Failed to save Twitter options" : "保存 Twitter 选项失败",
     "Failed to request Twitter 1st step OAuth token" : "请求Twitter第一步OAuth令牌失败 ",
+    "OAuth failure" : "OAuth失败",
     "No Twitter notifications!" : "无 Twitter 通知",
     "System" : "系统"
 },
