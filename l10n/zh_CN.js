@@ -38,9 +38,12 @@ OC.L10N.register(
     "Display name of Twitter user to follow in \"User timeline\" widget" : "在“用户时间线”小部件中显示Twitter用户的名称",
     "Twitter OAuth error:" : "Twitter OAuth 错误：",
     "Nextcloud Twitter integration on {ncUrl}" : "Nextcloud Twitter集成在 {ncUrl}",
+    "Twitter options saved" : "Twitter 选项已保存",
     "Failed to save Twitter options" : "保存 Twitter 选项失败",
     "Failed to request Twitter 1st step OAuth token" : "请求Twitter第一步OAuth令牌失败 ",
     "OAuth failure" : "OAuth失败",
+    "No Twitter account connected" : "未连接至 Twitter 账号",
+    "Error connecting to Twitter" : "连接到 Twitter 时出错",
     "No Twitter notifications!" : "无 Twitter 通知",
     "System" : "系统"
 },
