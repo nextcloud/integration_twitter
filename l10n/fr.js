@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Problem in OAuth first step" : "Problème à la première étape Oauth",
+    "Problem in OAuth third step" : "Problème à la troisième étape Oauth",
     "Problem in OAuth first or second step" : "Problème à la première ou à la seconde étape Oauth",
     "Twitter home timeline" : "Fil d'actualités Twitter",
     "Twitter notifications" : "Notifications Twitter",
