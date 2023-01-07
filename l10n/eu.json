@@ -12,7 +12,7 @@
     "Connected accounts" : "Konektaturiko kontuak",
     "Twitter integration" : "Twitter integrazioa",
     "Integration of Twitter microblogging and social networking service" : "Twitter mikroblog eta sare sozial zerbitzuaren integrazioa",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter integrazioak zure jakinarazpen garrantzitsuak eta denbora-lerro nagusia erakusten dituen panel-widgeta  eskaintzen du.",
+    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter integrazioak zure jakinarazpen garrantzitsuak eta denbora-lerro nagusia erakusten dituen panel-trepeta  eskaintzen du.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Utzi eremu guztiak hutsik, Nextclouden Twitter OAuth aplikazio lehenetsia erabiltzeko.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Zeure Twitter OAuth aplikazio bat erabili nahi baduzu Twitter-era autentifikatzeko, sortu Twitter aplikazioa bat zure Twitter garatzaile ezarpenetan eta jarri \"Kontsumitzaile gakoa\" eta \"Kontsumitzaile sekretua\" behean.",
     "Twitter developer app settings" : "Twitter garatzaile aplikazioaren ezarpenak",
