@@ -49,6 +49,7 @@ OC.L10N.register(
     "Error connecting to Twitter" : "Napaka povezovanja z računom Twitter",
     "No Twitter notifications!" : "Ni obvestil Twitter!",
     "Failed to get Twitter notifications" : "Pridobivanje obvestil Twitter je spodletelo",
+    "{nb} follow requests" : "{nb} zahtev za sledenje",
     "System" : "Sistem",
     "No tweets!" : "Ni še objav!",
     "No Twitter user timeline to show" : "Ni še navedenih časovnic za prikaz",
