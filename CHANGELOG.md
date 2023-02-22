@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.4 – 2023-02-22
+### Changed
+- add 26 compat
+- use @nextcloud/vue 7.6.1
+
+### Fixed
+- fix bug when failing to get extra info on a user while getting notifications
+
 ## 1.0.1 – 2021-06-28
 ### Changed
 - stop polling widget content when document is hidden

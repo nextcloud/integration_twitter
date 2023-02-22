@@ -4,7 +4,7 @@
     <name>Twitter integration</name>
     <summary>Integration of Twitter microblogging and social networking service</summary>
     <description><![CDATA[Twitter integration provides dashboard widgets displaying your important notifications and your home timeline.]]></description>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <licence>agpl</licence>
     <author>Julien Veyssier</author>
     <namespace>Twitter</namespace>
@@ -17,7 +17,7 @@
     <bugs>https://github.com/nextcloud/integration_twitter/issues</bugs>
     <screenshot>https://github.com/nextcloud/integration_twitter/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
-        <nextcloud min-version="22" max-version="25"/>
+        <nextcloud min-version="22" max-version="26"/>
     </dependencies>
     <settings>
         <admin>OCA\Twitter\Settings\Admin</admin>
