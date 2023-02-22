@@ -4,13 +4,13 @@
 		:show-more-text="title"
 		:loading="state === 'loading'">
 		<template #empty-content>
-			<EmptyContent
-				v-if="emptyContentMessage">
+			<NcEmptyContent
+				v-if="emptyContentMessage"
+				:description="emptyContentMessage">
 				<template #icon>
 					<component :is="emptyContentIcon" />
 				</template>
-				<template #desc>
-					{{ emptyContentMessage }}
+				<template #action>
 					<div v-if="state === 'no-token' || state === 'error'" class="connect-button">
 						<a :href="settingsUrl">
 							<NcButton>
@@ -22,7 +22,7 @@
 						</a>
 					</div>
 				</template>
-			</EmptyContent>
+			</NcEmptyContent>
 		</template>
 	</DashboardWidget>
 </template>
@@ -34,13 +34,14 @@ import CloseIcon from 'vue-material-design-icons/Close.vue'
 
 import TwitterIcon from '../components/icons/TwitterIcon.vue'
 
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+
 import axios from '@nextcloud/axios'
 import { generateUrl, imagePath } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent.js'
-import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 import { convert } from 'html-to-text'
 
@@ -49,7 +50,7 @@ export default {
 
 	components: {
 		DashboardWidget,
-		EmptyContent,
+		NcEmptyContent,
 		NcButton,
 		LoginVariantIcon,
 	},
@@ -192,7 +193,10 @@ export default {
 				if (error.response && error.response.status === 400) {
 					this.state = 'no-token'
 				} else if (error.response && error.response.status === 401) {
-					showError(t('integration_twitter', 'Failed to get Twitter notifications'))
+					showError(
+						t('integration_twitter', 'Failed to get Twitter notifications')
+							+ ': ' + error.response.data?.error
+					)
 					this.state = 'error'
 				} else {
 					// there was an error in notif processing

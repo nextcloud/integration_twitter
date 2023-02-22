@@ -4,13 +4,13 @@
 		:show-more-text="showMoreText"
 		:loading="state === 'loading'">
 		<template #empty-content>
-			<EmptyContent
-				v-if="emptyContentMessage">
+			<NcEmptyContent
+				v-if="emptyContentMessage"
+				:description="emptyContentMessage">
 				<template #icon>
 					<component :is="emptyContentIcon" />
 				</template>
-				<template #desc>
-					{{ emptyContentMessage }}
+				<template #action>
 					<div v-if="state === 'no-token' || state === 'error' || state === 'nothing-to-show'"
 						class="connect-button">
 						<a :href="settingsUrl">
@@ -23,7 +23,7 @@
 						</a>
 					</div>
 				</template>
-			</EmptyContent>
+			</NcEmptyContent>
 		</template>
 	</DashboardWidget>
 </template>
@@ -35,13 +35,14 @@ import CloseIcon from 'vue-material-design-icons/Close.vue'
 
 import TwitterIcon from '../components/icons/TwitterIcon.vue'
 
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+
 import axios from '@nextcloud/axios'
 import { generateUrl, imagePath } from '@nextcloud/router'
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import { DashboardWidget } from '@nextcloud/vue-dashboard'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent.js'
-import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 import { convert } from 'html-to-text'
 
@@ -50,7 +51,7 @@ export default {
 
 	components: {
 		DashboardWidget,
-		EmptyContent,
+		NcEmptyContent,
 		NcButton,
 		LoginVariantIcon,
 	},
