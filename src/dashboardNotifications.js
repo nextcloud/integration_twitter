@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 /**
  * Nextcloud - twitter
  *
@@ -11,17 +9,15 @@
  * @copyright Julien Veyssier 2020
  */
 
-import Vue from 'vue'
-import './bootstrap.js'
-import DashboardNotifications from './views/DashboardNotifications.vue'
+__webpack_nonce__ = btoa(OC.requestToken) // eslint-disable-line
+__webpack_public_path__ = OC.linkTo('integration_twitter', 'js/') // eslint-disable-line
 
-document.addEventListener('DOMContentLoaded', function() {
-
-	OCA.Dashboard.register('twitter_notifications', (el, { widget }) => {
-		const View = Vue.extend(DashboardNotifications)
-		new View({
-			propsData: { title: widget.title },
-		}).$mount(el)
-	})
-
+OCA.Dashboard.register('twitter_notifications', async (el, { widget }) => {
+	const { default: Vue } = await import(/* webpackChunkName: "dashboard-notif-lazy" */'vue')
+	const { default: DashboardNotifications } = await import(/* webpackChunkName: "dashboard-notif-lazy" */'./views/DashboardNotifications.vue')
+	Vue.mixin({ methods: { t, n } })
+	const View = Vue.extend(DashboardNotifications)
+	new View({
+		propsData: { title: widget.title },
+	}).$mount(el)
 })

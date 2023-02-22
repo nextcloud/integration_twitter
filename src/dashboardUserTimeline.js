@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 /**
  * Nextcloud - twitter
  *
@@ -11,17 +9,15 @@
  * @copyright Julien Veyssier 2021
  */
 
-import Vue from 'vue'
-import './bootstrap.js'
-import DashboardUserTimeline from './views/DashboardUserTimeline.vue'
+__webpack_nonce__ = btoa(OC.requestToken) // eslint-disable-line
+__webpack_public_path__ = OC.linkTo('integration_twitter', 'js/') // eslint-disable-line
 
-document.addEventListener('DOMContentLoaded', function() {
-
-	OCA.Dashboard.register('twitter_user_timeline', (el, { widget }) => {
-		const View = Vue.extend(DashboardUserTimeline)
-		new View({
-			propsData: { title: widget.title },
-		}).$mount(el)
-	})
-
+OCA.Dashboard.register('twitter_user_timeline', async (el, { widget }) => {
+	const { default: Vue } = await import(/* webpackChunkName: "dashboard-user-lazy" */'vue')
+	const { default: DashboardUserTimeline } = await import(/* webpackChunkName: "dashboard-user-lazy" */'./views/DashboardUserTimeline.vue')
+	Vue.mixin({ methods: { t, n } })
+	const View = Vue.extend(DashboardUserTimeline)
+	new View({
+		propsData: { title: widget.title },
+	}).$mount(el)
 })
