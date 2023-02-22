@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## 1.0.4 – 2023-02-22
+## 1.0.5 – 2023-02-22
 ### Changed
 - add 26 compat
 - use @nextcloud/vue 7.6.1
