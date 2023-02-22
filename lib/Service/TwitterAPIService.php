@@ -250,7 +250,7 @@ class TwitterAPIService {
 			];
 			$result = $this->classicRequest($consumerKey, $consumerSecret, $oauthToken, $oauthTokenSecret, 'users/show.json', $params);
 			if (isset($result['error'])) {
-				return $result;
+				continue;
 			}
 			$userInfo[$user_id] = [
 				'sender_id_str' => $result['id_str'] ?? '',
