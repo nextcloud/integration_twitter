@@ -1,0 +1,8 @@
+{ "translations": {
+    "Problem in OAuth first step" : "Masalah di langkah pertama OAuth",
+    "Bad HTTP method" : "Metode HTTP tidak benar",
+    "Connected accounts" : "Akun terhubung",
+    "Connected as {user}" : "Terhubung sebagai {user}",
+    "System" : "Sistem"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
