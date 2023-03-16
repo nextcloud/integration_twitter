@@ -1,0 +1,6 @@
+{ "translations": {
+    "Bad HTTP method" : "Phương thức HTTP không hợp lệ",
+    "Connected as {user}" : "Kết nối bởi {user}",
+    "System" : "Hệ thống"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
