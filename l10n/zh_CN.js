@@ -16,6 +16,7 @@ OC.L10N.register(
     "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter集成提供了显示重要通知和主时间轴的仪表板小部件。 ",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "所有字段留空，以使用默认的Nextcloud Twitter OAuth应用程序。",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "如果你想使用自己的Twitter OAuth应用程序进行Twitter身份验证，请在你的Twitter开发者设置中创建一个Twitter应用程序，并将“消费者 key”和“消费者secret”放在下面。",
+    "Twitter developer app settings" : "Twitter开发者应用设置",
     "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "确保你将这个“回调URL”设置到你的Twitter OAuth 应用:",
     "And give it \"Read + Write + Direct Messages\" permissions." : "赋予它“读+写+直接消息”的权限。 ",
     "Consumer key" : "网站密钥",
@@ -39,12 +40,14 @@ OC.L10N.register(
     "Twitter OAuth error:" : "Twitter OAuth 错误：",
     "Nextcloud Twitter integration on {ncUrl}" : "Nextcloud Twitter集成在 {ncUrl}",
     "Twitter options saved" : "Twitter 选项已保存",
-    "Failed to save Twitter options" : "保存 Twitter 选项失败",
+    "Failed to save Twitter options" : "保存Twitter选项失败",
     "Failed to request Twitter 1st step OAuth token" : "请求Twitter第一步OAuth令牌失败 ",
     "OAuth failure" : "OAuth失败",
     "No Twitter account connected" : "未连接至 Twitter 账号",
     "Error connecting to Twitter" : "连接到 Twitter 时出错",
     "No Twitter notifications!" : "无 Twitter 通知",
-    "System" : "系统"
+    "Failed to get Twitter notifications" : "获取Twitter通知失败",
+    "System" : "系统",
+    "Failed to get Twitter home timeline" : "获取Twitter主页时间线失败"
 },
 "nplurals=1; plural=0;");
