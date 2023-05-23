@@ -1,5 +1,6 @@
 { "translations": {
     "Bad HTTP method" : "錯誤的 HTTP 方法",
+    "Request failed" : "請求失敗",
     "Connected accounts" : "已連線的帳號",
     "Consumer key" : "消費者金鑰",
     "If you don't see the popup, you can still click on this icon in the address bar." : "若您沒有看到彈出式視窗，您仍然可以點擊地址列中的此圖示。",
