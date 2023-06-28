@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Bad HTTP method" : "دالة HTTP  غير صحيحة",
+    "Request failed" : "فشل الطلب",
     "Connected accounts" : "حسابات مترابطة",
     "Connected as {user}" : "متصل بصفته {user}",
     "System" : "النظام"
