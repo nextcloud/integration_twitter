@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_twitter",
     {
     "Bad HTTP method" : "Поганий метод HTTP",
+    "Connected accounts" : "Підключені облікові записи",
     "And give it \"Read + Write + Direct Messages\" permissions." : "Додайте дозвіл на \"читання + запис + прямі повідомлення\".",
     "System" : "Система"
 },
