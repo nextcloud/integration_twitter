@@ -23,6 +23,7 @@ OC.L10N.register(
     "Consumer key of your Twitter application" : "مفتاح المستهلك لتطبيق تويتر الخاص بك",
     "Consumer secret" : "سر المستهلك",
     "Consumer secret of your Twitter application" : "سر المستهلك لتطبيق تويتر الخاص بك",
+    "User to follow" : "يتابع المستخدم",
     "Twitter user to follow in \"User timeline\" widget" : "مستخدم تويتر لمتابعة \"التسلسل الزمني\" في عنصر واجهة المستخدم",
     "Twitter admin options saved" : "تم حفظ خيارات مسئول تويتر",
     "Failed to save Twitter admin options" : "فشل حفظ خيارات مسؤول تويتر",
@@ -50,8 +51,10 @@ OC.L10N.register(
     "Failed to get Twitter notifications" : "فشل الحصول على إشعارات تويتر",
     "{nb} follow requests" : "{nb} طلبات المتابعة",
     "System" : "النظام",
+    "No tweets!" : "لا توجد تغريدات!",
     "No Twitter user timeline to show" : "لا يوجد تسلسل زمني للمستخدم على تويتر لعرضه",
     "Configure Twitter connected account" : "تكوين حساب تويتر المتصل",
+    "about {name}" : "حول {name}",
     "Failed to get Twitter home timeline" : "فشل الحصول علي التسلسل الزمني للصفحة الرئيسية لتويتر",
     "{user} to you" : "{user} لك",
     "{user1} to {user2}" : "{user1} إلى {user2}"
