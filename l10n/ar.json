@@ -1,5 +1,6 @@
 { "translations": {
     "Problem in OAuth first step" : "مشكلة في الخطوة الأولى لتطبيق المصادقة OAuth",
+    "Problem in OAuth third step" : "مشكلة في الخطوة الثالثة من التصديق المفتوح OAuth",
     "Problem in OAuth first or second step" : "مشكلة في الخطوة الأولى أو الثانية لتطبيق المصادقة OAuth",
     "Twitter home timeline" : "التسلسل الزمني للصفحة الرئيسية على تويتر",
     "Twitter notifications" : "إشعارات تويتر",
@@ -36,6 +37,7 @@
     "Disconnect from Twitter" : "قطع الاتصال بتويتر",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "يجب عليك الوصول إلى هذه الصفحة باستخدام HTTPS لتتمكن من المصادقة على تويتر.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "عرض اسم مستخدم تويتر لمتابعة \"التسلسل الزمني\" في عنصر واجهة المستخدم",
+    "Defined by an administrator: \"@{name}\"" : "تم تحديده من قبل مسئول: \"@{name}\"",
     "Successfully connected to Twitter!" : "تم الاتصال بنجاح بتويتر!",
     "Twitter OAuth error:" : "خطأ Twitter OAuth:",
     "Nextcloud Twitter integration on {ncUrl}" : "تكامل نكست كلود تويتر على {ncUrl}",
