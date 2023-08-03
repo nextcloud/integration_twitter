@@ -48,7 +48,7 @@ OC.L10N.register(
     "Failed to request Twitter 1st step OAuth token" : "Twitter 1. adım OAuth kodu istenemedi",
     "OAuth failure" : "OAuth sorunu",
     "No Twitter account connected" : "Bağlı bir Twitter hesabı yok",
-    "Error connecting to Twitter" : "Twitter bağlantısı kurulurken sorun çıktı",
+    "Error connecting to Twitter" : "Twitter ile bağlantı kurulurken sorun çıktı",
     "No Twitter notifications!" : "Herhangi bir Twitter bildirimi yok!",
     "Failed to get Twitter notifications" : "Twitter bildirimleri alınamadı",
     "{nb} follow requests" : "{nb} takip istekleri",
