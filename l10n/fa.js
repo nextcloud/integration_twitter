@@ -7,6 +7,7 @@ OC.L10N.register(
     "Twitter notifications" : "اعلان‌های توییتر",
     "Impossible to decode response" : "رمزگشایی پاسخ ناممکن است",
     "Invalid return value in OAuth step 1" : "مقدار بازگشتی در گام اول OAuth نامعتبر است",
+    "Bad HTTP method" : "روش HTTP بد",
     "Request failed" : "درخواست شکست خورد",
     "Connected accounts" : "حساب‌های متصل",
     "Twitter integration" : "ادغام با توییتر",
