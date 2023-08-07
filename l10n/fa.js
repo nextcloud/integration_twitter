@@ -13,6 +13,7 @@ OC.L10N.register(
     "Twitter integration" : "ادغام با توییتر",
     "Integration of Twitter microblogging and social networking service" : "ادغام با خدمت شبکه اجتماعی و میکروبلاگینگ توییتر",
     "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "ادغام با توییتر، ابزارکی برای نمایش اعلان‌های مهم و خط زمانی اصلی شما در پیشخوان ارائه می‌کند.",
+    "Connected as {user}" : "متصل به عنوان {user}",
     "System" : "سیستم"
 },
 "nplurals=2; plural=(n > 1);");
