@@ -25,7 +25,7 @@ OC.L10N.register(
     "Consumer secret" : "Tajný kľúč spotrebiteľa",
     "Consumer secret of your Twitter application" : "Tajný kľúč spotrebiteľa vašej aplikácie Twitter",
     "User to follow" : "Nasledovať užívateľa",
-    "Twitter user to follow in \"User timeline\" widget" : "Uživateľské meno na Twitteri, ktoré nasledovať na ovládacom prvku \"Časová os užívateľa\"",
+    "Twitter user to follow in \"User timeline\" widget" : "Meno používateľa na Twitteri, ktoré nasledovať na ovládacom prvku \"Časová os užívateľa\"",
     "Twitter admin options saved" : "Možnosti administrátora Twitteru boli uložené",
     "Failed to save Twitter admin options" : "Nepodarilo sa uložiť možnosti administrátora Twitter",
     "Make sure you accepted the protocol registration on top of this page if you want to authenticate to Twitter." : "Ak sa chcete autentizovať v Twitteri, uistite sa, že ste prijali registráciu protokolu v hornej časti tejto stránky.",
