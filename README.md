@@ -2,6 +2,10 @@
 
 🐦 Twitter integration provides dashboard widgets displaying your important notifications and your home timeline.
 
+## ⚠️**Deprecated**️⚠️
+
+This app is deprecated and will no longer be maintained due to [changes](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/) in Twitter(X) policy.
+
 ## 🔧 Configuration
 
 ### User settings
