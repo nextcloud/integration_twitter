@@ -11,7 +11,6 @@
     "Connected accounts" : "Verbonden accounts",
     "Twitter integration" : "Twitter integratie",
     "Integration of Twitter microblogging and social networking service" : "Integratie met Twitter microblogging en social networking service",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter integratie biedt een dashboardwidgets die je belangrijke meldingen en je persoonlijke tijdlijn weergeven.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Laat alle velden blanco om de standaard Nextcloud Twitter OAuth app te gebruiken.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Als je je eigen Twitter OAuth app wilt gebruiken om te authenticeren bij Twitter, maak dan een Twitter applicatie aan in je Twitter developer instellingen en plaats \"Consumer key\" en \"Consumer secret\" hieronder.",
     "Twitter developer app settings" : "Twitter developer app instellingen",

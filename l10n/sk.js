@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "Prepojené účty",
     "Twitter integration" : "Twitter integrácia",
     "Integration of Twitter microblogging and social networking service" : "Integrácia služby mikroblogovania a sociálnych sietí Twitter",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Integrácia so službou Twitter poskytuje miniaplikácie na paneli, ktoré zobrazujú vaše dôležité upozornenia a domácu časovú os.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Ak chcete použiť predvolenú aplikáciu Nextcloud Twitter OAuth, nechajte všetky polia prázdne.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Ak chcete na autentifikáciu na Twitteri použiť svoju vlastnú aplikáciu Twitter OAuth, vytvorte si aplikáciu Twitter v nastaveniach vývojára pre Twitter a nižšie zadajte „Užívateľský kľúč“ a „Užívateľský secret“.",
     "Twitter developer app settings" : "Nastavenia vývojárskej aplikácie Twitter",

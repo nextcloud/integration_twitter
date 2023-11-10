@@ -11,7 +11,6 @@
     "Connected accounts" : "Подключённые учётные записи",
     "Twitter integration" : "Интеграция с Twitter",
     "Integration of Twitter microblogging and social networking service" : "Интеграция сервиса микроблогов и социальной сети Twitter",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Интеграция с Twitter предоставляет виджеты на панели инструментов, отображающие важные уведомления и домашнюю ленту.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Оставьте все поля пустыми, чтобы использовать приложение Nextcloud Twitter OAuth по умолчанию.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Если вы хотите использовать собственное приложение Twitter OAuth для аутентификации в Twitter, создайте приложение Twitter в настройках разработчика Twitter и укажите ниже «Consumer key» и «Consumer secret».",
     "Twitter developer app settings" : "Настройки приложения для разработчиков Twitter",

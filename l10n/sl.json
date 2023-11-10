@@ -11,7 +11,6 @@
     "Connected accounts" : "Povezani računi",
     "Twitter integration" : "Združevalnik Twitter",
     "Integration of Twitter microblogging and social networking service" : "Podpora za mikrospletnik Twitter in storitve družbenega mreženja",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Podpora za Twitter omogoča gradnike za prikazovanje pomembnih obvestil in osebno časovnico objav.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Za uporabo privzetega programa za overitev računa Twitter z OAuth pustite polja prazna.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Če želite uporabiti lastni program za overitev OAuth za dostop do računa Twitter, ustvarite program Twitter med nastavitvami in vstavite »Uporabniški ključ« in »Uporabniško kodo«.",
     "Twitter developer app settings" : "Nastavitve razvijalskega programa Twitter",

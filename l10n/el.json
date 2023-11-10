@@ -11,7 +11,6 @@
     "Connected accounts" : "Συνδεδεμένοι λογαριασμοί",
     "Twitter integration" : "Ενσωμάτωση Twitter",
     "Integration of Twitter microblogging and social networking service" : "Ενσωμάτωση της υπηρεσίας microblogging και κοινωνικής δικτύωσης Twitter",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Η ενσωμάτωση του Twitter παρέχει μικροεφαρμογή του πίνακα ελέγχου που εμφανίζει τις σημαντικές ειδοποιήσεις σας και το χρονολόγιο της αρχικής σας σελίδας.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Αφήστε όλα τα πεδία κενά για να χρησιμοποιήσετε την προεπιλεγμένη εφαρμογή Nextcloud Twitter OAuth.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Εάν θέλετε να χρησιμοποιήσετε τη δική σας εφαρμογή Twitter OAuth για έλεγχο ταυτότητας στο Twitter, δημιουργήστε μια εφαρμογή Twitter στις ρυθμίσεις προγραμματιστή Twitter και τοποθετήστε το «Κλειδί καταναλωτή» και «Μυστικό του καταναλωτή» παρακάτω.",
     "Twitter developer app settings" : "Ρυθμίσεις εφαρμογής προγραμματιστή Twitter",

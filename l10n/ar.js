@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "حسابات مترابطة",
     "Twitter integration" : "تكامل تويتر",
     "Integration of Twitter microblogging and social networking service" : "تكامل المدونات الصغيرة على تويتر وخدمة التواصل الاجتماعي",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "يوفر تكامل تويتر لوحة تحكم عناصر واجهة المستخدم والتي تعرض إشعاراتك المهمة والتسلسل الزمني لصفحتك الرئيسية.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "اترك كل الحقول فارغة لاستخدام تطبيق Nextcloud Twitter OAuth الافتراضي.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "إذا كنت تريد استخدام تطبيق Twitter OAuth الخاص بك للمصادقة على تويتر، فيجب عليك القياك بإنشاء تطبيق تويتر في إعدادات مطور تويتر ةوضع \"مفتاح المستهلك\" و \"سر المستهلك\" أدناه.",
     "Twitter developer app settings" : "إعدادات تطبيق Twitter developer",

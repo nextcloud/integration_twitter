@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "Cuentas conectadas",
     "Twitter integration" : "Integración de Twitter",
     "Integration of Twitter microblogging and social networking service" : "Integración del servicio de microblogging y redes sociales Twitter",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "La integración de Twitter proporciona widgets de tablero que muestran tus notificaciones importantes y tu línea de tiempo principal de Twitter.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Deja todos los campos vacíos para usar la aplicación predeterminada de OAuth de Twitter de Nextcloud.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Si deseas utilizar tu propia aplicación de OAuth de Twitter para autenticarte en Twitter, crea una aplicación de Twitter en la configuración de desarrollador de Twitter y coloca la \"Clave de consumidor\" y \"Secreto de consumidor\" a continuación.",
     "Twitter developer app settings" : "Configuración de la aplicación de Twitter para desarrolladores",

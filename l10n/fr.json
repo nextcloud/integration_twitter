@@ -12,7 +12,6 @@
     "Connected accounts" : "Comptes connectés",
     "Twitter integration" : "Intégration Twitter",
     "Integration of Twitter microblogging and social networking service" : "Intégration du service de microblogging et de réseautage social Twitter",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "L'intégration de Twitter fournit un widget de tableau de bord affichant vos notifications importantes et votre fil d'actualités.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Laissez tous les champs vides pour utiliser l'application OAuth Twitter Nextcloud par défaut.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Si vous souhaitez utiliser votre propre application Twitter OAuth pour vous authentifier sur Twitter, créez une application Twitter dans vos paramètres de développeur Twitter et indiquez ci-dessous la \"Consumer key\" et le \"Consumer secret\".",
     "Twitter developer app settings" : "Paramètres pour les développeurs d'applications Twitter",

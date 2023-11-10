@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "关联账号",
     "Twitter integration" : "Twitter 集成",
     "Integration of Twitter microblogging and social networking service" : "集成Twitter微博客和社交网络服务",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter集成提供了显示重要通知和主时间轴的仪表板小部件。 ",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "所有字段留空，以使用默认的Nextcloud Twitter OAuth应用程序。",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "如果你想使用自己的Twitter OAuth应用程序进行Twitter身份验证，请在你的Twitter开发者设置中创建一个Twitter应用程序，并将“消费者 key”和“消费者secret”放在下面。",
     "Twitter developer app settings" : "Twitter开发者应用设置",

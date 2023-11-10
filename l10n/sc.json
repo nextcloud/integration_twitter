@@ -11,7 +11,6 @@
     "Connected accounts" : "Contos connètidos",
     "Twitter integration" : "Integratzione de Twitter",
     "Integration of Twitter microblogging and social networking service" : "Integratzione de su servìtziu de sa pàgina personale de Twitter e rete sotziale",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "S'integratzione de Twitter frunit trastos de su pannellu de controllu de sa pàgina printzipale chi visualizant is notìficas de importu e sa lìnia temporale printzipale.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Lassa totu is campos bòidos pro impreare s'aplicatzione OAuth de Twitter predefinida pro Neextcloud.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Si cheres lassare una aplicatzione tua OAuth de Twitter pro t'identificare, crea un'aplicatzione de Twitter in is impostatziones isvilupadore de Twitter e inserta·nche sa \"Crae cliente\"  e su \"Segretu cliente\" in suta.",
     "Twitter developer app settings" : "Impostatziones de s'aplicatzione de Twitter pro isvilupadores",

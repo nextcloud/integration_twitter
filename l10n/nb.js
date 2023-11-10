@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "Tilknyttede kontoer",
     "Twitter integration" : "Twitter-integrasjon",
     "Integration of Twitter microblogging and social networking service" : "Integrasjon av Twitter mikroblogging og sosiale nettverkstjenester",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "Twitter-integrasjon gir dashbord-widgets som viser viktige varsler og hjemmetidslinjen.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "La alle feltene stå tomme for å bruke standard Nextcloud Twitter OAuth-appen.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Hvis du vil bruke din egen Twitter OAuth-app for å autentisere til Twitter, oppretter du en Twitter-applikasjon i Twitter-utviklerinnstillingene dine og legger inn «Forbrukernøkkel» og «Forbrukerhemmelighet» nedenfor.",
     "Twitter developer app settings" : "Innstillinger for Twitter-utviklerapper",

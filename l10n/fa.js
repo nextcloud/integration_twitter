@@ -14,7 +14,6 @@ OC.L10N.register(
     "Connected accounts" : "حساب‌های متصل",
     "Twitter integration" : "ادغام با توییتر",
     "Integration of Twitter microblogging and social networking service" : "ادغام با خدمت شبکه اجتماعی و میکروبلاگینگ توییتر",
-    "Twitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "ادغام با توییتر، ابزارکی برای نمایش اعلان‌های مهم و خط زمانی اصلی شما در پیشخوان ارائه می‌کند.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Leave all fields empty to use the default Nextcloud Twitter OAuth app.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below.",
     "Twitter developer app settings" : "Twitter developer app settings",
