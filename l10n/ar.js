@@ -14,6 +14,7 @@ OC.L10N.register(
     "Connected accounts" : "حسابات مترابطة",
     "Twitter integration" : "تكامل تويتر",
     "Integration of Twitter microblogging and social networking service" : "تكامل المدونات الصغيرة على تويتر وخدمة التواصل الاجتماعي",
+    "## ⚠️**Deprecated**️⚠️\n\nThis app is deprecated and will no longer be maintained due to [changes](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/) in Twitter(X) policy.\n\nTwitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "## ⚠️**مٌلغىً**️⚠️ \n\nتم إلغاء هذا التطبيق . \"التكامل مع تويتر\" Integration Twitter، ولن تتم صيانته بعد الآن بسبب [التغييرات] في سياسة تويتر (X). \n(https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/)\n\nيوفر \"التكامل مع تويتر\" ودجات للوحة المعلومات التي تعرض إشعاراتك المهمة و خطك الزمني.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "اترك كل الحقول فارغة لاستخدام تطبيق Nextcloud Twitter OAuth الافتراضي.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "إذا كنت تريد استخدام تطبيق Twitter OAuth الخاص بك للمصادقة على تويتر، فيجب عليك القياك بإنشاء تطبيق تويتر في إعدادات مطور تويتر ةوضع \"مفتاح المستهلك\" و \"سر المستهلك\" أدناه.",
     "Twitter developer app settings" : "إعدادات تطبيق Twitter developer",
