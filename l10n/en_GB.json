@@ -12,6 +12,7 @@
     "Connected accounts" : "Connected accounts",
     "Twitter integration" : "Twitter integration",
     "Integration of Twitter microblogging and social networking service" : "Integration of Twitter microblogging and social networking service",
+    "## ⚠️**Deprecated**️⚠️\n\nThis app is deprecated and will no longer be maintained due to [changes](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/) in Twitter(X) policy.\n\nTwitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "## ⚠️**Deprecated**️⚠️\n\nThis app is deprecated and will no longer be maintained due to [changes](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/) in Twitter(X) policy.\n\nTwitter integration provides dashboard widgets displaying your important notifications and your home timeline.",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Leave all fields empty to use the default Nextcloud Twitter OAuth app.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below.",
     "Twitter developer app settings" : "Twitter developer app settings",
