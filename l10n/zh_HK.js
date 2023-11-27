@@ -14,6 +14,7 @@ OC.L10N.register(
     "Connected accounts" : "已連線的帳號",
     "Twitter integration" : "Twitter 整合",
     "Integration of Twitter microblogging and social networking service" : "Twitter微博和社交網絡服務的整合",
+    "## ⚠️**Deprecated**️⚠️\n\nThis app is deprecated and will no longer be maintained due to [changes](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/) in Twitter(X) policy.\n\nTwitter integration provides dashboard widgets displaying your important notifications and your home timeline." : "## ⚠️**已棄用**️⚠️\n\n因為 Twitter(X) [政策](https://www.forbes.com/sites/jenaebarnes/2023/02/03/twitter-ends-its-free-api-heres-who-will-be-affected/)的變更，此應用程式已棄用且不再維護。\n\nTwitter 整合提供了儀表板小工具，顯示您的重要通知與您的首頁時間軸。",
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "將所有字段留空以使用默認的 Nextcloud Twitter OAuth 應用程式。",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "如果要使用自己的Twitter OAuth應用程序對Twitter進行身分驗證，請在Twitter開發人員設置中創建一個Twitter應用程序，然後在下面放置“消費者密鑰”和“消費者秘密”。",
     "Twitter developer app settings" : "Twitter開發人員應用程序設置",
