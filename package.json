@@ -1,6 +1,6 @@
 {
   "name": "integration_twitter",
-  "version": "0.0.1",
+  "version": "1.0.7",
   "description": "Twitter integration",
   "main": "index.js",
   "directories": {
