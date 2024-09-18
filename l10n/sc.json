@@ -14,7 +14,7 @@
     "Leave all fields empty to use the default Nextcloud Twitter OAuth app." : "Lassa totu is campos bòidos pro impreare s'aplicatzione OAuth de Twitter predefinida pro Neextcloud.",
     "If you want to use your own Twitter OAuth app to authenticate to Twitter, create a Twitter application in your Twitter developer settings and put the \"Consumer key\" and \"Consumer secret\" below." : "Si boles lassare una aplicatzione tua OAuth de Twitter pro t'identificare, crea un'aplicatzione de Twitter in sa cunfiguratzione de  isvilupadore de Twitter e inserta·nche sa \"Crae cliente\"  e su \"Segretu cliente\" in suta.",
     "Twitter developer app settings" : "Cunfiguratzione de s'aplicatzione de Twitter pro isvilupadores",
-    "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Segura·ti de impostare \"URL de torrare a cramare\" a sa aplicatzione tua OAuth de Twitter:",
+    "Make sure you set this \"callback URL\" to your Twitter OAuth app:" : "Assegura·ti de cunfigurare s'\"URL de torrare a cramare\" a s'aplicatzione tua OAuth de Twitter:",
     "And give it \"Read + Write + Direct Messages\" permissions." : "E assigna·si is permissos \"Letura+Iscritura+Messàgios deretos\".",
     "Consumer key" : "Crae cliente",
     "Consumer key of your Twitter application" : "Crae cliente de s'aplicatzione tua de Twitter",
