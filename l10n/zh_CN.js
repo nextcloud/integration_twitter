@@ -54,7 +54,7 @@ OC.L10N.register(
     "System" : "系统",
     "No tweets!" : "没有推文",
     "No Twitter user timeline to show" : "沒有Twitter用户时间线显示",
-    "Configure Twitter connected account" : "配置Twitter连接的账户",
+    "Configure Twitter connected account" : "配置 Twitter 连接的账号",
     "about {name}" : "关于{name}",
     "Failed to get Twitter home timeline" : "获取Twitter主页时间线失败",
     "{user} to you" : "{user}给您",
