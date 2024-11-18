@@ -35,7 +35,7 @@
     "Connect to Twitter" : "Conectar con Twitter",
     "Connected as {user}" : "Conectado como {user}",
     "Disconnect from Twitter" : "Desconectar de Twitter",
-    "You must access this page with HTTPS to be able to authenticate to Twitter." : "Debe acceder a esta páxina con HTTPS para poder autenticarse no Twitter.",
+    "You must access this page with HTTPS to be able to authenticate to Twitter." : "Acceda a esta páxina con HTTPS para poder autenticarse no Twitter.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Nome para amosar do usuario de Twitter para seguir no trebello «Cronoloxía do usuario»",
     "Defined by an administrator: \"@{name}\"" : "Definido por un administrador: «@{name}»",
     "Successfully connected to Twitter!" : "Conectou satisfactoriamente con Twitter!",
