@@ -35,7 +35,7 @@ OC.L10N.register(
     "If you still don't manage to get the protocol registered, check your settings on this page:" : "ئەگەر سىز يەنىلا كېلىشىمنى تىزىمغا ئالدۇرالمىسىڭىز ، بۇ بەتتىكى تەڭشەكلىرىڭىزنى تەكشۈرۈڭ:",
     "With Firefox, you should see a bar on top of this page to authorize this page to open \"web+nextcloudtwitter\" links." : "Firefox ئارقىلىق بۇ بەتنىڭ ئۈستىدىكى بىر بالداقنى كۆرۈپ ، بۇ بەتكە «web + nextcloudtwitter» ئۇلانمىسىنى ئېچىشقا ئىجازەت بېرىشىڭىز كېرەك.",
     "Connect to Twitter" : "Twitter غا ئۇلاڭ",
-    "Connected as {user}" : "{ئىشلەتكۈچى as قىلىپ ئۇلاندى",
+    "Connected as {user}" : "{user} as قىلىپ ئۇلاندى",
     "Disconnect from Twitter" : "Twitter دىن ئۈزۈڭ",
     "You must access this page with HTTPS to be able to authenticate to Twitter." : "Twitter غا دەلىللەش ئۈچۈن چوقۇم HTTPS ئارقىلىق بۇ بەتنى زىيارەت قىلىشىڭىز كېرەك.",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Twitter ئىشلەتكۈچىنىڭ نامىنى «ئىشلەتكۈچى ۋاقىت جەدۋىلى» كىچىك قورالىغا ئەگىشىڭ",
@@ -58,7 +58,7 @@ OC.L10N.register(
     "Configure Twitter connected account" : "Twitter ئۇلانغان ھېساباتنى سەپلەڭ",
     "about {name}" : "about {name}",
     "Failed to get Twitter home timeline" : "Twitter نىڭ ۋاقىت جەدۋىلىگە ئېرىشەلمىدى",
-    "{user} to you" : "{ئىشلەتكۈچى} سىزگە",
+    "{user} to you" : "{user} سىزگە",
     "{user1} to {user2}" : "{user1} دىن {user2}"
 },
 "nplurals=2; plural=(n != 1);");
