@@ -4,6 +4,6 @@
     "Connected accounts" : "Forbundne konti",
     "Connected as {user}" : "Forbundet som {user}",
     "System" : "System",
-    "{user1} to {user2}" : "{user1} til {slutDate}"
+    "{user1} to {user2}" : "{user1} til {user2}"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
