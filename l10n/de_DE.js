@@ -29,7 +29,7 @@ OC.L10N.register(
     "Consumer secret of your Twitter application" : "Verbrauchergeheimnis Ihrer Twitter-Anwendung",
     "User to follow" : "Benutzer zum Folgen",
     "Display name of Twitter user to follow in \"User timeline\" widget" : "Anzeigename des Twitter-Benutzers, dem man im Widget \"Benutzer-Zeitleiste\" folgen kann",
-    "Defined by an administrator: \"@{name}\"" : "Von einem Administrator definiert: \"@{name}\"",
+    "Defined by an administrator: \"@{name}\"" : "Von der Administration definiert: \"@{name}\"",
     "Successfully connected to Twitter!" : "Erfolgreich mit Twitter verbunden!",
     "Twitter OAuth error:" : "Twitter OAuth-Fehler:",
     "Nextcloud Twitter integration on {ncUrl}" : "Twitter-Einbindung in Nextcloud auf {ncUrl}",
